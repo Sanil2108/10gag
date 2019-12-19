@@ -2,6 +2,7 @@
 
 # dependencies
 /src/main/js/node_modules
+/src/main/resources/static/built/bundle.js
 node_modules/
 /.pnp
 .pnp.js
@@ -15,6 +16,7 @@ node_modules/
 # misc
 .DS_Store
 .env.local
+.vscode
 .env.development.local
 .env.test.local
 .env.production.local
