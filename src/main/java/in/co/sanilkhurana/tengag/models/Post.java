@@ -22,6 +22,9 @@ public class Post {
     private String title;
 
     @Column
+    private String imageURL;
+
+    @Column
     private int votes;
 
     @ManyToOne
@@ -33,11 +36,20 @@ public class Post {
     public Post() {
     }
 
-    public Post(Long id, String title, int votes, User user) {
+    public Post(Long id, String title, int votes, User user, String imageURL) {
         this.id = id;
         this.title = title;
         this.votes = votes;
         this.user = user;
+        this.imageURL = imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public String getImageURL() {
+        return imageURL;
     }
 
     public List<Comment> getComments() {
