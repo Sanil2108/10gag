@@ -1,6 +1,7 @@
 package in.co.sanilkhurana.tengag.controllers;
 
 import in.co.sanilkhurana.tengag.responses.error_responses.*;
+import in.co.sanilkhurana.tengag.responses.post_responses.GetPostResponse;
 import in.co.sanilkhurana.tengag.responses.post_responses.PostCreatedResponse;
 import in.co.sanilkhurana.tengag.responses.user_responses.*;
 import in.co.sanilkhurana.tengag.models.Post;
@@ -50,8 +51,9 @@ public class PostController {
             return new UserAuthenticationFailedErrorResponse();
         }
         else {
-            postRetrievalService.createPost(user, post);
-            return new PostCreatedResponse();
+            post = postRetrievalService.createPost(user, post);
+            PostCreatedResponse postCreatedResponse = new PostCreatedResponse(post);
+            return postCreatedResponse;
         }
     }
 
@@ -60,7 +62,9 @@ public class PostController {
         if (!postRetrievalService.postExists(postId)) {
             return new PostDoesNotExistErrorResponse();
         }
-
+        return new GetPostResponse(
+            postRetrievalService.getCompletePost(postId)
+        );
 
     }
 

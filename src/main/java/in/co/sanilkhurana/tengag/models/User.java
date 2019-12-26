@@ -2,11 +2,9 @@ package in.co.sanilkhurana.tengag.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.GenerationType;
 
 import java.util.List;
 

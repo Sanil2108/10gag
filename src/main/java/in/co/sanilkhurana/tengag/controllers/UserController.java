@@ -51,6 +51,7 @@ public class UserController {
         return new RegisterUserResponse();
     }
 
+    // TODO:
     @PostMapping("/update")
     public Response updateUser(@RequestBody User user) {
         if (!userRetrievalService.userExists(user)) {

@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Token {
 
@@ -18,6 +20,7 @@ public class Token {
     private String token;
 
     @OneToOne
+    @JsonIgnore
     private User user;
 
 

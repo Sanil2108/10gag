@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 
@@ -28,6 +30,7 @@ public class Post {
     private int votes;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     @OneToMany
