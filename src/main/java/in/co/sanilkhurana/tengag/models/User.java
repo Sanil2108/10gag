@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @Entity
@@ -21,7 +23,12 @@ public class User {
     private String password;
 
     @OneToMany
+    @JsonIgnore
     private List<Post> posts;
+
+    @OneToMany
+    @JsonIgnore
+    private List<Comment> comments;
 
     @OneToOne
     private Token token;
@@ -32,6 +39,18 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.password = password;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public Token getToken() {

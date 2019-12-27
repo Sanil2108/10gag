@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @Entity
@@ -27,9 +29,11 @@ public class Comment {
     private User originalPoster;
 
     @ManyToOne
+    @JsonIgnore
     private Comment parentComment;
 
     @ManyToOne
+    @JsonIgnore
     private Post parentPost;
 
     @OneToMany
@@ -47,11 +51,23 @@ public class Comment {
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Comment getParentComment() {
+        return parentComment;
+    }
+
+    public void setParentComment(Comment parentComment) {
+        this.parentComment = parentComment;
+    }
+
+    public Post getParentPost() {
+        return parentPost;
+    }
+
+    public void setParentPost(Post parentPost) {
+        this.parentPost = parentPost;
     }
 
     public String getText() {
@@ -84,6 +100,10 @@ public class Comment {
 
     public void setChildrenComments(List<Comment> childrenComments) {
         this.childrenComments = childrenComments;
+    }
+
+    public void addChildComment(Comment comment) {
+        this.childrenComments.add(comment);
     }
 
     @Override
