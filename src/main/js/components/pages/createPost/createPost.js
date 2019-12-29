@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Settings extends Component {
+export default class createPost extends Component {
     render() {
         return (
             <div>
-                I am in settings
+                I am in create post
             </div>
         )
     }

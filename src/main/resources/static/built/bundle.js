@@ -477,6 +477,18 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 
 /***/ }),
 
+/***/ "./src/main/js/api/serviceWorker.js":
+/*!******************************************!*\
+  !*** ./src/main/js/api/serviceWorker.js ***!
+  \******************************************/
+/*! exports provided: register, unregister */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"register\", function() { return register; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"unregister\", function() { return unregister; });\n// This optional code is used to register a service worker.\n// register() is not called by default.\n// This lets the app load faster on subsequent visits in production, and gives\n// it offline capabilities. However, it also means that developers (and users)\n// will only see deployed updates on subsequent visits to a page, after all the\n// existing tabs open on the page have been closed, since previously cached\n// resources are updated in the background.\n// To learn more about the benefits of this model and instructions on how to\n// opt-in, read https://bit.ly/CRA-PWA\nconst isLocalhost = Boolean(window.location.hostname === 'localhost' || // [::1] is the IPv6 localhost address.\nwindow.location.hostname === '[::1]' || // 127.0.0.0/8 are considered localhost for IPv4.\nwindow.location.hostname.match(/^127(?:\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/));\nfunction register(config) {\n  if (false) {}\n}\n\nfunction registerValidSW(swUrl, config) {\n  navigator.serviceWorker.register(swUrl).then(registration => {\n    registration.onupdatefound = () => {\n      const installingWorker = registration.installing;\n\n      if (installingWorker == null) {\n        return;\n      }\n\n      installingWorker.onstatechange = () => {\n        if (installingWorker.state === 'installed') {\n          if (navigator.serviceWorker.controller) {\n            // At this point, the updated precached content has been fetched,\n            // but the previous service worker will still serve the older\n            // content until all client tabs are closed.\n            console.log('New content is available and will be used when all ' + 'tabs for this page are closed. See https://bit.ly/CRA-PWA.'); // Execute callback\n\n            if (config && config.onUpdate) {\n              config.onUpdate(registration);\n            }\n          } else {\n            // At this point, everything has been precached.\n            // It's the perfect time to display a\n            // \"Content is cached for offline use.\" message.\n            console.log('Content is cached for offline use.'); // Execute callback\n\n            if (config && config.onSuccess) {\n              config.onSuccess(registration);\n            }\n          }\n        }\n      };\n    };\n  }).catch(error => {\n    console.error('Error during service worker registration:', error);\n  });\n}\n\nfunction checkValidServiceWorker(swUrl, config) {\n  // Check if the service worker can be found. If it can't reload the page.\n  fetch(swUrl, {\n    headers: {\n      'Service-Worker': 'script'\n    }\n  }).then(response => {\n    // Ensure service worker exists, and that we really are getting a JS file.\n    const contentType = response.headers.get('content-type');\n\n    if (response.status === 404 || contentType != null && contentType.indexOf('javascript') === -1) {\n      // No service worker found. Probably a different app. Reload the page.\n      navigator.serviceWorker.ready.then(registration => {\n        registration.unregister().then(() => {\n          window.location.reload();\n        });\n      });\n    } else {\n      // Service worker found. Proceed as normal.\n      registerValidSW(swUrl, config);\n    }\n  }).catch(() => {\n    console.log('No internet connection found. App is running in offline mode.');\n  });\n}\n\nfunction unregister() {\n  if ('serviceWorker' in navigator) {\n    navigator.serviceWorker.ready.then(registration => {\n      registration.unregister();\n    });\n  }\n}\n\n//# sourceURL=webpack:///./src/main/js/api/serviceWorker.js?");
+
+/***/ }),
+
 /***/ "./src/main/js/components/App/App.css":
 /*!********************************************!*\
   !*** ./src/main/js/components/App/App.css ***!
@@ -496,7 +508,79 @@ eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../.
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.css */ \"./src/main/js/components/App/App.css\");\n/* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_App_css__WEBPACK_IMPORTED_MODULE_1__);\n!(function webpackMissingModule() { var e = new Error(\"Cannot find module './api/serviceWorker'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }());\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/esm/react-router-dom.js\");\n\n\n\n\n\nfunction App() {\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__[\"BrowserRouter\"], null);\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack:///./src/main/js/components/App/App.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.css */ \"./src/main/js/components/App/App.css\");\n/* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_App_css__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _sharedComponents_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../sharedComponents/TopBar/TopBar */ \"./src/main/js/components/sharedComponents/TopBar/TopBar.js\");\n/* harmony import */ var _pages_front_Front__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/front/Front */ \"./src/main/js/components/pages/front/Front.js\");\n/* harmony import */ var _pages_settings_Settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/settings/Settings */ \"./src/main/js/components/pages/settings/Settings.js\");\n/* harmony import */ var _pages_user_User__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pages/user/User */ \"./src/main/js/components/pages/user/User.js\");\n/* harmony import */ var _pages_createPost_createPost__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pages/createPost/createPost */ \"./src/main/js/components/pages/createPost/createPost.js\");\n/* harmony import */ var _pages_post_Post__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pages/post/Post */ \"./src/main/js/components/pages/post/Post.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/esm/react-router-dom.js\");\n\n\n\n\n\n\n\n\n\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {\n  constructor(props) {\n    super(props);\n    this.state = {};\n  }\n\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"App\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sharedComponents_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__[\"BrowserRouter\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__[\"Switch\"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__[\"Route\"], {\n      path: \"/user/:userName\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_user_User__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__[\"Route\"], {\n      path: \"/post/:postId\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_post_Post__WEBPACK_IMPORTED_MODULE_7__[\"default\"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__[\"Route\"], {\n      path: \"/settings\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_settings_Settings__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__[\"Route\"], {\n      path: \"/createPost\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_createPost_createPost__WEBPACK_IMPORTED_MODULE_6__[\"default\"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__[\"Route\"], {\n      path: \"/\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_front_Front__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null)))));\n  }\n\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack:///./src/main/js/components/App/App.js?");
+
+/***/ }),
+
+/***/ "./src/main/js/components/pages/createPost/createPost.js":
+/*!***************************************************************!*\
+  !*** ./src/main/js/components/pages/createPost/createPost.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return createPost; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\nclass createPost extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"I am in create post\");\n  }\n\n}\n\n//# sourceURL=webpack:///./src/main/js/components/pages/createPost/createPost.js?");
+
+/***/ }),
+
+/***/ "./src/main/js/components/pages/front/Front.js":
+/*!*****************************************************!*\
+  !*** ./src/main/js/components/pages/front/Front.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Front; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\nclass Front extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"I am in front\");\n  }\n\n}\n\n//# sourceURL=webpack:///./src/main/js/components/pages/front/Front.js?");
+
+/***/ }),
+
+/***/ "./src/main/js/components/pages/post/Post.js":
+/*!***************************************************!*\
+  !*** ./src/main/js/components/pages/post/Post.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Post; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\nclass Post extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"I am in post\");\n  }\n\n}\n\n//# sourceURL=webpack:///./src/main/js/components/pages/post/Post.js?");
+
+/***/ }),
+
+/***/ "./src/main/js/components/pages/settings/Settings.js":
+/*!***********************************************************!*\
+  !*** ./src/main/js/components/pages/settings/Settings.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Settings; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\nclass Settings extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"I am in settings\");\n  }\n\n}\n\n//# sourceURL=webpack:///./src/main/js/components/pages/settings/Settings.js?");
+
+/***/ }),
+
+/***/ "./src/main/js/components/pages/user/User.js":
+/*!***************************************************!*\
+  !*** ./src/main/js/components/pages/user/User.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return User; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\nclass User extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"I am in User\");\n  }\n\n}\n\n//# sourceURL=webpack:///./src/main/js/components/pages/user/User.js?");
+
+/***/ }),
+
+/***/ "./src/main/js/components/sharedComponents/TopBar/TopBar.js":
+/*!******************************************************************!*\
+  !*** ./src/main/js/components/sharedComponents/TopBar/TopBar.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return TopBar; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\nclass TopBar extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"I am in top bar\");\n  }\n\n}\n\n//# sourceURL=webpack:///./src/main/js/components/sharedComponents/TopBar/TopBar.js?");
 
 /***/ }),
 
@@ -508,7 +592,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_App_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/App/App */ \"./src/main/js/components/App/App.js\");\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_App_App__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), document.getElementById('root')); // If you want your app to work offline and load faster, you can change\n// unregister() to register() below. Note this comes with some pitfalls.\n// Learn more about service workers: https://bit.ly/CRA-PWA\n\nserviceWorker.unregister();\n\n//# sourceURL=webpack:///./src/main/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_App_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/App/App */ \"./src/main/js/components/App/App.js\");\n/* harmony import */ var _api_serviceWorker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./api/serviceWorker */ \"./src/main/js/api/serviceWorker.js\");\n\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_App_App__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), document.getElementById('root')); // If you want your app to work offline and load faster, you can change\n// unregister() to register() below. Note this comes with some pitfalls.\n// Learn more about service workers: https://bit.ly/CRA-PWA\n\n_api_serviceWorker__WEBPACK_IMPORTED_MODULE_3__[\"unregister\"]();\n\n//# sourceURL=webpack:///./src/main/js/index.js?");
 
 /***/ })
 

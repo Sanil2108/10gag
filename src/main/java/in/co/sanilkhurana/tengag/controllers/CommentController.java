@@ -27,7 +27,7 @@ import in.co.sanilkhurana.tengag.services.UserAuthenticationService;
 import in.co.sanilkhurana.tengag.services.UserRetrievalService;
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/api/comments")
 public class CommentController {
 
     // TODO: Rename
