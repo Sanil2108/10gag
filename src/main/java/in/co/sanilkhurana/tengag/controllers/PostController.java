@@ -1,11 +1,11 @@
 package in.co.sanilkhurana.tengag.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import in.co.sanilkhurana.tengag.responses.error_responses.*;
-import in.co.sanilkhurana.tengag.responses.post_responses.GetPostResponse;
-import in.co.sanilkhurana.tengag.responses.post_responses.PostCreatedResponse;
-import in.co.sanilkhurana.tengag.responses.user_responses.*;
+import in.co.sanilkhurana.tengag.responses.post_responses.*;
 import in.co.sanilkhurana.tengag.models.Post;
-import in.co.sanilkhurana.tengag.models.Token;
 import in.co.sanilkhurana.tengag.models.User;
 import in.co.sanilkhurana.tengag.responses.Response;
 import in.co.sanilkhurana.tengag.services.PostRetrievalService;
@@ -66,6 +66,22 @@ public class PostController {
             postRetrievalService.getCompletePost(postId)
         );
 
+    }
+
+    @GetMapping("/get/top")
+    public Response getTopPosts() {
+        return new GetPostsResponse(new ArrayList<Post>());
+    }
+
+    @GetMapping("/get/hot")
+    public Response getHotPosts() {
+        return new GetPostsResponse(new ArrayList<Post>());
+    }
+
+    @GetMapping("/get/new")
+    public Response getNewPosts() {
+        List<Post> posts = postRetrievalService.getNewPosts();
+        return new GetPostsResponse(posts);
     }
 
 }

@@ -22,14 +22,46 @@ class App extends React.Component {
         super(props)
 
         this.state = {
-
+            currentUser: null,
+            currentTheme: null,
         }
+    }
+
+    loginUser(email, token) {
+        this.setState({
+            currentUser: {
+                email, token,
+            }
+        })
+    }
+
+    logoutUser() {
+        this.setState({
+            currentUser: null,
+        })
+    }
+
+    changeTheme(newTheme) {
+        this.setState({
+            currentTheme: newTheme,
+        })
+    }
+
+    getUser() {
+        return (this.state.currentUser !== null) ?
+            this.state.currentUser : new Error("User not logged in");
     }
 
     render() {
         return (
             <div className="App">
-                <TopBar>
+                <TopBar
+                    loginUserFunction={this.loginUser.bind(this)}
+                    logoutUserFunction={this.logoutUser.bind(this)}
+                    changeThemeFunction={this.changeTheme.bind(this)}
+                    currentUser={this.state.currentUser}
+                    currentTheme={this.state.currentTheme}
+                >
                 
                 </TopBar>
                 <Router>

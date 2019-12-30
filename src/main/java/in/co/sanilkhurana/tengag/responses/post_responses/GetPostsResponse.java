@@ -1,15 +1,16 @@
 package in.co.sanilkhurana.tengag.responses.post_responses;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import in.co.sanilkhurana.tengag.models.Post;
 import in.co.sanilkhurana.tengag.responses.Response;
 
-public class GetAllPostsResponse extends Response {
+public class GetPostsResponse extends Response {
 
-    ArrayList<Post> posts;
+    List<Post> posts;
 
-    public GetAllPostsResponse(ArrayList<Post> posts) {
+    public GetPostsResponse(List<Post> posts) {
         super("Posts retrieved successfully", Response.ResponseType.RESPONSE_TYPE_OK);
 
         this.posts = posts;
@@ -19,7 +20,7 @@ public class GetAllPostsResponse extends Response {
         this.posts = posts;
     }
 
-    public ArrayList<Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 }

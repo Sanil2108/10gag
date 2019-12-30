@@ -36,6 +36,9 @@ public class Post {
     @OneToMany
     private List<Comment> comments;
 
+    @Column
+    private Long date;
+
     public Post() {
     }
 
@@ -45,6 +48,14 @@ public class Post {
         this.votes = votes;
         this.user = user;
         this.imageURL = imageURL;
+    }
+
+    public void setDate(Long date) {
+        this.date = date;
+    }
+
+    public Long getDate() {
+        return date;
     }
 
     public void setImageURL(String imageURL) {
