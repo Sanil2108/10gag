@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
-import * as axios from 'axios';
 
 import {
-    LOGIN_USER_URL,
-    RESPONSE_TYPE_OK,
     CREATE_POST_PAGE_URL,
     SETTINGS_PAGE_URL,
     FRONT_PAGE_URL,
+    USER_KEY,
+    THEME_KEY,
 } from '../../../constants';
 
 import {
     authenticateUserWithPassword,
+    validateThemeSelection,
 } from '../../../utils';
+
+import getStoreInstance from '../../../Store';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class TopBar extends Component {
     constructor(props) {
@@ -20,25 +23,24 @@ export default class TopBar extends Component {
         this.state = {
             email: "sanilkhurana7@gmail.com",
             password: "root",
-            currentUser: this.props.currentUser,
-            currentTheme: this.props.currentTheme,
+            currentUser: getStoreInstance().get(USER_KEY),
+            currentTheme: getStoreInstance().get(THEME_KEY),
+            redirectTo: null,
         };
     }
 
-    static getDerivedStateFromProps(props, state) {
-        const stateChanges = {};
-
-        if (state.currentUser != props.currentUser) {
-            stateChanges.currentUser = props.currentUser;
-        }
-        if (state.currentTheme != props.currentTheme) {
-            stateChanges.currentTheme = props.currentTheme;
-        }
-
-        if (stateChanges === {}) {
-            return null;
-        }
-        return Object.assign(state, stateChanges);
+    componentDidMount() {
+        const scope = this;
+        getStoreInstance().subscribe(USER_KEY, (key, value) => {
+            scope.setState({
+                currentUser: value,
+            })
+        });
+        getStoreInstance().subscribe(THEME_KEY, (key, value) => {
+            scope.setState({
+                currentTheme: value,
+            })
+        });
     }
 
     async loginUser() {
@@ -47,11 +49,25 @@ export default class TopBar extends Component {
             this.state.password,
         );
         if (authenticationResult) {
-            this.props.loginUserFunction(this.state.email, authenticationResult.token);
+            getStoreInstance().updateOrCreate(USER_KEY, authenticationResult);
+        }
+    }
+
+    logoutUser() {
+        getStoreInstance().updateOrCreate(USER_KEY, {email: null, token: null});
+    }
+
+    changeTheme(event) {
+        if (validateThemeSelection(event.target.value)) {
+            getStoreInstance().updateOrCreate(THEME_KEY, event.target.value);
         }
     }
 
     render() {
+        if (this.state.redirectTo !== null) {
+            return <Redirect push to={this.state.redirectTo}></Redirect>
+        }
+
         const scope = this;
 
         return (
@@ -65,16 +81,17 @@ export default class TopBar extends Component {
                     scope.setState({password: e.target.value});
                 }} />
                 <button onClick={this.loginUser.bind(this)}>Login</button>
-                <button onClick={this.props.logoutUserFunction}>Logout</button>
-                <select onChange={(e)=>{this.props.changeThemeFunction(e.target.value)}}>
+                <button onClick={this.logoutUser.bind(this)}>Logout</button>
+                <select onChange={this.changeTheme.bind(this)}>
                     <option value="Theme1">Theme 1</option>
                     <option value="Theme2">Theme 2</option>
                     <option value="Theme3">Theme 3</option>
                     <option value="Theme4">Theme 4</option>
                 </select>
-                <a href={CREATE_POST_PAGE_URL}>Create post</a>
-                <a href={SETTINGS_PAGE_URL}>Settings</a>
-                <a href={FRONT_PAGE_URL}>Front page</a>
+
+                <Link to={CREATE_POST_PAGE_URL}>Create post</Link>&nbsp;&nbsp;
+                <Link to={SETTINGS_PAGE_URL}>Settings</Link>&nbsp;&nbsp;
+                <Link to={FRONT_PAGE_URL}>Front page</Link>
 
                 <br />
                 <br />

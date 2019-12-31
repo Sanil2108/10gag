@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
 
-import TopBar from '../sharedComponents/TopBar/TopBar';
+import getStoreInstance from '../../Store';
 
+import TopBar from '../sharedComponents/TopBar/TopBar';
 import Front from '../pages/front/Front';
 import Settings from '../pages/settings/Settings';
 import User from '../pages/user/User';
@@ -18,10 +19,6 @@ import {
 } from '../../constants';
 
 import {
-    authenticateUserWithPassword,
-} from '../../utils';
-
-import {
     BrowserRouter as Router,
     Switch,
     Route,
@@ -30,51 +27,16 @@ import {
 class App extends React.Component {
 
     constructor(props) {
-        super(props)
+        super(props);
 
-        this.state = {
-            currentUser: null,
-            currentTheme: null,
-        }
-    }
-
-    loginUser(email, token) {
-        this.setState({
-            currentUser: {
-                email, token,
-            }
-        })
-    }
-
-    logoutUser() {
-        this.setState({
-            currentUser: null,
-        });
-    }
-
-    changeTheme(newTheme) {
-        this.setState({
-            currentTheme: newTheme,
-        })
-    }
-
-    getUser() {
-        return (this.state.currentUser !== null) ?
-            this.state.currentUser : new Error("User not logged in");
+        // Default values
+        getStoreInstance().updateOrCreate('user', {email: null, token: null});
+        getStoreInstance().updateOrCreate('theme', null);
     }
 
     render() {
         return (
             <div className="App">
-                <TopBar
-                    loginUserFunction={this.loginUser.bind(this)}
-                    logoutUserFunction={this.logoutUser.bind(this)}
-                    changeThemeFunction={this.changeTheme.bind(this)}
-                    currentUser={this.state.currentUser}
-                    currentTheme={this.state.currentTheme}
-                >
-                
-                </TopBar>
                 <Router>
                 <Switch>
                     <Route path={USER_PAGE_URL + "/:userName"}>
@@ -87,7 +49,7 @@ class App extends React.Component {
                         <Settings></Settings>
                     </Route>
                     <Route path={CREATE_POST_PAGE_URL}>
-                        <CreatePost getUserFunction={this.getUser.bind(this)}></CreatePost>
+                        <CreatePost></CreatePost>
                     </Route>
                     <Route path={FRONT_PAGE_URL}>
                         <Front></Front>

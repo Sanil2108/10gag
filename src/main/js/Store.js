@@ -1,20 +1,20 @@
-export default class Store {
-
-    static instance = new Store();
-
-    static getInstance() {
-        return this.instance;
-    }
-
+class Store {
     constructor() {
         this.keyValuePairs = {};
     }
 
-    updateOrCreate(key, value, callback) {
+    subscribe(key, callback) {
+        if (this.keyValuePairs[key] === undefined) {
+            return false;
+        }
+        this.keyValuePairs[key].callbacks.push(callback);
+    }
+
+    updateOrCreate(key, value, defaultValue = null) {
         if (this.keyValuePairs[key] === undefined) {
             this.keyValuePairs[key] = {
                 value,
-                callbacks: [callback],
+                callbacks: [],
             }
         }
         else {
@@ -23,12 +23,19 @@ export default class Store {
             }
 
             this.keyValuePairs[key].value = value;
-            this.keyValuePairs[key].callbacks.push(callback);
         }
     }
 
     get(key) {
+        if (this.keyValuePairs[key] === undefined) {
+            return null;
+        }
         return this.keyValuePairs[key].value;
     }
 
+}
+
+let store = new Store();
+export default function getInstance() {
+    return store;
 }

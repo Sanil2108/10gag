@@ -5,6 +5,15 @@ import {
     authenticateUserWithToken,
 } from '../../../utils';
 
+import {
+    USER_KEY,
+    CREATE_POSTS_URL,
+    RESPONSE_TYPE_OK,
+} from '../../../constants';
+
+import getStoreInstance from '../../../Store';
+import TopBar from '../../sharedComponents/TopBar/TopBar';
+
 export default class createPost extends Component {
     constructor(props) {
         super(props);
@@ -15,9 +24,35 @@ export default class createPost extends Component {
         }
     }
 
-    createPost() {
-        if (await authenticateUserWithToken()) {
+    async createPost() {
+        let user = getStoreInstance().get(USER_KEY);
+        if (user === null) {
+            // TODO: Throw proper error here. No user logged in
+            console.error("CreatePost - No user logged in.");
+            return;
+        }
+        console.log(user);
+        if (await authenticateUserWithToken(user.email, user.token)) {
+            const createPostRequest = {
+                user,
+                post: {
+                    title: this.state.postTitle,
+                    imageURL: this.state.postURL,
+                }
+            };
 
+            console.log(createPostRequest);
+
+            const response = await axios.post(CREATE_POSTS_URL, createPostRequest);
+
+            if (response.status === 200) {
+                if (response.data.responseType === RESPONSE_TYPE_OK) {
+                    console.log("Post created!");
+                }
+                else {
+                    console.error(response.data.responseMessage);
+                }
+            }
         }
     }
 
@@ -25,6 +60,7 @@ export default class createPost extends Component {
         const scope = this;
         return (
             <div>
+                <TopBar></TopBar>
                 Title: <input
                     type="text"
                     value={this.state.postTitle}
@@ -35,7 +71,7 @@ export default class createPost extends Component {
                     value={this.state.postURL}
                     onChange={(e) => {scope.setState({postURL: e.target.value})}}
                 ></input><br />
-                <button>Create post</button>
+                <button onClick={this.createPost.bind(this)}>Create post</button>
                 I am in create post
             </div>
         )

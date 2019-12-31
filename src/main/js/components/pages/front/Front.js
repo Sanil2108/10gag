@@ -5,6 +5,7 @@ import * as axios from 'axios';
 import {
     NEW_POSTS_URL,
 } from '../../../constants';
+import TopBar from '../../sharedComponents/TopBar/TopBar';
 
 export default class Front extends Component {
 
@@ -40,6 +41,7 @@ export default class Front extends Component {
     render() {
         return (
             <div>
+                <TopBar></TopBar>
                 I am in front
                 <br />
                 Posts - 
