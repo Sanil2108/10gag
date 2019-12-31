@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
 import * as axios from 'axios';
 
-import { LOGIN_USER_URL, RESPONSE_TYPE_OK } from '../../../constants';
+import {
+    LOGIN_USER_URL,
+    RESPONSE_TYPE_OK,
+    CREATE_POST_PAGE_URL,
+    SETTINGS_PAGE_URL,
+    FRONT_PAGE_URL,
+} from '../../../constants';
+
+import {
+    authenticateUserWithPassword,
+} from '../../../utils';
 
 export default class TopBar extends Component {
     constructor(props) {
@@ -31,25 +41,14 @@ export default class TopBar extends Component {
         return Object.assign(state, stateChanges);
     }
 
-    loginUser() {
-        const loginRequest = {
-            "email": this.state.email,
-            "password": this.state.password,
+    async loginUser() {
+        const authenticationResult = await authenticateUserWithPassword(
+            this.state.email,
+            this.state.password,
+        );
+        if (authenticationResult) {
+            this.props.loginUserFunction(this.state.email, authenticationResult.token);
         }
-
-        const scope = this;
-
-        axios.post(LOGIN_USER_URL, loginRequest).then((response) => {
-            if (response.data.responseType === RESPONSE_TYPE_OK) {
-                scope.props.loginUserFunction(scope.state.email, response.data.token.token);
-            }
-            else {
-                console.error(response.data.responseMessage);
-            }
-
-        }).catch((error) => {
-            console.error(error);
-        });
     }
 
     render() {
@@ -73,6 +72,9 @@ export default class TopBar extends Component {
                     <option value="Theme3">Theme 3</option>
                     <option value="Theme4">Theme 4</option>
                 </select>
+                <a href={CREATE_POST_PAGE_URL}>Create post</a>
+                <a href={SETTINGS_PAGE_URL}>Settings</a>
+                <a href={FRONT_PAGE_URL}>Front page</a>
 
                 <br />
                 <br />
