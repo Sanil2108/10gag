@@ -16,6 +16,8 @@ import {
 import getStoreInstance from '../../../Store';
 import { Link, Redirect } from 'react-router-dom';
 
+// import './TopBar.css';
+
 export default class TopBar extends Component {
     constructor(props) {
         super(props);
@@ -71,7 +73,7 @@ export default class TopBar extends Component {
         const scope = this;
 
         return (
-            <div>
+            <div className="TopBar">
                 I am in top bar and the current user email is {(this.state.currentUser !== null) ? 
                     this.state.currentUser.email : "Null bro."} and the current theme is {this.state.currentTheme} <br />
                 Email <input type="text" value={this.state.email} onChange={(e) => {
