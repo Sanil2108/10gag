@@ -36,7 +36,7 @@ public class UserController {
         }
         else {
             Token newToken = userAuthenticationService.updateOrCreateTokenForUser(user);
-            LoginUserResponse loginUserResponse = new LoginUserResponse(newToken);
+            LoginUserResponse loginUserResponse = new LoginUserResponse(newToken, userRetrievalService.getUser(user.getEmail()));
 
             return loginUserResponse;
         }

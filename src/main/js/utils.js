@@ -3,6 +3,7 @@ import * as axios from 'axios';
 import {
     LOGIN_USER_URL,
     RESPONSE_TYPE_OK,
+    GET_USER_URL,
 } from './constants';
 
 export let authenticateUserWithToken = async (email, token) => {
@@ -29,7 +30,7 @@ let authenticateUser = async (loginRequest, email) => {
     const response = await axios.post(LOGIN_USER_URL, loginRequest);
     if (response.status === 200) {
         if (response.data.responseType === RESPONSE_TYPE_OK) {
-            return {token: response.data.token.token, email};
+            return {token: response.data.token.token, email, userName: response.data.user.userName};
         }
         else {
             return false;
@@ -37,6 +38,18 @@ let authenticateUser = async (loginRequest, email) => {
     }
     else {
         return false;
+    }
+}
+
+export let getUser = async (username) => {
+    const response = await axios.get(GET_USER_URL + username);
+    if (response.code === 200) {
+        if (response.data.responseType === RESPONSE_TYPE_OK) {
+            return response.data.user;
+        }
+        else {
+            return response.data.responseMessage;
+        }
     }
 }
 

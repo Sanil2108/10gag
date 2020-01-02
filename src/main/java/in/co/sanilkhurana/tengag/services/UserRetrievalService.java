@@ -14,6 +14,10 @@ public class UserRetrievalService {
     @Autowired
     private UserRepository userRepository;
 
+    public User getUser(String email) {
+        return userRepository.findById(email).get();
+    }
+
     public boolean userExists(User user) {
         return userRepository.existsById(user.getEmail());
     }
