@@ -9,6 +9,8 @@ import in.co.sanilkhurana.tengag.services.UserAuthenticationService;
 import in.co.sanilkhurana.tengag.services.UserRetrievalService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +51,15 @@ public class UserController {
         userAuthenticationService.updateOrCreateTokenForUser(user);
 
         return new RegisterUserResponse();
+    }
+
+    @GetMapping("/get/{username}")
+    public Response getUser(@PathVariable String username) {
+        User user = userRetrievalService.getUserByUsername(username);
+        if (user == null) {
+            return new UserDoesNotExistErrorResponse();
+        }
+        return new GetUserResponse(user);
     }
 
     // TODO:
