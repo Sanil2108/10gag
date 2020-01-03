@@ -29,20 +29,32 @@ export default class TopBar extends Component {
             currentTheme: getStoreInstance().get(THEME_KEY),
             redirectTo: null,
         };
+
+        this.currentThemeChangedCallback = this.currentThemeChanged.bind(this);
+        this.currentUserChangedCallback = this.currentUserChanged.bind(this);
+    }
+
+    currentThemeChanged(key, newTheme) {
+        this.setState({
+            currentTheme: newTheme,
+        });
+    }
+
+    currentUserChanged(key, newUser) {
+        this.setState({
+            currentUser: newUser,
+        });
     }
 
     componentDidMount() {
         const scope = this;
-        getStoreInstance().subscribe(USER_KEY, (key, value) => {
-            scope.setState({
-                currentUser: value,
-            })
-        });
-        getStoreInstance().subscribe(THEME_KEY, (key, value) => {
-            scope.setState({
-                currentTheme: value,
-            })
-        });
+        getStoreInstance().subscribe(USER_KEY, this.currentUserChangedCallback);
+        getStoreInstance().subscribe(THEME_KEY, this.currentThemeChangedCallback);
+    }
+
+    componentWillUnmount() {
+        getStoreInstance().unsubscribe(USER_KEY, this.currentUserChangedCallback);
+        getStoreInstance().unsubscribe(THEME_KEY, this.currentThemeChangedCallback);
     }
 
     async loginUser() {
@@ -75,7 +87,8 @@ export default class TopBar extends Component {
         return (
             <div className="TopBar">
                 I am in top bar and the current user email is {(this.state.currentUser !== null) ? 
-                    this.state.currentUser.email : "Null bro."} and the current theme is {this.state.currentTheme} <br />
+                    this.state.currentUser.email : "Null bro."} and the current theme is {this.state.currentTheme}. Also the current username is {(this.state.currentUser !== null) ? 
+                        this.state.currentUser.userName : "Null bro."}<br></br>
                 Email <input type="text" value={this.state.email} onChange={(e) => {
                     scope.setState({email: e.target.value});
                 }} />

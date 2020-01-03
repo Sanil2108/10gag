@@ -27,7 +27,7 @@ export default class Front extends Component {
 
         const scope = this;
 
-        axios.get(NEW_POSTS_URL, {}).then((response) => {
+        axios.get(NEW_POSTS_URL(), {}).then((response) => {
             scope.setState({
                 posts: response.data,
             })

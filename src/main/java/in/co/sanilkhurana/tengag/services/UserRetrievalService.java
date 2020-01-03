@@ -22,11 +22,11 @@ public class UserRetrievalService {
         return userRepository.existsById(user.getEmail());
     }
 
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(String userName) {
         Iterator<User> users = userRepository.findAll().iterator();
         while(users.hasNext()) {
             User currentUser = users.next();
-            if (currentUser.getUserName().equals(username)) {
+            if (currentUser.getUserName().equals(userName)) {
                 return currentUser;
             }
         }

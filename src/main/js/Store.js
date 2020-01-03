@@ -3,6 +3,15 @@ class Store {
         this.keyValuePairs = {};
     }
 
+    unsubscribe(key, callback) {
+        if (this.keyValuePairs[key] === undefined) {
+            return false;
+        }
+        this.keyValuePairs[key].callbacks.splice(
+            this.keyValuePairs[key].callbacks.indexOf(callback), 1
+        );
+    }
+
     subscribe(key, callback) {
         if (this.keyValuePairs[key] === undefined) {
             return false;

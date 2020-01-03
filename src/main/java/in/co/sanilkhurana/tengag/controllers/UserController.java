@@ -53,9 +53,9 @@ public class UserController {
         return new RegisterUserResponse();
     }
 
-    @GetMapping("/get/{username}")
-    public Response getUser(@PathVariable String username) {
-        User user = userRetrievalService.getUserByUsername(username);
+    @GetMapping("/get/{userName}")
+    public Response getUser(@PathVariable String userName) {
+        User user = userRetrievalService.getUserByUsername(userName);
         if (user == null) {
             return new UserDoesNotExistErrorResponse();
         }

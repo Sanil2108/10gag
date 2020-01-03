@@ -3,7 +3,6 @@ import React from 'react';
 
 import getStoreInstance from '../../Store';
 
-import TopBar from '../sharedComponents/TopBar/TopBar';
 import Front from '../pages/front/Front';
 import Settings from '../pages/settings/Settings';
 import User from '../pages/user/User';
@@ -16,6 +15,8 @@ import {
     SETTINGS_PAGE_URL,
     CREATE_POST_PAGE_URL,
     FRONT_PAGE_URL,
+    USER_KEY,
+    THEME_KEY,
 } from '../../constants';
 
 import {
@@ -30,8 +31,8 @@ class App extends React.Component {
         super(props);
 
         // Default values
-        getStoreInstance().updateOrCreate('user', {email: null, token: null});
-        getStoreInstance().updateOrCreate('theme', null);
+        getStoreInstance().updateOrCreate(USER_KEY, {email: null, token: null, userName: null});
+        getStoreInstance().updateOrCreate(THEME_KEY, null);
     }
 
     render() {

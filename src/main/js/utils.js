@@ -27,13 +27,13 @@ export let authenticateUserWithPassword = async (email, password) => {
 }
 
 let authenticateUser = async (loginRequest, email) => {
-    const response = await axios.post(LOGIN_USER_URL, loginRequest);
+    const response = await axios.post(LOGIN_USER_URL(), loginRequest);
     if (response.status === 200) {
         if (response.data.responseType === RESPONSE_TYPE_OK) {
             return {token: response.data.token.token, email, userName: response.data.user.userName};
         }
         else {
-            return false;
+            return {responseMessage: response.data.responseMessage};
         }
     }
     else {
@@ -41,16 +41,19 @@ let authenticateUser = async (loginRequest, email) => {
     }
 }
 
-export let getUser = async (username) => {
-    const response = await axios.get(GET_USER_URL + username);
+export let getUser = async (userName) => {
+    const response = await axios.get(GET_USER_URL(userName));
     if (response.code === 200) {
         if (response.data.responseType === RESPONSE_TYPE_OK) {
+            console.log(response.data)
             return response.data.user;
         }
         else {
+            console.error(response.data.responseMessage);
             return response.data.responseMessage;
         }
     }
+    return false;
 }
 
 export let validateThemeSelection = (themeName) => {

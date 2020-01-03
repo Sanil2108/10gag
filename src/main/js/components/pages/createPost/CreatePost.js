@@ -7,7 +7,7 @@ import {
 
 import {
     USER_KEY,
-    CREATE_POSTS_URL,
+    CREATE_POST_URL,
     RESPONSE_TYPE_OK,
 } from '../../../constants';
 
@@ -31,7 +31,6 @@ export default class createPost extends Component {
             console.error("CreatePost - No user logged in.");
             return;
         }
-        console.log(user);
         if (await authenticateUserWithToken(user.email, user.token)) {
             const createPostRequest = {
                 user,
@@ -41,9 +40,7 @@ export default class createPost extends Component {
                 }
             };
 
-            console.log(createPostRequest);
-
-            const response = await axios.post(CREATE_POSTS_URL, createPostRequest);
+            const response = await axios.post(CREATE_POST_URL(), createPostRequest);
 
             if (response.status === 200) {
                 if (response.data.responseType === RESPONSE_TYPE_OK) {
