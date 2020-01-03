@@ -17,11 +17,13 @@ export default class Settings extends Component {
     }
 
     userChanged(key, newUser) {
-        this.updateWithUser();
+        this.updateWithUser(newUser.userName);
     }
 
-    async updateWithUser() {
-        const getUserResult = await getUser(getStoreInstance().get(USER_KEY).userName);
+    async updateWithUser(userName) {
+        console.log(userName);
+        const getUserResult = await getUser(userName);
+        console.log(getUserResult);
         this.setState({
             user: (getUserResult) ? getUserResult : null,
         })
@@ -42,7 +44,7 @@ export default class Settings extends Component {
             <div>
                 <TopBar></TopBar>
                 I am in settings
-                The user name is {(this.state.user != null) ? this.state.user.userName : "Null bro"}
+                The user name is {(this.state.user != null) ? this.state.user.userName : "Null bro"} and user email is {(this.state.user != null) ? this.state.user.email : "Null bro2"}
             </div>
         )
     }

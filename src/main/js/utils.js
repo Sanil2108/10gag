@@ -43,7 +43,7 @@ let authenticateUser = async (loginRequest, email) => {
 
 export let getUser = async (userName) => {
     const response = await axios.get(GET_USER_URL(userName));
-    if (response.code === 200) {
+    if (response.status === 200) {
         if (response.data.responseType === RESPONSE_TYPE_OK) {
             console.log(response.data)
             return response.data.user;
