@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class WebsiteController {
 
     // TODO: Fix regex
-    @RequestMapping(value = "/**/{path:[^\\.]*}", method = RequestMethod.GET)
+    @RequestMapping(value = "(api[/\\A-Za-z0-9._-]*)", method = RequestMethod.GET)
     public String something() {
         return "index.html";
     }

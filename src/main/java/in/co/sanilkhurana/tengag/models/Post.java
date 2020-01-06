@@ -3,6 +3,7 @@ package in.co.sanilkhurana.tengag.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -39,6 +40,14 @@ public class Post {
     @Column
     private Long date;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "upvotedPosts")
+    private List<User> upvotedBy;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "downvotedPosts")
+    private List<User> downvotedBy;
+
     public Post() {
     }
 
@@ -48,6 +57,30 @@ public class Post {
         this.votes = votes;
         this.user = user;
         this.imageURL = imageURL;
+    }
+
+    public List<User> getDownvotedBy() {
+        return downvotedBy;
+    }
+
+    public void addDownvotedBy(User user) {
+        this.downvotedBy.add(user);
+    }
+
+    public void removeDownvotedBy(User user) {
+        this.downvotedBy.remove(user);
+    }
+
+    public List<User> getUpvotedBy() {
+        return upvotedBy;
+    }
+
+    public void addUpvotedBy(User user) {
+        this.upvotedBy.add(user);
+    }
+
+    public void removeUpvotedBy(User user) {
+        this.upvotedBy.remove(user);
     }
 
     public void setDate(Long date) {

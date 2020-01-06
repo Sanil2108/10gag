@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -39,6 +40,13 @@ public class Comment {
     @OneToMany
     private List<Comment> childrenComments;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "upvotedComments")
+    private List<User> upvotedBy;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "downvotedComments")
+    private List<User> downvotedBy;
 
     public Comment() {
     }
@@ -52,6 +60,30 @@ public class Comment {
 
     public Long getId() {
         return id;
+    }
+
+    public List<User> getDownvotedBy() {
+        return downvotedBy;
+    }
+
+    public void addDownvotedBy(User user) {
+        this.downvotedBy.add(user);
+    }
+
+    public void removeDownvotedBy(User user) {
+        this.downvotedBy.remove(user);
+    }
+
+    public List<User> getUpvotedBy() {
+        return upvotedBy;
+    }
+
+    public void addUpvotedBy(User user) {
+        this.upvotedBy.add(user);
+    }
+
+    public void removeUpvotedBy(User user) {
+        this.upvotedBy.remove(user);
     }
 
     public Comment getParentComment() {

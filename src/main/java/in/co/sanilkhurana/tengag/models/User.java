@@ -3,6 +3,7 @@ package in.co.sanilkhurana.tengag.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -33,12 +34,76 @@ public class User {
     @OneToOne
     private Token token;
 
+    @ManyToMany
+    @JsonIgnore
+    private List<Comment> upvotedComments;
+
+    @ManyToMany
+    @JsonIgnore
+    private List<Comment> downvotedComments;
+
+    @ManyToMany
+    @JsonIgnore
+    private List<Post> upvotedPosts;
+
+    @ManyToMany
+    @JsonIgnore
+    private List<Post> downvotedPosts;
+
     public User() {}
 
     public User(String userName, String email, String password) {
         this.userName = userName;
         this.email = email;
         this.password = password;
+    }
+
+    public List<Comment> getUpvotedComments() {
+        return upvotedComments;
+    }
+
+    public void addUpvotedComment(Comment comment) {
+        this.upvotedComments.add(comment);
+    }
+
+    public void removeUpvotedComment(Comment comment) {
+        this.upvotedComments.remove(comment);
+    }
+
+    public List<Comment> getDownvotedComments() {
+        return downvotedComments;
+    }
+
+    public void addDownvotedComment(Comment comment) {
+        this.downvotedComments.add(comment);
+    }
+
+    public void removeDownvotedComment(Comment comment) {
+        this.downvotedComments.remove(comment);
+    }
+
+    public List<Post> getDownvotedPosts() {
+        return downvotedPosts;
+    }
+
+    public void addDownvotedPost(Post post) {
+        this.downvotedPosts.add(post);
+    }
+
+    public void removeDownvotedPost(Post post) {
+        this.downvotedPosts.remove(post);
+    }
+
+    public List<Post> getUpvotedPosts() {
+        return upvotedPosts;
+    }
+
+    public void addUpvotedPost(Post post) {
+        this.upvotedPosts.add(post);
+    }
+
+    public void removeUpvotedPost(Post post) {
+        this.upvotedPosts.remove(post);
     }
 
     public void addComment(Comment comment) {

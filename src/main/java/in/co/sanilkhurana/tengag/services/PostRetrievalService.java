@@ -59,6 +59,60 @@ public class PostRetrievalService {
         return IteratorUtils.toList(postRepository.findAll(new Sort(Sort.Direction.DESC, "date")).iterator());
     }
 
+    public void upvotePost(User user, Post post) {
+        post = postRepository.findById(post.getId()).get();
+        user = userRepository.findById(user.getEmail()).get();
+
+        // TODO: Equals in post based on id
+        if (user.getUpvotedPosts().contains(post)) {
+            user.removeUpvotedPost(post);
+            post.removeUpvotedBy(user);
+            post.setVotes(post.getVotes() - 1);
+        }
+        else if (user.getDownvotedPosts().contains(post)) {
+            user.removeDownvotedPost(post);
+            user.addUpvotedPost(post);
+            post.removeDownvotedBy(user);
+            post.addUpvotedBy(user);
+            post.setVotes(post.getVotes() + 2);
+        }
+        else {
+            user.addUpvotedPost(post);
+            post.addUpvotedBy(user);
+            post.setVotes(post.getVotes() + 1);
+        }
+
+        userRepository.save(user);
+        postRepository.save(post);
+    }
+
+    public void downvotePost(User user, Post post) {
+        post = postRepository.findById(post.getId()).get();
+        user = userRepository.findById(user.getEmail()).get();
+
+        // TODO: Equals in post based on id
+        if (user.getUpvotedPosts().contains(post)) {
+            user.removeUpvotedPost(post);
+            post.removeUpvotedBy(user);
+            user.addDownvotedPost(post);
+            post.addDownvotedBy(user);
+            post.setVotes(post.getVotes() - 2);
+        }
+        else if (user.getDownvotedPosts().contains(post)) {
+            user.removeDownvotedPost(post);
+            post.removeDownvotedBy(user);
+            post.setVotes(post.getVotes() + 1);
+        }
+        else {
+            user.addDownvotedPost(post);
+            post.addDownvotedBy(user);
+            post.setVotes(post.getVotes() - 1);
+        }
+
+        userRepository.save(user);
+        postRepository.save(post);
+    }
+
     // public List<Post> getTopPosts(String timePeriod) {
 
     // }

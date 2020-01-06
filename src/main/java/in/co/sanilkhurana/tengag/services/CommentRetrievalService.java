@@ -78,6 +78,68 @@ public class CommentRetrievalService {
         userRepository.save(user);
     }
 
+    public Comment getComment(Long commentId) {
+        return commentRepository.findById(commentId).get();
+    }
+
+    public Comment getComment(Comment comment) {
+        return this.getComment(comment.getId());
+    }
+
+    public void upvoteComment(User user, Comment comment) {
+        comment = commentRepository.findById(comment.getId()).get();
+        user = userRepository.findById(user.getEmail()).get();
+
+        // TODO: Equals in comment based on id
+        if (user.getUpvotedComments().contains(comment)) {
+            user.removeUpvotedComment(comment);
+            comment.removeUpvotedBy(user);
+            comment.setPoints(comment.getPoints() - 1);
+        }
+        else if (user.getDownvotedComments().contains(comment)) {
+            user.removeDownvotedComment(comment);
+            user.addUpvotedComment(comment);
+            comment.removeDownvotedBy(user);
+            comment.addUpvotedBy(user);
+            comment.setPoints(comment.getPoints() + 2);
+        }
+        else {
+            user.addUpvotedComment(comment);
+            comment.addUpvotedBy(user);
+            comment.setPoints(comment.getPoints() + 1);
+        }
+
+        userRepository.save(user);
+        commentRepository.save(comment);
+    }
+
+    public void downvoteComment(User user, Comment comment) {
+        comment = commentRepository.findById(comment.getId()).get();
+        user = userRepository.findById(user.getEmail()).get();
+
+        // TODO: Equals in comment based on id
+        if (user.getUpvotedComments().contains(comment)) {
+            user.removeUpvotedComment(comment);
+            comment.removeUpvotedBy(user);
+            user.addDownvotedComment(comment);
+            comment.addDownvotedBy(user);
+            comment.setPoints(comment.getPoints() - 2);
+        }
+        else if (user.getDownvotedComments().contains(comment)) {
+            user.removeDownvotedComment(comment);
+            comment.removeDownvotedBy(user);
+            comment.setPoints(comment.getPoints() + 1);
+        }
+        else {
+            user.addDownvotedComment(comment);
+            comment.addDownvotedBy(user);
+            comment.setPoints(comment.getPoints() - 1);
+        }
+
+        userRepository.save(user);
+        commentRepository.save(comment);
+    }
+
     public boolean commentExists(Comment comment) {
         return commentExists(comment.getId());
     }

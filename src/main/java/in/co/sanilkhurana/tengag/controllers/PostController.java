@@ -57,6 +57,38 @@ public class PostController {
         }
     }
 
+    @PostMapping("/downvote/{postId}")
+    public Response downvotePost(@RequestBody ObjectNode downvotePostRequest, @PathVariable Long postId) {
+        User user = objectMapper.convertValue(downvotePostRequest.get("user"), User.class);
+        if (!userRetrievalService.userExists(user)) {
+            return new UserDoesNotExistErrorResponse();
+        }
+        if (!userAuthenticationService.isUserAuthentic(user)) {
+            return new UserAuthenticationFailedErrorResponse();
+        }
+        if (!postRetrievalService.postExists(postId)) {
+            return new PostDoesNotExistErrorResponse();
+        }
+        postRetrievalService.downvotePost(user, postRetrievalService.getCompletePost(postId));
+        return new DownvotePostResponse();
+    }
+
+    @PostMapping("/upvote/{postId}")
+    public Response upvotePost(@RequestBody ObjectNode upvotePostRequest, @PathVariable Long postId) {
+        User user = objectMapper.convertValue(upvotePostRequest.get("user"), User.class);
+        if (!userRetrievalService.userExists(user)) {
+            return new UserDoesNotExistErrorResponse();
+        }
+        if (!userAuthenticationService.isUserAuthentic(user)) {
+            return new UserAuthenticationFailedErrorResponse();
+        }
+        if (!postRetrievalService.postExists(postId)) {
+            return new PostDoesNotExistErrorResponse();
+        }
+        postRetrievalService.upvotePost(user, postRetrievalService.getCompletePost(postId));
+        return new UpvotePostResponse();
+    }
+
     @GetMapping("/get/{postId}")
     public Response getPost(@PathVariable Long postId) {
         if (!postRetrievalService.postExists(postId)) {

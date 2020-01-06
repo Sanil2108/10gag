@@ -17,7 +17,9 @@ import in.co.sanilkhurana.tengag.models.User;
 import in.co.sanilkhurana.tengag.responses.Response;
 import in.co.sanilkhurana.tengag.responses.comment_responses.CreateCommentResponse;
 import in.co.sanilkhurana.tengag.responses.comment_responses.CreateReplyResponse;
+import in.co.sanilkhurana.tengag.responses.comment_responses.DownvoteCommentResponse;
 import in.co.sanilkhurana.tengag.responses.comment_responses.GetChildrenCommentsResponse;
+import in.co.sanilkhurana.tengag.responses.comment_responses.UpvoteCommentResponse;
 import in.co.sanilkhurana.tengag.responses.error_responses.CommentDoesNotExistErrorResponse;
 import in.co.sanilkhurana.tengag.responses.error_responses.UserAuthenticationFailedErrorResponse;
 import in.co.sanilkhurana.tengag.responses.error_responses.UserDoesNotExistErrorResponse;
@@ -77,6 +79,38 @@ public class CommentController {
         commentRetrievalService.createComment(user, comment, post);
 
         return new CreateCommentResponse();
+    }
+
+    @PostMapping("/downvote/{commentId}")
+    public Response downvoteComment(@RequestBody ObjectNode downvoteCommentRequest, @PathVariable Long commentId) {
+        User user = objectMapper.convertValue(downvoteCommentRequest.get("user"), User.class);
+        if (!userRetrievalService.userExists(user)) {
+            return new UserDoesNotExistErrorResponse();
+        }
+        if (!userAuthenticationService.isUserAuthentic(user)) {
+            return new UserAuthenticationFailedErrorResponse();
+        }
+        if (!commentRetrievalService.commentExists(commentId)) {
+            return new CommentDoesNotExistErrorResponse();
+        }
+        commentRetrievalService.downvoteComment(user, commentRetrievalService.getComment(commentId));
+        return new DownvoteCommentResponse();
+    }
+
+    @PostMapping("/upvote/{commentId}")
+    public Response upvoteComment(@RequestBody ObjectNode upvoteCommentRequest, @PathVariable Long commentId) {
+        User user = objectMapper.convertValue(upvoteCommentRequest.get("user"), User.class);
+        if (!userRetrievalService.userExists(user)) {
+            return new UserDoesNotExistErrorResponse();
+        }
+        if (!userAuthenticationService.isUserAuthentic(user)) {
+            return new UserAuthenticationFailedErrorResponse();
+        }
+        if (!commentRetrievalService.commentExists(commentId)) {
+            return new CommentDoesNotExistErrorResponse();
+        }
+        commentRetrievalService.upvoteComment(user, commentRetrievalService.getComment(commentId));
+        return new UpvoteCommentResponse();
     }
 
     @GetMapping("/getChildren/{commentId}")
