@@ -43,8 +43,7 @@ class App extends React.Component {
                     <Route path={USER_PAGE_URL + "/:userName"}>
                         <User></User>
                     </Route>
-                    <Route path={POST_PAGE_URL + "/:postId"}>
-                        <Post></Post>
+                    <Route path={POST_PAGE_URL + "/:postId"} component={Post}>
                     </Route>
                     <Route path={SETTINGS_PAGE_URL}>
                         <Settings></Settings>

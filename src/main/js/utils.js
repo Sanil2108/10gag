@@ -4,6 +4,10 @@ import {
     LOGIN_USER_URL,
     RESPONSE_TYPE_OK,
     GET_USER_URL,
+    NEW_POSTS_URL,
+    GET_POST_URL,
+    UPVOTE_POST_URL,
+    DOWNVOTE_POST_URL,
 } from './constants';
 
 export let authenticateUserWithToken = async (email, token) => {
@@ -54,6 +58,74 @@ export let getUser = async (userName) => {
         }
     }
     return false;
+}
+
+export let getPosts = async () => {
+    const response = await axios.get(NEW_POSTS_URL(), {});
+    if (response.status === 200) {
+        if (response.data.responseType === RESPONSE_TYPE_OK) {
+            return response.data.posts;
+        }
+        else {
+            console.error(response.data.responseMessage);
+            return response.data.responseMessage;
+        }
+    }
+    return false;
+}
+
+export let getPost = async (postId)  => {
+    const response = await axios.get(GET_POST_URL(postId), {});
+    if (response.status === 200) {
+        if (response.data.responseType === RESPONSE_TYPE_OK) {
+            return response.data.post;
+        }
+        else {
+            console.error(response.data.responseMessage);
+            return response.data.responseMessage;
+        }
+    }
+}
+
+// TODO: Refactor other functions to similar
+export let sendUpvotePostRequest = async (postId, userEmail, token) => {
+    const data = {
+        user: {
+            email: userEmail,
+            token,
+        },
+    }
+    const response = await axios.post(UPVOTE_POST_URL(postId), data);
+    if (response.status === 200) {
+        if (response.data.responseType === RESPONSE_TYPE_OK) {
+            return true;
+        }
+        else {
+            console.error(response.data.responseMessage);
+            return false;
+        }
+    }
+    return false;
+}
+
+export let sendDownvotePostRequest = async (postId, userEmail, token) => {
+    const data = {
+        user: {
+            email: userEmail,
+            token,
+        },
+    }
+    const response = await axios.post(DOWNVOTE_POST_URL(postId), data);
+    if (response.status === 200) {
+        if (response.data.responseType === RESPONSE_TYPE_OK) {
+            return true;
+        }
+        else {
+            console.error(response.data.responseMessage);
+            return new Error(response.data.responseMessage);
+        }
+    }
+    return new Error("axios falied");
 }
 
 export let validateThemeSelection = (themeName) => {
