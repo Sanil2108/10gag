@@ -31,3 +31,9 @@ export const FRONT_PAGE_URL = '/';
 // Store constants
 export const USER_KEY = 'user';
 export const THEME_KEY = 'theme';
+
+export const THEMES = {
+    'Theme1':{},
+    'Theme2':{},
+    'Theme3':{},
+}

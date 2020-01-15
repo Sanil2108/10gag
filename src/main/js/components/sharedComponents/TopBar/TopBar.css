@@ -1,4 +1,29 @@
 .TopBar {
-    background: #000;
-    border: 1px solid black;
+    box-shadow: 0px 4px 4px 0px #aaa;
+}
+
+.LogoContainer {
+    border: 1px solid white;
+}
+
+.RightButtonsContainer {
+    border: 1px solid white;
+}
+
+.ThemeDropDownContainer {
+    border: 1px solid white;
+}
+
+.MyLink {
+    color: #000;
+    text-decoration: none;
+}
+
+.MyMaterialIcon {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-size: 30px;
+    position: relative;
+    display: inline;
+    text-align: center;
 }

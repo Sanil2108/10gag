@@ -1,0 +1,35 @@
+.DropDown {
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+    width: 130px;
+    position: relative;
+    background: black;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.DropDown:hover {
+    box-shadow: #aaa 0 0 18px 3px;
+    border-radius: 10px;
+}
+
+.MyMaterialIcon {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-size: 24px;
+    position: relative;
+    display: inline;
+    text-align: center;
+}
+
+.RotateButton {
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+    right: 15px;
+    top: 7px;
+}

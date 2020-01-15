@@ -6,6 +6,7 @@ import {
     FRONT_PAGE_URL,
     USER_KEY,
     THEME_KEY,
+    THEMES,
 } from '../../../constants';
 
 import {
@@ -16,7 +17,9 @@ import {
 import getStoreInstance from '../../../Store';
 import { Link, Redirect } from 'react-router-dom';
 
-// import './TopBar.css';
+import './TopBar.css';
+
+import DropDown from '../DropDown/DropDown';
 
 export default class TopBar extends Component {
     constructor(props) {
@@ -77,6 +80,18 @@ export default class TopBar extends Component {
         }
     }
 
+    getThemeDropDownElements() {
+        const elements = [];
+        const themeNames = Object.keys(THEMES);
+        for (let i = 0; i < themeNames.length; i += 1) {
+            elements.push(
+                <div>
+                    {themeNames[i]}
+                </div>
+            )
+        }
+    }
+
     render() {
         if (this.state.redirectTo !== null) {
             return <Redirect push to={this.state.redirectTo}></Redirect>
@@ -84,8 +99,17 @@ export default class TopBar extends Component {
 
         const scope = this;
 
+        const allDropDownThemeOptions = ['Theme1', 'Theme2', 'Theme3'];
+        const defaultDropDownOption = 'Theme1';
+
         return (
             <div className="TopBar">
+                <DropDown
+                    getChildrenElements={this.getThemeDropDownElements.bind(this)}
+                    allOptions={allDropDownThemeOptions}
+                    defaultOption={defaultDropDownOption}
+                ></DropDown>
+
                 I am in top bar and the current user email is {(this.state.currentUser !== null) ? 
                     this.state.currentUser.email : "Null bro."} and the current theme is {this.state.currentTheme}. Also the current username is {(this.state.currentUser !== null) ? 
                         this.state.currentUser.userName : "Null bro."}<br></br>
@@ -104,7 +128,11 @@ export default class TopBar extends Component {
                     <option value="Theme4">Theme 4</option>
                 </select>
 
-                <Link to={CREATE_POST_PAGE_URL}>Create post</Link>&nbsp;&nbsp;
+                <Link to={CREATE_POST_PAGE_URL} className="MyLink">
+                    <i className="MyMaterialIcon">
+                        add
+                    </i>
+                </Link>&nbsp;&nbsp;
                 <Link to={SETTINGS_PAGE_URL}>Settings</Link>&nbsp;&nbsp;
                 <Link to={FRONT_PAGE_URL}>Front page</Link>
 

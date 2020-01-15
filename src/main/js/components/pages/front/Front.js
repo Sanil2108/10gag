@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-import * as axios from 'axios';
-
 import {
     NEW_POSTS_URL, POST_PAGE_URL,
 } from '../../../constants';
 import TopBar from '../../sharedComponents/TopBar/TopBar';
 import { Link } from 'react-router-dom';
 import { getPosts } from '../../../utils';
+
+import './Front.css';
 
 export default class Front extends Component {
 
@@ -46,7 +46,7 @@ export default class Front extends Component {
         }
 
         return (
-            <div>
+            <div className="Front">
                 <TopBar></TopBar>
                 I am in front
                 <br />
