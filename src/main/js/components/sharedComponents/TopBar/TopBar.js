@@ -83,6 +83,7 @@ export default class TopBar extends Component {
     getThemeDropDownElements() {
         const elements = [];
         const themeNames = Object.keys(THEMES);
+        console.log(themeNames);
         for (let i = 0; i < themeNames.length; i += 1) {
             elements.push(
                 <div>
@@ -90,6 +91,7 @@ export default class TopBar extends Component {
                 </div>
             )
         }
+        return elements;
     }
 
     render() {

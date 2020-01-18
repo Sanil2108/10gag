@@ -10,11 +10,44 @@
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.5s;
+    display: inline-table;
+    height: auto;
+}
+
+.DropDown_Contracting {
+    animation: contract 0.1s;
+    animation-fill-mode:forwards;
+}
+
+.DropDown_Expanding {
+    animation: expand 0.1s;
+    animation-fill-mode:forwards;
+}
+
+@keyframes contract {
+    from {
+        height: 100%;
+    }
+
+    to {
+        height: 0px;
+    }
+}
+
+@keyframes expand {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .DropDown:hover {
     box-shadow: #aaa 0 0 18px 3px;
-    border-radius: 10px;
 }
 
 .MyMaterialIcon {

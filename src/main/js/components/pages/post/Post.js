@@ -9,6 +9,7 @@ import getStoreInstance from '../../../Store';
 import {
     USER_KEY
 } from '../../../constants';
+import './Post.css';
 
 export default class Post extends Component {
 

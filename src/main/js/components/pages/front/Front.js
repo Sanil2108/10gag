@@ -38,8 +38,14 @@ export default class Front extends Component {
         const postsToRender = [];
         for (let post of this.state.posts) {
             postsToRender.push(
-                <div key={"post"+post.id}>
-                    <Link to={POST_PAGE_URL + "/" + post.id}>{post.title}</Link><br />
+                <div key={"post"+post.id} className="Post">
+                    <Link to={POST_PAGE_URL + "/" + post.id}>
+                        <h1>
+                            {post.title}<br />
+                        </h1>
+                    </Link>
+                    <div className="VoteContainer">
+                    </div>
                     <img src={post.imageURL} height="200"></img>
                 </div>
             )
@@ -47,11 +53,13 @@ export default class Front extends Component {
 
         return (
             <div className="Front">
-                <TopBar></TopBar>
-                I am in front
-                <br />
-                Posts - 
-                {postsToRender}
+                <div className="FrontPostContainer">
+                    <TopBar></TopBar>
+                    I am in front
+                    <br />
+                    Posts - 
+                    {postsToRender}
+                </div>
             </div>
         )
     }

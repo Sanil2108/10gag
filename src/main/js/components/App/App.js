@@ -37,7 +37,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="App">
+            <div className="App" style={{"height": "100%"}}>
                 <Router>
                 <Switch>
                     <Route path={USER_PAGE_URL + "/:userName"}>

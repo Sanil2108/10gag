@@ -1,3 +1,52 @@
 .Front {
     /* background: black; */
 }
+
+.FrontPostContainer {
+    height: 100%;
+    width: 75%;
+    position: relative;
+    left: 12.5%;
+    border: 1px solid black;
+}
+
+.UpvoteButton {
+
+}
+
+.DownvoteButton {
+
+}
+
+.Post {
+    border: 1px solid blue;
+    display: inline;
+}
+
+.Post h1 {
+    font-family: 'Ubuntu', sans-serif;
+    color: #000;
+    text-decoration: none;
+    font-size: 20;
+}
+
+.Post a {
+    text-decoration: none;
+}
+
+.Post img {
+    max-width: 90%;
+    position: relative;
+    left: 0px;
+    right: 0px;
+    height: auto;
+    border: 1px solid black;
+}
+
+.VoteContainer {
+    display: inline-block;
+    width: 30px;
+    height: 100px;
+    border: 1px solid red;
+    vertical-align: top;
+}
