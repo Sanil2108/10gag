@@ -1,22 +1,30 @@
 import React, { Component } from 'react'
 
 import {
-    NEW_POSTS_URL, POST_PAGE_URL,
+    NEW_POSTS_URL, POST_PAGE_URL, THEME_KEY,
 } from '../../../constants';
 import TopBar from '../../sharedComponents/TopBar/TopBar';
 import { Link } from 'react-router-dom';
 import { getPosts } from '../../../utils';
 
+import getStoreInstance from '../../../Store';
+import * as constants from '../../../constants';
+
 import './Front.css';
+import VoteContainer from './VoteContainer';
+import PostSummary from './PostSummary';
 
 export default class Front extends Component {
 
     constructor(props) {
         super(props);
 
+        const currentThemeColors =  constants.THEMES[getStoreInstance().get(THEME_KEY)].FRONT;
+
         this.state = {
             posts: [],
             loadingPosts: true,
+            currentThemeColors: currentThemeColors,
         };
     }
 
@@ -37,27 +45,24 @@ export default class Front extends Component {
     render() {
         const postsToRender = [];
         for (let post of this.state.posts) {
+            // TODO: Temp
+            post = Object.assign(post, {upvoted: false, downvoted: false})
+            
             postsToRender.push(
-                <div key={"post"+post.id} className="Post">
-                    <Link to={POST_PAGE_URL + "/" + post.id}>
-                        <h1>
-                            {post.title}<br />
-                        </h1>
-                    </Link>
-                    <div className="VoteContainer">
-                    </div>
-                    <img src={post.imageURL} height="200"></img>
-                </div>
+                <PostSummary
+                    post={post}
+                    themeColors={this.state.currentThemeColors.FRONT_POST}
+                >
+
+                </PostSummary>
             )
         }
 
         return (
             <div className="Front">
                 <div className="FrontPostContainer">
-                    <TopBar></TopBar>
-                    I am in front
+                    {/* <TopBar></TopBar> */}
                     <br />
-                    Posts - 
                     {postsToRender}
                 </div>
             </div>

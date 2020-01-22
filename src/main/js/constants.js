@@ -32,8 +32,28 @@ export const FRONT_PAGE_URL = '/';
 export const USER_KEY = 'user';
 export const THEME_KEY = 'theme';
 
+export const THEME_NAMES = {
+    OPTIMISTIC_OCEAN: 'Optimistic Ocean',
+    FEROCIOUS_FIRE: 'Ferocious Fire',
+}
+
 export const THEMES = {
-    'Theme1':{},
+    [THEME_NAMES.OPTIMISTIC_OCEAN]:{
+        FRONT: {
+            FRONT_POST: {
+                UPVOTE_SELECTED: "#00FF00",
+                DOWNVOTE_SELECTED: "#FF0000",
+                UPVOTE_DESELECTED: "#FFFFFF",
+                DOWNVOTE_DESELECTED: "#FFFFFF",
+                VOTE_TEXT_UPVOTED: "#FF0000",
+                VOTE_TEXT_DOWNVOTED: "#FF0000",
+            },  
+        },
+        BODY: {
+            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1579714883/landscape-photograph-of-body-of-water-1001682.jpg)',
+            BACKGROUND_COLOR: '#ff0000',
+        }
+    },
     'Theme2':{},
     'Theme3':{},
 }

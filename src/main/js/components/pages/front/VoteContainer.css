@@ -1,0 +1,9 @@
+.VoteContainer {
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+}
+
+.VoteContainer i {
+    width: 100%;
+    cursor: pointer;
+}

@@ -3,10 +3,22 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+
+      <style>
+            * { background-color: rgba(255,0,0,.2); }
+            * * { background-color: rgba(0,255,0,.2); }
+            * * * { background-color: rgba(0,0,255,.2); }
+            * * * * { background-color: rgba(255,0,255,.2); }
+            * * * * * { background-color: rgba(0,255,255,.2); }
+            * * * * * * { background-color: rgba(255,255,0,.2); }
+            * * * * * * * { background-color: rgba(255,0,0,.2); }
+            * * * * * * * * { background-color: rgba(0,255,0,.2); }
+            * * * * * * * * * { background-color: rgba(0,0,255,.2); }
+      </style>
     </head>
 
-    <body style="margin: 0px; min-height: 100%; position: absolute;">
-        <div id="root" style="height: 100%;"></div>
+    <body style="margin: 0px; min-height: 100%;">
+        <div id="root"></div>
 
         <!-- TODO: Fix this -->
         <script src="http://localhost:5000/built/bundle.js"></script>

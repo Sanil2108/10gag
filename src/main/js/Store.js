@@ -28,7 +28,7 @@ class Store {
         }
         else {
             for (let callback of this.keyValuePairs[key].callbacks) {
-                callback(key, value);
+                callback(key, this.keyValuePairs[key], value);
             }
 
             this.keyValuePairs[key].value = value;

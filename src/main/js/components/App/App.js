@@ -17,7 +17,11 @@ import {
     FRONT_PAGE_URL,
     USER_KEY,
     THEME_KEY,
+    THEME_NAMES,
+    THEMES,
 } from '../../constants';
+
+import './App.css';
 
 import {
     BrowserRouter as Router,
@@ -32,12 +36,29 @@ class App extends React.Component {
 
         // Default values
         getStoreInstance().updateOrCreate(USER_KEY, {email: null, token: null, userName: null});
-        getStoreInstance().updateOrCreate(THEME_KEY, null);
+        getStoreInstance().updateOrCreate(THEME_KEY, THEME_NAMES.OPTIMISTIC_OCEAN);
+
+        getStoreInstance().subscribe(THEME_KEY, this.themeChanged.bind(this));
+
+        // TODO: Temp
+        window.storeInstance = getStoreInstance();
+    }
+
+    themeChanged(key, oldValue, newValue) {
+        const body = THEMES[newValue].BODY;
+        if (body.BACKGROUND_IMAGE) {
+            document.body.style.background = body.BACKGROUND_IMAGE;
+        }
+        else if (body.BACKGROUND_COLOR) {
+            document.body.style.backgroundColor = body.BACKGROUND_COLOR;
+        }
+
+        console.log("Something")
     }
 
     render() {
         return (
-            <div className="App" style={{"height": "100%"}}>
+            <div className="App">
                 <Router>
                 <Switch>
                     <Route path={USER_PAGE_URL + "/:userName"}>
