@@ -52,8 +52,6 @@ class App extends React.Component {
         else if (body.BACKGROUND_COLOR) {
             document.body.style.backgroundColor = body.BACKGROUND_COLOR;
         }
-
-        console.log("Something")
     }
 
     render() {

@@ -3,8 +3,8 @@
 }
 
 .FrontPostContainer {
-    width: 75%;
+    width: 60%;
+    padding: 20px;
     position: relative;
-    left: 12.5%;
-    border: 1px solid black;
+    left: 20%;
 }

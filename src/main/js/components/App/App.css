@@ -3,4 +3,5 @@ body {
   padding: 0;
   font-family: 'Ubuntu', sans-serif;
   background-attachment: fixed !important;
+  background-position: center !important;
 }

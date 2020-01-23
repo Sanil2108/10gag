@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
 import {
-    NEW_POSTS_URL, POST_PAGE_URL, THEME_KEY,
+    NEW_POSTS_URL, POST_PAGE_URL, THEME_KEY, THEMES
 } from '../../../constants';
 import { Link } from 'react-router-dom';
 import VoteContainer from './VoteContainer';
+import getStoreInstance from '../../../Store';
 
 import './PostSummary.css';
 
@@ -13,49 +14,23 @@ export class PostSummary extends Component {
         super(props);
 
         this.state = {
-            themeColors: this.props.themeColors,
             post: this.props.post,
-        }
-
-        this.setColors();
-
-        if (!window.frontPostState) {
-            window.frontPostState = this.state;
+            postSummaryStyleObject: {},
         }
     }
 
-    setColors() {
-        this.state.currentColors = {};
-        if (this.state.post.upvoted) {
-            this.state.currentColors.UPVOTE_BUTTON_COLOUR = this.state.themeColors.UPVOTE_SELECTED;
-            this.state.currentColors.DOWNVOTE_BUTTON_COLOUR = this.state.themeColors.DOWNVOTE_DESELECTED;
+    componentDidMount() {
+        getStoreInstance().subscribe(THEME_KEY, this.themeChanged.bind(this));
+    }
+
+    themeChanged(key, oldValue, newValue) {
+        const postSummaryStylingInformation = THEMES[newValue].FRONT.POST_SUMMARY;
+
+        const tempPostSummaryStyleObject = {};
+        if (postSummaryStylingInformation.BACKGROUND_COLOR) {
+            tempPostSummaryStyleObject.backgroundColor = postSummaryStylingInformation.BACKGROUND_COLOR;
         }
-        else if (this.state.post.downvoted) {
-            this.state.currentColors.DOWNVOTE_BUTTON_COLOUR = this.state.themeColors.DOWNVOTE_SELECTED;
-            this.state.currentColors.UPVOTE_BUTTON_COLOUR = this.state.themeColors.UPVOTE_DESELECTED;
-        }
-        else {
-            this.state.currentColors.DOWNVOTE_BUTTON_COLOUR = this.state.themeColors.DOWNVOTE_DESELECTED;
-            this.state.currentColors.UPVOTE_BUTTON_COLOUR = this.state.themeColors.UPVOTE_DESELECTED;
-        }
-        
-        this.state.currentColors = Object.assign(this.state.currentColors, this.state.themeColors);
-    }
-
-    updateColorsForSelectDownvote() {
-        this.state.currentColors.DOWNVOTE_BUTTON_COLOUR = this.state.themeColors.DOWNVOTE_SELECTED;
-    }
-
-    updateColorsForDeselectDownvote() {
-        this.state.currentColors.DOWNVOTE_BUTTON_COLOUR = this.state.themeColors.DOWNVOTE_DESELECTED;
-    }
-
-    updateColorsForSelectUpvote() {
-        this.state.currentColors.UPVOTE_BUTTON_COLOUR = this.state.themeColors.UPVOTE_SELECTED;
-    }
-
-    updateColorsForDeselectUpvote() {
-        this.state.currentColors.UPVOTE_BUTTON_COLOUR = this.state.themeColors.UPVOTE_DESELECTED;
+        this.setState({postSummaryStyleObject: tempPostSummaryStyleObject});
     }
 
     onUpvotePost() {
@@ -94,7 +69,7 @@ export class PostSummary extends Component {
 
     render() {
         return (
-            <div key={"post"+this.state.post.id} className="Post">
+            <div key={"post"+this.state.post.id} className="Post" style={this.state.postSummaryStyleObject}>
                 <Link to={POST_PAGE_URL + "/" + this.state.post.id}>
                     <h1>
                         {this.state.post.title}<br />
@@ -102,8 +77,8 @@ export class PostSummary extends Component {
                 </Link>
                 <VoteContainer
                     votes={this.state.post.votes}
-                    upvoteColor={this.state.currentColors.UPVOTE_BUTTON_COLOUR}
-                    downvoteColor={this.state.currentColors.DOWNVOTE_BUTTON_COLOUR}
+                    // upvoteColor={this.state.currentColors.UPVOTE_BUTTON_COLOUR}
+                    // downvoteColor={this.state.currentColors.DOWNVOTE_BUTTON_COLOUR}
                     // voteTextColor={}
                     onDownvote={this.onDownvotePost.bind(this)}
                     onUpvote={this.onUpvotePost.bind(this)}

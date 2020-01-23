@@ -34,23 +34,42 @@ export const THEME_KEY = 'theme';
 
 export const THEME_NAMES = {
     OPTIMISTIC_OCEAN: 'Optimistic Ocean',
-    FEROCIOUS_FIRE: 'Ferocious Fire',
+    FASCINATING_FIRE: 'Fascinating Fire',
 }
 
 export const THEMES = {
     [THEME_NAMES.OPTIMISTIC_OCEAN]:{
         FRONT: {
-            FRONT_POST: {
+            POST_SUMMARY: {
                 UPVOTE_SELECTED: "#00FF00",
                 DOWNVOTE_SELECTED: "#FF0000",
                 UPVOTE_DESELECTED: "#FFFFFF",
                 DOWNVOTE_DESELECTED: "#FFFFFF",
                 VOTE_TEXT_UPVOTED: "#FF0000",
                 VOTE_TEXT_DOWNVOTED: "#FF0000",
-            },  
+            },
+            OPACITY: 1,
         },
         BODY: {
             BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1579714883/landscape-photograph-of-body-of-water-1001682.jpg)',
+            BACKGROUND_COLOR: '#ff0000',
+        }
+    },
+    [THEME_NAMES.FASCINATING_FIRE]:{
+        FRONT: {
+            POST_SUMMARY: {
+                UPVOTE_SELECTED: "#00FF00",
+                DOWNVOTE_SELECTED: "#FF0000",
+                UPVOTE_DESELECTED: "#FFFFFF",
+                DOWNVOTE_DESELECTED: "#FFFFFF",
+                VOTE_TEXT_UPVOTED: "#FF0000",
+                VOTE_TEXT_DOWNVOTED: "#FF0000",
+                BACKGROUND_COLOR: "#d32f2f",
+            },
+            OPACITY: 1,
+        },
+        BODY: {
+            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1575470467/Z6kdWmA.jpg)',
             BACKGROUND_COLOR: '#ff0000',
         }
     },

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import {
-    NEW_POSTS_URL, POST_PAGE_URL, THEME_KEY,
+    NEW_POSTS_URL, POST_PAGE_URL, THEME_KEY, THEMES
 } from '../../../constants';
 import TopBar from '../../sharedComponents/TopBar/TopBar';
 import { Link } from 'react-router-dom';
@@ -19,17 +19,17 @@ export default class Front extends Component {
     constructor(props) {
         super(props);
 
-        const currentThemeColors =  constants.THEMES[getStoreInstance().get(THEME_KEY)].FRONT;
-
         this.state = {
             posts: [],
             loadingPosts: true,
-            currentThemeColors: currentThemeColors,
+            frontStyleObject: {},
         };
     }
 
     componentDidMount() {
         this.loadPosts();
+
+        getStoreInstance().subscribe(THEME_KEY, this.themeChanged.bind(this));
     }
 
     async loadPosts() {
@@ -42,6 +42,19 @@ export default class Front extends Component {
         }
     }
 
+    themeChanged(key, oldValue, newValue) {
+        const frontStylingInformation = THEMES[newValue].FRONT;
+
+        const tempFrontStyleObject = {};
+        if (frontStylingInformation.BACKGROUND_COLOR) {
+            tempFrontStyleObject.backgroundColor = frontStylingInformation.BACKGROUND_COLOR;
+        }
+        if (frontStylingInformation.OPACITY) {
+            tempFrontStyleObject.opacity = frontStylingInformation.OPACITY;
+        }
+        this.setState({frontStyleObject: tempFrontStyleObject});
+    }
+
     render() {
         const postsToRender = [];
         for (let post of this.state.posts) {
@@ -49,18 +62,14 @@ export default class Front extends Component {
             post = Object.assign(post, {upvoted: false, downvoted: false})
             
             postsToRender.push(
-                <PostSummary
-                    post={post}
-                    themeColors={this.state.currentThemeColors.FRONT_POST}
-                >
-
+                <PostSummary post={post}>
                 </PostSummary>
             )
         }
 
         return (
             <div className="Front">
-                <div className="FrontPostContainer">
+                <div className="FrontPostContainer" style={this.state.frontStyleObject}>
                     {/* <TopBar></TopBar> */}
                     <br />
                     {postsToRender}

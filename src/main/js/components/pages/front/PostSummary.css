@@ -8,14 +8,23 @@
 }
 
 .Post {
-    border: 1px solid blue;
+    box-shadow: 0px 10px 14px 6px rgba(50, 50, 50, 0.8);
+    margin: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.Post:hover {
+    box-shadow: 0px 1px 14px 6px rgba(50, 50, 50, 0.5);
 }
 
 .Post h1 {
     font-family: 'Ubuntu', sans-serif;
-    color: #000;
+    color: #fff;
     text-decoration: none;
-    font-size: 20;
+    font-size: 24;
+    padding-top: 20px;
+    padding-left: 20px;
 }
 
 .Post a {
@@ -23,18 +32,16 @@
 }
 
 .Post img {
-    max-width: 90%;
+    width: 100%;
     position: relative;
     left: 0px;
     right: 0px;
     height: auto;
-    border: 1px solid black;
 }
 
 .VoteContainer {
-    display: inline-block;
+    display: none;
     width: 30px;
     height: 100px;
-    border: 1px solid red;
     vertical-align: top;
 }
