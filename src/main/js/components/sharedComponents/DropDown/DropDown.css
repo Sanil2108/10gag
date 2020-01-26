@@ -1,68 +1,112 @@
-.DropDown {
-    padding: 10px;
-    margin: 10px;
+.TopBar .ThemeButton {
     text-align: center;
+    border: 1px solid white;
+    background: #454545;
     font-family: 'Ubuntu', sans-serif;
-    color: white;
-    width: 130px;
-    position: relative;
-    background: black;
-    border-radius: 20px;
+    font-size: 0.5em;
     cursor: pointer;
-    transition: all 0.5s;
-    display: inline-table;
-    height: auto;
-}
-
-.DropDown_Contracting {
-    animation: contract 1s;
-    animation-fill-mode:forwards;
-}
-
-.DropDown_Expanding {
-    animation: expand 1s;
-    animation-fill-mode:forwards;
-}
-
-@keyframes contract {
-    from {
-        height: 100%;
-    }
-
-    to {
-        height: 0px;
-    }
-}
-
-@keyframes expand {
-    from {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.DropDown:hover {
-    box-shadow: #aaa 0 0 18px 3px;
-}
-
-.MyMaterialIcon {
-    font-family: 'Material Icons';
-    font-style: normal;
-    font-size: 24px;
+    border-radius: 7px;
+    padding: 8px 20px;
+    box-shadow: inset 0px 0px 0px 20px #000;
+    transition: all 0.4s;
+    display: inline-flex;
+    align-items: center;
+    min-width: 200px;
     position: relative;
-    display: inline;
-    text-align: center;
 }
 
-.RotateButton {
-    display: inline-block;
+.TopBar .ThemeButton .ThemeLabelContainer {
+    z-index: 1;
+}
+
+.TopBar .ThemeButton .ThemeNameContainer {
+    margin-left: auto;
+    z-index: 1;
+}
+
+.TopBar .ThemeButton img {
+    height: 12px;
+    filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(78deg) brightness(102%) contrast(102%);
+    margin-left: auto;
+}
+
+.TopBar .Expanded{
+    border-radius: 7px 7px 0px 0px;
+}
+
+.TopBar .ThemeButton .Background {
+    margin-left: auto;
     position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+    background-position: center;
+    background-size: 100% auto;
+    opacity: 0.4;
+}
+
+.TopBar .ThemeButton:hover {
+    box-shadow: inset 0px 0px 0px 0px #454545;
+}
+
+.ExpandedDropDown {
+    padding-top: 4px;
+    position: absolute;
+    left: 0px;
+    border-radius: 0px 0px 7px 7px;
+    background: black;
+    animation-fill-mode: forwards;
+    animation-duration: 0.5s;
+    animation-name: expandDropDown;
+    animation-timing-function: ease-in;
+    width: calc(100% - 2px);
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+    transform: translateY(-2px);
+}
+
+.ExpandedDropDown span:hover {
+    box-shadow: inset 0px 0px 0px 0px #000;
+}
+
+.ExpandedDropDown span {
+    display: flex;
+    height: 44px;
+    box-shadow: inset 0px 0px 0px 30px #000;
+    transition: all 0.4s;
+    background: #454545;
+    font-family: 'Ubuntu', sans-serif;
     text-align: center;
-    right: 15px;
-    top: 7px;
+    font-size: 0.5em;
+    cursor: pointer;
+    position: relative;
+}
+
+.ExpandedDropDown .BackgroundSpan {
+    opacity: 0.4;
+    background-position: center;
+    background-size: 100% auto;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.ExpandedDropDown span p {
+    width: 100%;
+}
+
+@keyframes expandDropDown {
+    from {
+        height: 0px;
+        opacity: 0.6;
+    }
+    to {
+        opacity: 1;
+        height: 200px;
+    }
 }

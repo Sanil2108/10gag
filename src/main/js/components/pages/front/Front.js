@@ -43,6 +43,7 @@ export default class Front extends Component {
     }
 
     themeChanged(key, oldValue, newValue) {
+        console.log(newValue);
         const frontStylingInformation = THEMES[newValue].FRONT;
 
         const tempFrontStyleObject = {};
@@ -69,8 +70,8 @@ export default class Front extends Component {
 
         return (
             <div className="Front">
+                <TopBar></TopBar>
                 <div className="FrontPostContainer" style={this.state.frontStyleObject}>
-                    {/* <TopBar></TopBar> */}
                     <br />
                     {postsToRender}
                 </div>

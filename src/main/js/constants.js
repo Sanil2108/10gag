@@ -39,6 +39,11 @@ export const THEME_NAMES = {
 
 export const THEMES = {
     [THEME_NAMES.OPTIMISTIC_OCEAN]:{
+        TOPBAR: {
+            DROPDOWN: {
+                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1579714883/landscape-photograph-of-body-of-water-1001682.jpg)',
+            }
+        },
         FRONT: {
             POST_SUMMARY: {
                 UPVOTE_SELECTED: "#00FF00",
@@ -56,6 +61,11 @@ export const THEMES = {
         }
     },
     [THEME_NAMES.FASCINATING_FIRE]:{
+        TOPBAR: {
+            DROPDOWN: {
+                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1575470467/Z6kdWmA.jpg)',
+            },
+        },
         FRONT: {
             POST_SUMMARY: {
                 UPVOTE_SELECTED: "#00FF00",
@@ -73,6 +83,4 @@ export const THEMES = {
             BACKGROUND_COLOR: '#ff0000',
         }
     },
-    'Theme2':{},
-    'Theme3':{},
 }

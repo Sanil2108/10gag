@@ -1,6 +1,10 @@
-import Keyframes from '@keyframes/core';
-
 import React, { Component } from 'react'
+
+import getStoreInstance from '../../../Store';
+import {
+    THEMES,
+    THEME_KEY,
+} from '../../../constants';
 
 import './DropDown.css';
 
@@ -8,82 +12,94 @@ export default class DropDown extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { mouseOver: false, canAnimate: true, };
-
-        this.childContainerRef = React.createRef();
+        this.state = {
+            topBarDropDownColors: {},
+            currentThemeName: "No theme set",
+            dropDownOpen: false,
+            dropDownAnimationEnded: false
+        };
     }
 
-    onMouseOver(event) {
-        this.setState({ mouseOver: true });
+    componentDidMount() {
+        getStoreInstance().subscribe(THEME_KEY, (key, oldTheme, newTheme) => {
+            console.log(newTheme);
+            this.setState({
+                topBarDropDownColors: THEMES[newTheme].TOPBAR.DROPDOWN,
+                currentThemeName: newTheme,
+            })
+        })
+    }
 
-        window.childContainerRef = this.childContainerRef;
-
-        const totalHeight = 0;
-        for (let i = 0; i < this.childContainerRef.current.children; i += 1) {
-            totalHeight += this.childContainerRef.current.children[i].offsetHeight;
+    toggleDropDown() {
+        if (this.state.dropDownOpen) {
+            this.setState({
+                dropDownAnimationEnded: false
+            })
         }
-        console.log(totalHeight);
+        else {
+            console.log("Drop down open")
+        }
+
+        this.setState({
+            dropDownOpen: !this.state.dropDownOpen,
+        });
     }
 
-    onMouseOut(event) {
-        // this.setState({ mouseOver: false });
+    onDropDownAnimationEnd(event) {
+        this.setState({dropDownAnimationEnded: true})
     }
 
     render() {
-        let childElements;
-        // if (this.state.mouseOver) {
-            childElements = this.props.getChildrenElements();
-        // }
+        let dropDownDiv = '';
+        if (this.state.dropDownOpen) {
+            const childrenSpans = [];
 
-        const tempClass =  (this.state.mouseOver && this.state.canAnimate) ? "DropDown_Expanding" : "DropDown_Contracting";
-
-        const childElementsContainer = (
-            <div ref={this.childContainerRef} className = {(this.state.mouseOver && this.state.canAnimate) ? "DropDown_Expanding" : "DropDown_Contracting"}>
-                {childElements}
-            </div>
-        );
-
-        if (this.childContainerRef.current) {
-            // console.log(this.childContainerRef.current);
-            // console.log(this.childContainerRef.)
-            window.childContainerRef = this.childContainerRef;
-
-            const totalHeight = 0;
-            for (let i = 0; i < this.childContainerRef.current.children; i += 1) {
-                totalHeight += this.childContainerRef.current.children[i].offsetHeight;
+            const themes = Object.keys(THEMES)
+            for (let i = 0; i < themes.length; i += 1) {
+                if (this.state.dropDownAnimationEnded) {
+                    childrenSpans.push((
+                        <span>
+                            <span
+                                className="BackgroundSpan"
+                                style={{
+                                    backgroundImage: THEMES[themes[i]].TOPBAR.DROPDOWN.BACKGROUND_IMAGE
+                                }}
+                            ></span>
+                            <p>{themes[i]}</p>
+                        </span>
+                    ));
+                }
             }
 
-            window.totalHeight = totalHeight;
 
-
-            // Keyframes.define({
-            //     name: 'expand',
-            //     from: {
-            //         height: '0px',
-            //     },
-            //     to: {
-            //         height: totalHeight + 'px',
-            //     }
-            // });
+            dropDownDiv =
+            (<div
+                className="ExpandedDropDown"
+                onAnimationEnd={this.onDropDownAnimationEnd.bind(this)}
+            >
+                {childrenSpans}
+            </div>)
         }
-        if (this.childContainerRef.current){
-            console.log(this.childContainerRef.current.offsetHeight)
-
-        }
-
-        // TODO: Dont bind shit here bro
         return (
-            <div>
-                <div className={"DropDown " + tempClass} onMouseOver={this.onMouseOver.bind(this)} onMouseOut={this.onMouseOut.bind(this)}>
-                    {this.props.defaultOption}
-                    <div className="RotateButton">
-                        <i className="MyMaterialIcon">
-                            keyboard_arrow_down
-                        </i>
-                    </div>
-                    {childElementsContainer}
-                </div>
-            </div>
+            <span style={{position: "relative"}}>
+                <span
+                    className={"ThemeButton" + ((this.state.dropDownOpen) ? " Expanded" : "")}
+                    onClick={this.toggleDropDown.bind(this)}>
+                    <span className="Background" style={{
+                        "backgroundImage": this.state.topBarDropDownColors.BACKGROUND_IMAGE,
+                    }}>
+
+                    </span>
+                    <span className="ThemeLabelContainer">
+                        Theme:
+                    </span>
+                    <span className="ThemeNameContainer">
+                        {this.state.currentThemeName}
+                    </span>
+                    <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580044318/download.svg"></img>
+                </span>
+                {dropDownDiv}
+            </span>
         )
     }
 }

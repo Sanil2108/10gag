@@ -31,15 +31,18 @@ export default class TopBar extends Component {
             currentUser: getStoreInstance().get(USER_KEY),
             currentTheme: getStoreInstance().get(THEME_KEY),
             redirectTo: null,
+            topBarClass: "",
+            topBarColors: {},
         };
 
         this.currentThemeChangedCallback = this.currentThemeChanged.bind(this);
         this.currentUserChangedCallback = this.currentUserChanged.bind(this);
     }
 
-    currentThemeChanged(key, newTheme) {
+    currentThemeChanged(key, oldTheme, newTheme) {
         this.setState({
             currentTheme: newTheme,
+            topBarColors: THEMES[newTheme].TOPBAR,
         });
     }
 
@@ -50,14 +53,27 @@ export default class TopBar extends Component {
     }
 
     componentDidMount() {
-        const scope = this;
         getStoreInstance().subscribe(USER_KEY, this.currentUserChangedCallback);
         getStoreInstance().subscribe(THEME_KEY, this.currentThemeChangedCallback);
+
+        document.addEventListener("wheel", (event) => {
+            if (document.body.scrollTop === 0) {
+                return;
+            }
+            if (event.deltaY < 0) {
+                this.setState({topBarClass: " TopBar--show"});
+            }
+            else if (event.deltaY > 0) {
+                this.setState({topBarClass: " TopBar--hide"});
+            }
+        });
     }
 
     componentWillUnmount() {
         getStoreInstance().unsubscribe(USER_KEY, this.currentUserChangedCallback);
         getStoreInstance().unsubscribe(THEME_KEY, this.currentThemeChangedCallback);
+
+
     }
 
     async loginUser() {
@@ -105,43 +121,35 @@ export default class TopBar extends Component {
         const defaultDropDownOption = 'Theme1';
 
         return (
-            <div className="TopBar">
-                <DropDown
-                    getChildrenElements={this.getThemeDropDownElements.bind(this)}
-                    allOptions={allDropDownThemeOptions}
-                    defaultOption={defaultDropDownOption}
-                ></DropDown>
+            <div className={"TopBar" + this.state.topBarClass}>
+                <span className="LeftPaneContainer">
+                    <DropDown></DropDown>
+                </span>
+                <span className="LogoContainer">
+                    <Link to={FRONT_PAGE_URL}>
+                        9GAG++
+                    </Link>
+                </span>
+                <span className="RightPaneContainer">
 
-                I am in top bar and the current user email is {(this.state.currentUser !== null) ? 
-                    this.state.currentUser.email : "Null bro."} and the current theme is {this.state.currentTheme}. Also the current username is {(this.state.currentUser !== null) ? 
-                        this.state.currentUser.userName : "Null bro."}<br></br>
-                Email <input type="text" value={this.state.email} onChange={(e) => {
-                    scope.setState({email: e.target.value});
-                }} />
-                Password <input type="text" value={this.state.password} onChange={(e) => {
-                    scope.setState({password: e.target.value});
-                }} />
-                <button onClick={this.loginUser.bind(this)}>Login</button>
-                <button onClick={this.logoutUser.bind(this)}>Logout</button>
-                <select onChange={this.changeTheme.bind(this)}>
-                    <option value="Theme1">Theme 1</option>
-                    <option value="Theme2">Theme 2</option>
-                    <option value="Theme3">Theme 3</option>
-                    <option value="Theme4">Theme 4</option>
-                </select>
+                    <span className="RotateButton RightPaneButton">
+                        <Link to={CREATE_POST_PAGE_URL} className="RightPaneButton__Link">
+                            <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580033150/plus.svg"></img>
+                        </Link>
+                    </span>
+                    <span className="RotateButton RightPaneButton">
+                        <Link to={SETTINGS_PAGE_URL} className="RightPaneButton__Link">
+                            <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580033152/gear_1.svg"></img>
+                        </Link>
+                    </span>
 
-                <Link to={CREATE_POST_PAGE_URL} className="MyLink">
-                    <i className="MyMaterialIcon">
-                        add
-                    </i>
-                </Link>&nbsp;&nbsp;
-                <Link to={SETTINGS_PAGE_URL}>Settings</Link>&nbsp;&nbsp;
-                <Link to={FRONT_PAGE_URL}>Front page</Link>
+                    <span className="RightPaneButton">
+                        <Link to={SETTINGS_PAGE_URL} className="RightPaneButton__Link">
+                            <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580042222/user_1.svg"></img>
+                        </Link>
+                    </span>
 
-                <br />
-                <br />
-                <br />
-                <br />
+                </span>
             </div>
         )
     }
