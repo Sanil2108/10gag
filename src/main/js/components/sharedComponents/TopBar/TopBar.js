@@ -19,7 +19,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import './TopBar.css';
 
-import DropDown from '../DropDown/DropDown';
+import ThemeDropDown from '../ThemeDropDown/ThemeDropDown';
 
 export default class TopBar extends Component {
     constructor(props) {
@@ -99,7 +99,6 @@ export default class TopBar extends Component {
     getThemeDropDownElements() {
         const elements = [];
         const themeNames = Object.keys(THEMES);
-        console.log(themeNames);
         for (let i = 0; i < themeNames.length; i += 1) {
             elements.push(
                 <div>
@@ -115,15 +114,15 @@ export default class TopBar extends Component {
             return <Redirect push to={this.state.redirectTo}></Redirect>
         }
 
-        const scope = this;
-
-        const allDropDownThemeOptions = ['Theme1', 'Theme2', 'Theme3'];
-        const defaultDropDownOption = 'Theme1';
-
         return (
-            <div className={"TopBar" + this.state.topBarClass}>
+            <div
+                className={"TopBar" + this.state.topBarClass}
+                style={{
+                    "--box-shadow-color": this.state.topBarColors.SHADOW_COLOR
+                }}
+            >
                 <span className="LeftPaneContainer">
-                    <DropDown></DropDown>
+                    <ThemeDropDown></ThemeDropDown>
                 </span>
                 <span className="LogoContainer">
                     <Link to={FRONT_PAGE_URL}>

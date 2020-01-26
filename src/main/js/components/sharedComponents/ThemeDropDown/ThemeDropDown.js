@@ -6,9 +6,9 @@ import {
     THEME_KEY,
 } from '../../../constants';
 
-import './DropDown.css';
+import './ThemeDropDown.css';
 
-export default class DropDown extends Component {
+export default class ThemeDropDown extends Component {
     constructor(props) {
         super(props);
 
@@ -49,6 +49,10 @@ export default class DropDown extends Component {
         this.setState({dropDownAnimationEnded: true})
     }
 
+    changeTheme(newTheme) {
+        getStoreInstance().updateOrCreate(THEME_KEY, newTheme);
+    }
+
     render() {
         let dropDownDiv = '';
         if (this.state.dropDownOpen) {
@@ -58,7 +62,7 @@ export default class DropDown extends Component {
             for (let i = 0; i < themes.length; i += 1) {
                 if (this.state.dropDownAnimationEnded) {
                     childrenSpans.push((
-                        <span>
+                        <span onClick={this.changeTheme.bind(this, themes[i])}>
                             <span
                                 className="BackgroundSpan"
                                 style={{
