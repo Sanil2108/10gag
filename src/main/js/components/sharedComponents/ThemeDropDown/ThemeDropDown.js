@@ -34,7 +34,7 @@ export default class ThemeDropDown extends Component {
         if (this.state.dropDownOpen) {
             this.setState({
                 dropDownAnimationEnded: false
-            })
+            });
         }
         else {
             console.log("Drop down open")

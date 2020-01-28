@@ -20,6 +20,7 @@ import { Link, Redirect } from 'react-router-dom';
 import './TopBar.css';
 
 import ThemeDropDown from '../ThemeDropDown/ThemeDropDown';
+import UserDialog from '../UserDialog/UserDialog';
 
 export default class TopBar extends Component {
     constructor(props) {
@@ -33,10 +34,10 @@ export default class TopBar extends Component {
             redirectTo: null,
             topBarClass: "",
             topBarColors: {},
+            userDialogVisible: null,
         };
 
         this.currentThemeChangedCallback = this.currentThemeChanged.bind(this);
-        this.currentUserChangedCallback = this.currentUserChanged.bind(this);
     }
 
     currentThemeChanged(key, oldTheme, newTheme) {
@@ -72,28 +73,16 @@ export default class TopBar extends Component {
     componentWillUnmount() {
         getStoreInstance().unsubscribe(USER_KEY, this.currentUserChangedCallback);
         getStoreInstance().unsubscribe(THEME_KEY, this.currentThemeChangedCallback);
-
-
-    }
-
-    async loginUser() {
-        const authenticationResult = await authenticateUserWithPassword(
-            this.state.email,
-            this.state.password,
-        );
-        if (authenticationResult) {
-            getStoreInstance().updateOrCreate(USER_KEY, authenticationResult);
-        }
-    }
-
-    logoutUser() {
-        getStoreInstance().updateOrCreate(USER_KEY, {email: null, token: null});
     }
 
     changeTheme(event) {
         if (validateThemeSelection(event.target.value)) {
             getStoreInstance().updateOrCreate(THEME_KEY, event.target.value);
         }
+    }
+
+    toggleUserDialog() {
+        this.setState({userDialogVisible: !this.state.userDialogVisible});
     }
 
     getThemeDropDownElements() {
@@ -142,10 +131,13 @@ export default class TopBar extends Component {
                         </Link>
                     </span>
 
-                    <span className="RightPaneButton">
-                        <Link to={SETTINGS_PAGE_URL} className="RightPaneButton__Link">
-                            <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580042222/user_1.svg"></img>
-                        </Link>
+                    <span>
+                        <span className="RightPaneButton">
+                            <Link to="#" className="RightPaneButton__Link" onClick={this.toggleUserDialog.bind(this)}>
+                                <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580042222/user_1.svg"></img>
+                            </Link>
+                        </span>
+                        <UserDialog userDialogVisible={this.state.userDialogVisible}></UserDialog>
                     </span>
 
                 </span>

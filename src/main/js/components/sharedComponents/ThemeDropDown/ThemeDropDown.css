@@ -75,8 +75,8 @@
 .ExpandedDropDown span {
     display: flex;
     height: 44px;
-    box-shadow: inset 0px 0px 0px 30px #000;
-    transition: all 0.4s;
+    box-shadow: inset 0px 0px 10px 30px #000;
+    transition: all 0.6s;
     background: #454545;
     font-family: 'Ubuntu', sans-serif;
     text-align: center;

@@ -1,0 +1,86 @@
+
+.UserDialog {
+    height: 300px;
+    width: 400px;
+    background: black;
+    border: 1px solid white;
+    top: calc(100% + 2px);
+    position: absolute;
+    border-radius: 8px;
+}
+
+.UserDialog--show {
+    animation-name: showUserDialog;
+    animation-duration: 0.25s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+}
+
+@keyframes showUserDialog {
+    from {
+        opacity: 0.2;
+        transform: translate(0%, -15px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0%, 0px);
+    }
+}
+
+.UserDialog--hide {
+    animation-name: hideUserDialog;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+}
+
+.UserDialog .UserDialog__Tabs {
+    background: #262626;
+    border-radius: 8px 8px 0px 0px;
+    padding: 18px;
+    text-align: left;
+}
+
+.UserDialog .UserDialog__Tabs span {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 0.6em;
+    opacity: 0.6;
+    display: inline-block;
+    width: 70px;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+}
+
+.UserDialog .UserDialog__Tabs span:first-child {
+    margin-right: 20px;
+}
+
+.UserDialog .UserDialog__Tabs .UserDialog__Tabs--selected {
+    opacity: 1;
+}
+
+.UserDialog .UserDialog__Tabs span.underlineHighlight {
+    height: 2px;
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    bottom: -100%;
+    left: 0%;
+}
+
+@keyframes hideUserDialog {
+    from {
+        opacity: 1;
+        transform: translate(0%, 0px);
+    }
+    99% {
+        opacity: 0;
+        transform: translate(0%, -15px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(0%, -15px);
+        visibility: hidden;
+    }
+}
