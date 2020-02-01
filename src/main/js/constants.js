@@ -71,7 +71,20 @@ export const THEMES = {
             POST_SUMMARY: {
                 BACKGROUND_COLOR: "#d32f2f",
             },
+            TOP_POSTS: {
+                BACKGROUND_COLOR: "#d32f2f",
+                POST_TITLE_COLOR: "#ffffff",
+                POST_VOTES_COLOR: "#ffffff",
+                DARK_BACKGROUND_COLOR: "#9a0007",
+            },
             OPACITY: 1,
+        },
+        CREATE_POST: {
+            CREATE_POST_DIALOG: {
+                BACKGROUND_COLOR: "#d32f2f",
+                TITLE_BACKGROUND_COLOR: "#9a0007",
+                TITLE_TEXT_COLOR: "#ffffff"
+            }
         },
         BODY: {
             BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1575470467/Z6kdWmA.jpg)',

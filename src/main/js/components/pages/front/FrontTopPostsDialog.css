@@ -1,0 +1,30 @@
+.FrontTopPosts {
+    box-shadow: 0px 10px 14px 6px rgba(50, 50, 50, 0.8);
+    cursor: pointer;
+    margin-top: 40px;
+    margin-left: 10px;
+    color: #fff;
+}
+
+.FrontTopPost {
+    padding: 10px 0px;
+}
+
+.FrontTopPost__Title {
+    margin-left: 20px;
+}
+
+.FrontTopPost__Points {
+    width: 30px;
+    display: inline-block;
+}
+
+.FrontTopPosts h1 {
+    font-family: 'Ubuntu', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    font-size: 24;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}

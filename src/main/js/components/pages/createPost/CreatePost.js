@@ -9,10 +9,15 @@ import {
     USER_KEY,
     CREATE_POST_URL,
     RESPONSE_TYPE_OK,
+    THEME_KEY,
+    THEMES,
 } from '../../../constants';
 
 import getStoreInstance from '../../../Store';
 import TopBar from '../../sharedComponents/TopBar/TopBar';
+
+import './CreatePost.css';
+import StandardTextField from '../../sharedComponents/StandardTextField/StandardTextField';
 
 export default class createPost extends Component {
     constructor(props) {
@@ -21,7 +26,11 @@ export default class createPost extends Component {
         this.state = {
             postTitle: "",
             postURL: "",
+            uploadDialogStyles: {},
+            uploadDialogTitleStyles: {},
         }
+
+        window.temp = this;
     }
 
     async createPost() {
@@ -53,23 +62,34 @@ export default class createPost extends Component {
         }
     }
 
+    componentDidMount() {
+        getStoreInstance().subscribe(THEME_KEY, (key, oldValue, newValue) => {
+            const uploadDialogStyles = THEMES[newValue].CREATE_POST.CREATE_POST_DIALOG;
+            console.log(uploadDialogStyles);
+            this.setState({uploadDialogStyles : {
+                background: uploadDialogStyles.BACKGROUND_COLOR,
+            }});
+
+            this.setState({uploadDialogTitleStyles: {
+                background: uploadDialogStyles.TITLE_BACKGROUND_COLOR,
+                color: uploadDialogStyles.TITLE_TEXT_COLOR,
+            }});
+        })
+    }
+
     render() {
-        const scope = this;
         return (
             <div>
                 <TopBar></TopBar>
-                Title: <input
-                    type="text"
-                    value={this.state.postTitle}
-                    onChange={(e) => {scope.setState({postTitle: e.target.value})}}
-                ></input><br />
-                URL: <input
-                    type="text"
-                    value={this.state.postURL}
-                    onChange={(e) => {scope.setState({postURL: e.target.value})}}
-                ></input><br />
-                <button onClick={this.createPost.bind(this)}>Create post</button>
-                I am in create post
+                <div className="UploadDialog" style={this.state.uploadDialogStyles}>
+                    <div className="UploadDialogTitle" style={this.state.uploadDialogTitleStyles}>
+                        Upload image
+                    </div>
+                    <form>
+                        <StandardTextField></StandardTextField>
+                        {/* <TextField classes="MyTextField"></TextField> */}
+                    </form>
+                </div>
             </div>
         )
     }

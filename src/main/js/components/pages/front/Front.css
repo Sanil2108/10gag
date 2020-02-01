@@ -3,9 +3,21 @@
 }
 
 .FrontPostContainer {
-    width: 30%;
-    padding: 20px;
-    position: relative;
-    left: 35%;
-    top: 30px;
+    width: 0px;
+    flex-grow: 3;
 }
+
+.ContentContainer {
+    display: flex;
+    padding-top: 40px;
+    flex-grow: 4;
+    width: 60%;
+    position: relative;
+    left: 20%;
+}
+
+.FrontSideBar {
+    flex-grow: 2;
+    width: 0px;
+}
+

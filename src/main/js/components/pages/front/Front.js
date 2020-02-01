@@ -13,6 +13,7 @@ import * as constants from '../../../constants';
 import './Front.css';
 import VoteContainer from './VoteContainer';
 import PostSummary from './PostSummary';
+import FrontTopPostsDialog from './FrontTopPostsDialog';
 
 export default class Front extends Component {
 
@@ -71,9 +72,14 @@ export default class Front extends Component {
         return (
             <div className="Front">
                 <TopBar></TopBar>
-                <div className="FrontPostContainer" style={this.state.frontStyleObject}>
-                    <br />
-                    {postsToRender}
+                <div className="ContentContainer">
+                    <div className="FrontPostContainer" style={this.state.frontStyleObject}>
+                        <br />
+                        {postsToRender}
+                    </div>
+                    <div className="FrontSideBar" style={this.state.frontStyleObject}>
+                        <FrontTopPostsDialog></FrontTopPostsDialog>
+                    </div>
                 </div>
             </div>
         )

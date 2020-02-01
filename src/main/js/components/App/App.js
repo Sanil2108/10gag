@@ -28,6 +28,7 @@ import {
     Switch,
     Route,
   } from "react-router-dom";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core";
 
 class App extends React.Component {
 
@@ -42,6 +43,11 @@ class App extends React.Component {
 
         // TODO: Temp
         window.storeInstance = getStoreInstance();
+
+        this.baseTheme = createMuiTheme();
+    }
+
+    componentDidMount() {
     }
 
     themeChanged(key, oldValue, newValue) {
@@ -56,26 +62,28 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="App">
-                <Router>
-                <Switch>
-                    <Route path={USER_PAGE_URL + "/:userName"}>
-                        <User></User>
-                    </Route>
-                    <Route path={POST_PAGE_URL + "/:postId"} component={Post}>
-                    </Route>
-                    <Route path={SETTINGS_PAGE_URL}>
-                        <Settings></Settings>
-                    </Route>
-                    <Route path={CREATE_POST_PAGE_URL}>
-                        <CreatePost></CreatePost>
-                    </Route>
-                    <Route path={FRONT_PAGE_URL}>
-                        <Front></Front>
-                    </Route>
-                </Switch>
-                </Router>
-            </div>
+            <ThemeProvider theme={this.baseTheme}>
+                <div className="App">
+                    <Router>
+                        <Switch>
+                            <Route path={USER_PAGE_URL + "/:userName"}>
+                                <User></User>
+                            </Route>
+                            <Route path={POST_PAGE_URL + "/:postId"} component={Post}>
+                            </Route>
+                            <Route path={SETTINGS_PAGE_URL}>
+                                <Settings></Settings>
+                            </Route>
+                            <Route path={CREATE_POST_PAGE_URL}>
+                                <CreatePost></CreatePost>
+                            </Route>
+                            <Route path={FRONT_PAGE_URL}>
+                                <Front></Front>
+                            </Route>
+                        </Switch>
+                    </Router>
+                </div>
+            </ThemeProvider>
         );
     }
 }
