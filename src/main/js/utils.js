@@ -8,7 +8,10 @@ import {
     GET_POST_URL,
     UPVOTE_POST_URL,
     DOWNVOTE_POST_URL,
+    UPLOAD_TO_IMGUR_URL,
 } from './constants';
+
+const CLIENT_ID = 'a7ea9abc8fd85ac';
 
 export let authenticateUserWithToken = async (email, token) => {
     const loginRequest = {
@@ -84,6 +87,32 @@ export let getPost = async (postId)  => {
             console.error(response.data.responseMessage);
             return response.data.responseMessage;
         }
+    }
+}
+
+export let uploadImageToImgur = async (base64, title) => {
+    const data = {
+        type: "base64",
+        name: title,
+        title,
+        image: base64,
+    };
+    const config = {
+        headers: {
+            'Authorization': 'Client-ID ' + CLIENT_ID,
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'authorization',
+            Accept: 'application/json'
+        }
+    };
+
+    const response = await axios.post(UPLOAD_TO_IMGUR_URL, data, config);
+    if (response.status === 200) {
+        return response.data;
+    }
+    else {
+        console.error(response.statusText);
+        return false;
     }
 }
 

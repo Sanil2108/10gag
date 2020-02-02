@@ -3,6 +3,7 @@ import * as axios from 'axios';
 
 import {
     authenticateUserWithToken,
+    uploadImageToImgur,
 } from '../../../utils';
 
 import {
@@ -17,7 +18,13 @@ import getStoreInstance from '../../../Store';
 import TopBar from '../../sharedComponents/TopBar/TopBar';
 
 import './CreatePost.css';
-import StandardTextField from '../../sharedComponents/StandardTextField/StandardTextField';
+import { Button, TextField } from '@material-ui/core';
+
+import jss from 'jss'
+import preset from 'jss-preset-default'
+import { withStyles } from '@material-ui/core/styles';
+
+jss.setup(preset())
 
 export default class createPost extends Component {
     constructor(props) {
@@ -28,6 +35,20 @@ export default class createPost extends Component {
             postURL: "",
             uploadDialogStyles: {},
             uploadDialogTitleStyles: {},
+            uploadButtonComponent: withStyles({
+                root: {},
+                label: {},
+            })(Button),
+            textFieldComponent: withStyles({
+                root: {
+                    fontSize: 40,
+                    borderRadius: 2,
+                    backgroundColor: 'rgba(0,0,0,0.04)',
+                    '&:hover': {
+                        backgroundColor: 'rgba(0,0,0,0.08)',
+                    },
+                },
+            })(TextField),
         }
 
         window.temp = this;
@@ -65,7 +86,7 @@ export default class createPost extends Component {
     componentDidMount() {
         getStoreInstance().subscribe(THEME_KEY, (key, oldValue, newValue) => {
             const uploadDialogStyles = THEMES[newValue].CREATE_POST.CREATE_POST_DIALOG;
-            console.log(uploadDialogStyles);
+            // TODO: Replace with one setState call
             this.setState({uploadDialogStyles : {
                 background: uploadDialogStyles.BACKGROUND_COLOR,
             }});
@@ -74,7 +95,44 @@ export default class createPost extends Component {
                 background: uploadDialogStyles.TITLE_BACKGROUND_COLOR,
                 color: uploadDialogStyles.TITLE_TEXT_COLOR,
             }});
+
+            this.setState({
+                uploadButtonComponent: withStyles({
+                    root: {
+                        backgroundColor: uploadDialogStyles.BUTTON_BACKGROUND,
+                    },
+                    label: {
+                        color: uploadDialogStyles.BUTTON_TEXT_COLOR,
+                    }
+                })(Button),
+            })
         })
+    }
+
+    handleTitleChange(event) {
+        this.setState({postTitle: event.target.value})
+    }
+
+    newFileUpload() {
+        const file = document.getElementById('file-uploader').files[0];
+        const title = this.state.postTitle;
+
+        const reader = new FileReader();
+        const scope = this;
+        reader.addEventListener("load", async function () {
+            let b64String =
+                reader.result.slice(reader.result.indexOf("base64") + ("base64").length, reader.result.length);
+            const response = await uploadImageToImgur(b64String, title);
+            scope.setState({imageURL: response.data.link});
+            scope.createPost()
+            if (response === false) {
+                alert('Something went wrong');
+            }
+            else {
+
+            }
+        }, false);
+        reader.readAsDataURL(file);
     }
 
     render() {
@@ -82,13 +140,26 @@ export default class createPost extends Component {
             <div>
                 <TopBar></TopBar>
                 <div className="UploadDialog" style={this.state.uploadDialogStyles}>
-                    <div className="UploadDialogTitle" style={this.state.uploadDialogTitleStyles}>
+                    <h1>
                         Upload image
-                    </div>
+                    </h1>
                     <form>
-                        <StandardTextField></StandardTextField>
-                        {/* <TextField classes="MyTextField"></TextField> */}
+                        <this.state.textFieldComponent
+                            onChange={this.handleTitleChange.bind(this)}
+                            label="Title"
+                            variant="filled">
+                        </this.state.textFieldComponent>
+
+                        <input type="file" id="file-uploader" accept="image/*">
+                        </input>
                     </form>
+
+                    <this.state.uploadButtonComponent
+                        onClick={this.newFileUpload.bind(this)}
+                        variant="contained"
+                    >
+                        Upload
+                    </this.state.uploadButtonComponent>
                 </div>
             </div>
         )

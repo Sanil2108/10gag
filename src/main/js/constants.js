@@ -15,6 +15,8 @@ export const GET_USER_URL = (userName) => BASE_URL + 'users/get/' + userName;
 export const UPVOTE_POST_URL = (postId) => BASE_URL + 'posts/upvote/' + postId;
 export const DOWNVOTE_POST_URL = (postId) => BASE_URL + 'posts/downvote/' + postId;
 
+export const UPLOAD_TO_IMGUR_URL = 'https://api.imgur.com/3/image';
+
 // Backend response types
 export const RESPONSE_TYPE_OK = 'RESPONSE_TYPE_OK';
 export const RESPONSE_TYPE_ALERT = 'RESPONSE_TYPE_ALERT';
@@ -83,7 +85,9 @@ export const THEMES = {
             CREATE_POST_DIALOG: {
                 BACKGROUND_COLOR: "#d32f2f",
                 TITLE_BACKGROUND_COLOR: "#9a0007",
-                TITLE_TEXT_COLOR: "#ffffff"
+                TITLE_TEXT_COLOR: "#ffffff",
+                BUTTON_BACKGROUND: "#9a0007",
+                BUTTON_TEXT_COLOR: "#ffffff",
             }
         },
         BODY: {

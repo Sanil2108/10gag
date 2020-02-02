@@ -62,7 +62,7 @@ export default class ThemeDropDown extends Component {
             for (let i = 0; i < themes.length; i += 1) {
                 if (this.state.dropDownAnimationEnded) {
                     childrenSpans.push((
-                        <span onClick={this.changeTheme.bind(this, themes[i])}>
+                        <span key={'Theme-'+i} onClick={this.changeTheme.bind(this, themes[i])}>
                             <span
                                 className="BackgroundSpan"
                                 style={{
