@@ -1,0 +1,58 @@
+.SignUpTab-enter-done {
+    display: block;
+}
+
+.SignUpTab-enter {
+    opacity: 0;
+    clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
+}
+
+.SignUpTab-enter-active {
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transition: all 2s;
+}
+
+.SignUpTab-exit-done {
+    display: none;
+}
+
+.SignUpTab-exit {
+    transition: all 2s;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.SignUpTab-exit-active {
+    opacity: 0;
+    clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
+    transition: all 2s;
+}
+
+
+
+.LoginTab-enter {
+    opacity: 0;
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+}
+
+.LoginTab-enter-active {
+    transition: all 2s;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+}
+
+.LoginTab-exit {
+    right: 0px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.LoginTab-exit-active {
+    opacity: 0;
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+    transition: all 2s;
+}
+
+.LoginTab-exit-done {
+    display: none;
+    right: 0px;
+}

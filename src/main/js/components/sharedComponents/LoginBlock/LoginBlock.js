@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import './LoginBlock.css';
 
 export class LoginBlock extends Component {
 
     render() {
         return (
-            <div style={{color: "#fff"}}>
+            <div style={{color: "#fff"}} className="LoginBlock">
                 LoginBlock block here
             </div>
         )

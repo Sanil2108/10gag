@@ -1,0 +1,7 @@
+.LoginBlock {
+    height: 100%;
+    background-color: red;
+    position: absolute;
+    width: 100%;
+    right: 0px;
+}

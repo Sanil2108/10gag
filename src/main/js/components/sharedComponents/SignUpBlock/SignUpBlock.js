@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import './SignUpBlock.css';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -15,8 +16,11 @@ export default function SignUpBlock () {
     const classes = useStyles();
 
     return (
-        <form className={classes.root} noValidate autoComplete="off">
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-        </form>
+        <div className="SignUpBlock">
+            {/* <form className={classes.root} noValidate autoComplete="off">
+                <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
+                <span style={{color: "#fff"}}>Hello signup block here</span>
+            {/* </form> */}
+        </div>
     );
 }

@@ -7,6 +7,8 @@
     top: calc(100% + 2px);
     position: absolute;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
 }
 
 .UserDialog--show {
@@ -67,6 +69,19 @@
     width: 100%;
     bottom: -100%;
     left: 0%;
+}
+
+.UserDialog__Tabs--hide {
+    animation-name: hideTab;
+}
+
+@keyframes hideTab {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100);
+    }
 }
 
 @keyframes hideUserDialog {
