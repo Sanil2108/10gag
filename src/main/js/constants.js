@@ -33,6 +33,7 @@ export const FRONT_PAGE_URL = '/';
 // Store constants
 export const USER_KEY = 'user';
 export const THEME_KEY = 'theme';
+export const GAPI_KEY = 'gapi';
 
 export const THEME_NAMES = {
     OPTIMISTIC_OCEAN: 'Optimistic Ocean',

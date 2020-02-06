@@ -17,6 +17,7 @@ class Store {
             return false;
         }
         this.keyValuePairs[key].callbacks.push(callback);
+        return true;
     }
 
     updateOrCreate(key, value, defaultValue = null) {
@@ -28,7 +29,7 @@ class Store {
         }
         else {
             for (let callback of this.keyValuePairs[key].callbacks) {
-                callback(key, this.keyValuePairs[key], value);
+                callback(key, this.keyValuePairs[key].value, value);
             }
 
             this.keyValuePairs[key].value = value;
@@ -37,6 +38,7 @@ class Store {
 
     get(key) {
         if (this.keyValuePairs[key] === undefined) {
+            console.error("Store - get - Key does not exist")
             return null;
         }
         return this.keyValuePairs[key].value;

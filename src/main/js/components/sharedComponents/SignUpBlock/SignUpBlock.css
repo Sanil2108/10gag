@@ -1,6 +1,6 @@
 .SignUpBlock {
     height: 100%;
-    background-color: green;
     position: absolute;
     width: 100%;
+    background-color: #000;
 }

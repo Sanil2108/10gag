@@ -19,6 +19,7 @@ import {
     THEME_KEY,
     THEME_NAMES,
     THEMES,
+    GAPI_KEY,
 } from '../../constants';
 
 import './App.css';
@@ -38,6 +39,7 @@ class App extends React.Component {
         // Default values
         getStoreInstance().updateOrCreate(USER_KEY, {email: null, token: null, userName: null});
         getStoreInstance().updateOrCreate(THEME_KEY, THEME_NAMES.OPTIMISTIC_OCEAN);
+        getStoreInstance().updateOrCreate(GAPI_KEY, null);
 
         getStoreInstance().subscribe(THEME_KEY, this.themeChanged.bind(this));
 
@@ -48,6 +50,9 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        document.body.onload = () => {
+            getStoreInstance().updateOrCreate(GAPI_KEY, window.gapi);
+        }
     }
 
     themeChanged(key, oldValue, newValue) {

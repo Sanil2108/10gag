@@ -14,6 +14,7 @@ import './Front.css';
 import VoteContainer from './VoteContainer';
 import PostSummary from './PostSummary';
 import FrontTopPostsDialog from './FrontTopPostsDialog';
+import FrontPostType from './FrontPostType';
 
 export default class Front extends Component {
 
@@ -59,19 +60,22 @@ export default class Front extends Component {
 
     render() {
         const postsToRender = [];
+        let i = 0;
         for (let post of this.state.posts) {
             // TODO: Temp
             post = Object.assign(post, {upvoted: false, downvoted: false})
             
             postsToRender.push(
-                <PostSummary post={post}>
+                <PostSummary key={"postSummary"+i} post={post}>
                 </PostSummary>
             )
+            i += 1;
         }
 
         return (
             <div className="Front">
                 <TopBar></TopBar>
+                <FrontPostType></FrontPostType>
                 <div className="ContentContainer">
                     <div className="FrontPostContainer" style={this.state.frontStyleObject}>
                         <br />

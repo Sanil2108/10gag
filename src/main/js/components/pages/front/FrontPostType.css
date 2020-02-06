@@ -1,0 +1,19 @@
+.FrontPostType {
+    background-color: #555;
+    padding: 10px 20vw 10px;
+    box-shadow: black;
+}
+
+.RoundButton {
+    margin-right: 5px;
+    border-radius: 100px;
+    color: #000;
+    border: 1px solid white;
+    padding: 3px;
+    transition: all 0.2s;
+}
+
+.RoundButton:hover {
+    background-color: #fff;
+    color: #000;
+}
