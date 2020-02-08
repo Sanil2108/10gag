@@ -38,7 +38,7 @@ export class UserDialog extends Component {
     }
 
     logoutUser() {
-        getStoreInstance().updateOrCreate(USER_KEY, {email: null, token: null});
+        getStoreInstance().updateOrCreate(USER_KEY, {email: null, userName:null, token: null});
     }
 
     render() {

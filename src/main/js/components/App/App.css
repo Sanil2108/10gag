@@ -4,7 +4,7 @@ body {
   font-family: 'Ubuntu', sans-serif;
   background-attachment: fixed !important;
   background-position: center !important;
-  transition: all 1s;
+  transition: background-image 1s, background-color 1s;
 }
 
 .fade-enter {

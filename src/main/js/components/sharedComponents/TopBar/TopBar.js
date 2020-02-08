@@ -34,7 +34,7 @@ export default class TopBar extends Component {
             redirectTo: null,
             topBarClass: "",
             topBarColors: {},
-            userDialogVisible: null,
+            userDialogVisible: false,
         };
 
         this.currentThemeChangedCallback = this.currentThemeChanged.bind(this);
@@ -106,6 +106,11 @@ export default class TopBar extends Component {
             return <Redirect push to={this.state.redirectTo}></Redirect>
         }
 
+        let userDialog = '';
+        if (this.state.userDialogVisible) {
+            userDialog = <UserDialog userDialogVisible={this.state.userDialogVisible}></UserDialog>
+        }
+
         return (
             <div
                 className={"TopBar" + this.state.topBarClass}
@@ -140,7 +145,7 @@ export default class TopBar extends Component {
                                 <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580042222/user_1.svg"></img>
                             </Link>
                         </span>
-                        <UserDialog userDialogVisible={this.state.userDialogVisible}></UserDialog>
+                        {userDialog}
                     </span>
 
                 </span>

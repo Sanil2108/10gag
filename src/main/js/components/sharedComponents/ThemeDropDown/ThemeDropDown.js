@@ -12,9 +12,11 @@ export default class ThemeDropDown extends Component {
     constructor(props) {
         super(props);
 
+        const currentTheme = THEMES[getStoreInstance().get(THEME_KEY)];
+
         this.state = {
-            topBarDropDownColors: {},
-            currentThemeName: "No theme set",
+            topBarDropDownColors: currentTheme.TOPBAR.DROPDOWN,
+            currentThemeName: getStoreInstance().get(THEME_KEY),
             dropDownOpen: false,
             dropDownAnimationEnded: false
         };
@@ -25,8 +27,8 @@ export default class ThemeDropDown extends Component {
             this.setState({
                 topBarDropDownColors: THEMES[newTheme].TOPBAR.DROPDOWN,
                 currentThemeName: newTheme,
-            })
-        })
+            });
+        });
     }
 
     toggleDropDown() {
@@ -34,9 +36,6 @@ export default class ThemeDropDown extends Component {
             this.setState({
                 dropDownAnimationEnded: false
             });
-        }
-        else {
-            console.log("Drop down open")
         }
 
         this.setState({

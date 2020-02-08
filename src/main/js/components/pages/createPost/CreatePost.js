@@ -83,30 +83,36 @@ export default class createPost extends Component {
         }
     }
 
-    componentDidMount() {
-        getStoreInstance().subscribe(THEME_KEY, (key, oldValue, newValue) => {
-            const uploadDialogStyles = THEMES[newValue].CREATE_POST.CREATE_POST_DIALOG;
-            // TODO: Replace with one setState call
-            this.setState({uploadDialogStyles : {
-                background: uploadDialogStyles.BACKGROUND_COLOR,
-            }});
+    changeTheme(newValue) {
+        const uploadDialogStyles = THEMES[newValue].CREATE_POST.CREATE_POST_DIALOG;
+        // TODO: Replace with one setState call
+        this.setState({uploadDialogStyles : {
+            background: uploadDialogStyles.BACKGROUND_COLOR,
+        }});
 
-            this.setState({uploadDialogTitleStyles: {
-                background: uploadDialogStyles.TITLE_BACKGROUND_COLOR,
-                color: uploadDialogStyles.TITLE_TEXT_COLOR,
-            }});
+        this.setState({uploadDialogTitleStyles: {
+            background: uploadDialogStyles.TITLE_BACKGROUND_COLOR,
+            color: uploadDialogStyles.TITLE_TEXT_COLOR,
+        }});
 
-            this.setState({
-                uploadButtonComponent: withStyles({
-                    root: {
-                        backgroundColor: uploadDialogStyles.BUTTON_BACKGROUND,
-                    },
-                    label: {
-                        color: uploadDialogStyles.BUTTON_TEXT_COLOR,
-                    }
-                })(Button),
-            })
+        this.setState({
+            uploadButtonComponent: withStyles({
+                root: {
+                    backgroundColor: uploadDialogStyles.BUTTON_BACKGROUND,
+                },
+                label: {
+                    color: uploadDialogStyles.BUTTON_TEXT_COLOR,
+                }
+            })(Button),
         })
+    }
+
+    componentDidMount() {
+        this.changeTheme(getStoreInstance().get(THEME_KEY));
+
+        getStoreInstance().subscribe(THEME_KEY, (key, oldValue, newValue) => {
+            this.changeTheme(newValue);
+        });
     }
 
     handleTitleChange(event) {

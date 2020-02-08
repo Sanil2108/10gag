@@ -32,13 +32,11 @@ export class UserInformationBlock extends Component {
     }
 
     render() {
-        console.log(this.state.user);
-
         return (<div className={"UserDialog UserDialog__information " + this.props.userDialogClass}>
             <span>
                 email: {(this.state.user !== null) ? this.state.user.email : "N/A"}
                 username: {(this.state.user !== null) ? this.state.user.userName : "N/A"}
-                password: {(this.state.user !== null) ? this.state.user.password : "N/A"}
+                token: {(this.state.user !== null) ? this.state.user.token : "N/A"}
             </span>
 
             <Button onClick={this.logOutUser.bind(this)}>

@@ -21,6 +21,8 @@ export class PostSummary extends Component {
 
     componentDidMount() {
         getStoreInstance().subscribe(THEME_KEY, this.themeChanged.bind(this));
+
+        this.themeChanged(THEME_KEY, null, getStoreInstance().get(THEME_KEY));
     }
 
     themeChanged(key, oldValue, newValue) {

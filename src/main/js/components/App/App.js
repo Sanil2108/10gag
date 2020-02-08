@@ -38,7 +38,7 @@ class App extends React.Component {
 
         // Default values
         getStoreInstance().updateOrCreate(USER_KEY, {email: null, token: null, userName: null});
-        getStoreInstance().updateOrCreate(THEME_KEY, THEME_NAMES.OPTIMISTIC_OCEAN);
+        getStoreInstance().updateOrCreate(THEME_KEY, THEME_NAMES.FASCINATING_FIRE);
         getStoreInstance().updateOrCreate(GAPI_KEY, null);
 
         getStoreInstance().subscribe(THEME_KEY, this.themeChanged.bind(this));
@@ -47,6 +47,8 @@ class App extends React.Component {
         window.storeInstance = getStoreInstance();
 
         this.baseTheme = createMuiTheme();
+
+        this.themeChanged(THEME_KEY, null, getStoreInstance().get(THEME_KEY));
     }
 
     componentDidMount() {

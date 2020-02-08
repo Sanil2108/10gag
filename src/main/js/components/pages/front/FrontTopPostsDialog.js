@@ -13,26 +13,32 @@ export class FrontTopPostsDialog extends Component {
         }
     }
 
+    themeChanged(newValue) {
+        if (THEMES[newValue].FRONT.TOP_POSTS !== undefined) {
+            let topPostDialogStyleObject = {
+                background: THEMES[newValue].FRONT.TOP_POSTS.BACKGROUND_COLOR,
+            };
+            this.setState({
+                topPostDialogStyleObject
+            });
+        }
+
+        if (THEMES[newValue].FRONT.TOP_POSTS !== undefined) {
+            let topPostDialogContentStyleObject = {
+                background: THEMES[newValue].FRONT.TOP_POSTS.DARK_BACKGROUND_COLOR,
+            };
+            this.setState({
+                topPostDialogContentStyleObject,
+            });
+        }
+    }
+
     componentDidMount() {
         getStoreInstance().subscribe(THEME_KEY, (key, oldValue, newValue) => {
-            if (THEMES[newValue].FRONT.TOP_POSTS !== undefined) {
-                let topPostDialogStyleObject = {
-                    background: THEMES[newValue].FRONT.TOP_POSTS.BACKGROUND_COLOR,
-                };
-                this.setState({
-                    topPostDialogStyleObject
-                });
-            }
+            this.themeChanged(newValue);
+        });
 
-            if (THEMES[newValue].FRONT.TOP_POSTS !== undefined) {
-                let topPostDialogContentStyleObject = {
-                    background: THEMES[newValue].FRONT.TOP_POSTS.DARK_BACKGROUND_COLOR,
-                };
-                this.setState({
-                    topPostDialogContentStyleObject,
-                });
-            }
-        })
+        this.themeChanged(getStoreInstance().get(THEME_KEY));
     }
 
     render() {
