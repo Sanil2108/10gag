@@ -13,6 +13,8 @@ class Store {
     }
 
     subscribe(key, callback) {
+        console.assert(callback instanceof Function);
+
         if (this.keyValuePairs[key] === undefined) {
             return false;
         }

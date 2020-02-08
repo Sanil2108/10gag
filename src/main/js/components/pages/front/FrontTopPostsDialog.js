@@ -15,17 +15,23 @@ export class FrontTopPostsDialog extends Component {
 
     componentDidMount() {
         getStoreInstance().subscribe(THEME_KEY, (key, oldValue, newValue) => {
-            let topPostDialogStyleObject = {
-                background: THEMES[newValue].FRONT.TOP_POSTS.BACKGROUND_COLOR,
-            };
+            if (THEMES[newValue].FRONT.TOP_POSTS !== undefined) {
+                let topPostDialogStyleObject = {
+                    background: THEMES[newValue].FRONT.TOP_POSTS.BACKGROUND_COLOR,
+                };
+                this.setState({
+                    topPostDialogStyleObject
+                });
+            }
 
-            let topPostDialogContentStyleObject = {
-                background: THEMES[newValue].FRONT.TOP_POSTS.DARK_BACKGROUND_COLOR,
-            };
-            this.setState({
-                topPostDialogStyleObject,
-                topPostDialogContentStyleObject,
-            })
+            if (THEMES[newValue].FRONT.TOP_POSTS !== undefined) {
+                let topPostDialogContentStyleObject = {
+                    background: THEMES[newValue].FRONT.TOP_POSTS.DARK_BACKGROUND_COLOR,
+                };
+                this.setState({
+                    topPostDialogContentStyleObject,
+                });
+            }
         })
     }
 

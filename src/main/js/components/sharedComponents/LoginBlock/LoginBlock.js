@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import './LoginBlock.css';
 import getStoreInstance from '../../../Store';
 import {
-    GAPI_KEY
+    GAPI_KEY, USER_KEY
 } from '../../../constants';
+import { TextField, Button } from '@material-ui/core';
+import { authenticateUserWithPassword } from '../../../utils';
 
 export class LoginBlock extends Component {
 
@@ -12,6 +14,8 @@ export class LoginBlock extends Component {
 
         this.state = {
             gapiInitialized: false,
+            emailEntered: "sanilkhurana7@gmail.com",
+            passwordEntered: "root",
         }
     }
 
@@ -49,12 +53,33 @@ export class LoginBlock extends Component {
     render() {
         return (
             <div style={{color: "#fff"}} className="LoginBlock">
-                LoginBlock block here
+            
+                <TextField
+                    label="Email"
+                    onChange={(event) => {this.setState({emailEntered: event.target.value})}}
+                ></TextField>
+                <TextField
+                    label="Password"
+                    onChange={(event) => {this.setState({passwordEntered: event.target.value})}}
+                ></TextField>
+
+                <Button onClick={async () => {
+                    const authenticationResult = await authenticateUserWithPassword(this.state.emailEntered, this.state.passwordEntered);
+                    if (authenticationResult.successful) {
+                        getStoreInstance().updateOrCreate(USER_KEY, {
+                            email: authenticationResult.email,
+                            password: authenticationResult.password,
+                            userName: authenticationResult.userName,
+                        });
+                    }
+                    else {
+                        alert(authenticationResult.responseMessage);
+                        console.error(authenticationResult.responseMessage);
+                    }
+                }}
+                >Login</Button>
 
                 <div className="SignInButtonsContainer">
-                    <p style={{display: "none"}}>
-                        This is not a great way, find a better way
-                    </p>
                     <div className={"GoogleSignInButtonsContainer " + ((this.state.gapiInitialized) ? "GoogleSignInButtonsContainerEnabled" : "GoogleSignInButtonsContainerDisabled")}>
                         <div className="google-sign-in" id="google-login-button">
 

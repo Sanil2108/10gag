@@ -22,7 +22,6 @@ export default class ThemeDropDown extends Component {
 
     componentDidMount() {
         getStoreInstance().subscribe(THEME_KEY, (key, oldTheme, newTheme) => {
-            console.log(newTheme);
             this.setState({
                 topBarDropDownColors: THEMES[newTheme].TOPBAR.DROPDOWN,
                 currentThemeName: newTheme,

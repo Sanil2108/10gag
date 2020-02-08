@@ -6,6 +6,7 @@ const BASE_URL = (PRODUCTION_ENV) ? PRODUCTION_URL : DEVELOPMENT_URL;
 
 // External URLs
 export const LOGIN_USER_URL = () => BASE_URL + 'users/login';
+export const CREATE_USER_URL = () => BASE_URL + 'users/register'
 export const CREATE_POST_URL = () => BASE_URL + 'posts/create';
 export const NEW_POSTS_URL = () => BASE_URL + 'posts/get/new';
 export const HOT_POSTS_URL = () => BASE_URL + 'posts/get/hot';

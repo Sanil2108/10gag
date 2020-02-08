@@ -9,6 +9,8 @@ import './SignUpLoginBlock.css';
 const SIGN_UP_TAB = 'SignUpTab';
 const LOGIN_TAB = 'LoginTab';
 
+const TRANSITION_TIME = 1000;
+
 export class SignUpLoginBlock extends Component {
 
     constructor(props) {
@@ -60,10 +62,10 @@ export class SignUpLoginBlock extends Component {
                     </span>
                 </div>
                 <div style={{flexGrow: "1", position: 'relative'}}>
-                    <CSSTransition in={this.state.currentTab === LOGIN_TAB} timeout={2000} classNames="LoginTab">
+                    <CSSTransition in={this.state.currentTab === LOGIN_TAB} timeout={TRANSITION_TIME} classNames="LoginTab">
                         <LoginBlock className="LoginBlock"></LoginBlock>
                     </CSSTransition>
-                    <CSSTransition in={this.state.currentTab === SIGN_UP_TAB} timeout={2000} classNames="SignUpTab">
+                    <CSSTransition in={this.state.currentTab === SIGN_UP_TAB} timeout={TRANSITION_TIME} classNames="SignUpTab">
                         <SignUpBlock className="SignUpBlock"></SignUpBlock>
                     </CSSTransition>
                 </div>

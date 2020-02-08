@@ -45,7 +45,6 @@ export default class Front extends Component {
     }
 
     themeChanged(key, oldValue, newValue) {
-        console.log(newValue);
         const frontStylingInformation = THEMES[newValue].FRONT;
 
         const tempFrontStyleObject = {};

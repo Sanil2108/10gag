@@ -38,6 +38,7 @@ export default class TopBar extends Component {
         };
 
         this.currentThemeChangedCallback = this.currentThemeChanged.bind(this);
+        this.currentUserChangedCallback = this.currentUserChanged.bind(this);
     }
 
     currentThemeChanged(key, oldTheme, newTheme) {
@@ -48,7 +49,8 @@ export default class TopBar extends Component {
     }
 
     // TODO: oldUser would come first
-    currentUserChanged(key, newUser) {
+    currentUserChanged(key, oldUser, newUser) {
+        console.log(key, oldUser, newUser);
         this.setState({
             currentUser: newUser,
         });

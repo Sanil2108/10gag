@@ -11,6 +11,13 @@
     flex-direction: column;
 }
 
+.UserDialog__information {
+    height: 100px;
+    width: 400px;
+    background: purple;
+    font-size: 18px;
+}
+
 .UserDialog--show {
     animation-name: showUserDialog;
     animation-duration: 0.25s;

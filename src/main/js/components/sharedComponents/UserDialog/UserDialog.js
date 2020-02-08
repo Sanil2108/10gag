@@ -4,6 +4,7 @@ import { USER_KEY } from '../../../constants';
 
 import getStoreInstance from '../../../Store';
 import SignUpLoginBlock from '../SignUpLoginBlock/SignUpLoginBlock';
+import UserInformationBlock from '../UserInformationBlock/UserInformationBlock';
 
 export class UserDialog extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export class UserDialog extends Component {
         };
     }
 
-    currentUserChanged(key, newUser) {
+    currentUserChanged(key, oldUser, newUser) {
         this.setState({
             currentUser: newUser,
         });
@@ -49,7 +50,9 @@ export class UserDialog extends Component {
             ></SignUpLoginBlock>
         }
         else {
-            return '';
+            return <UserInformationBlock
+                userDialogClass={userDialogVisibilityClass}
+            ></UserInformationBlock>;
         }
     }
 }

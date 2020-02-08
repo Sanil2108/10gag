@@ -9,6 +9,7 @@ import {
     UPVOTE_POST_URL,
     DOWNVOTE_POST_URL,
     UPLOAD_TO_IMGUR_URL,
+    CREATE_USER_URL,
 } from './constants';
 
 const CLIENT_ID = 'a7ea9abc8fd85ac';
@@ -37,15 +38,31 @@ let authenticateUser = async (loginRequest, email) => {
     const response = await axios.post(LOGIN_USER_URL(), loginRequest);
     if (response.status === 200) {
         if (response.data.responseType === RESPONSE_TYPE_OK) {
-            return {token: response.data.token.token, email, userName: response.data.user.userName};
+            return {successful: true, token: response.data.token.token, email, userName: response.data.user.userName};
         }
         else {
-            return {responseMessage: response.data.responseMessage};
+            return {successful: false, responseMessage: response.data.responseMessage};
         }
     }
     else {
-        return false;
+        return {successful: false};
     }
+}
+
+export let registerUser = async (userName, email, password) => {
+    const createUserRequest = { userName, email, password };
+    const response = await axios.post(CREATE_USER_URL(), createUserRequest);
+    if (response.status === 200) {
+        if (response.data.responseType === RESPONSE_TYPE_OK) {
+            console.log(response.data);
+            return {successful: true};
+        }
+        else {
+            console.error(response.data.responseMessage);
+            return {successful: false, responseMessage: response.data.responseMessage};
+        }
+    }
+    return {successful: false, responseMessage: 'Network error'};
 }
 
 export let getUser = async (userName) => {
