@@ -12,6 +12,7 @@ import {
     RESPONSE_TYPE_OK,
     THEME_KEY,
     THEMES,
+    FRONT_PAGE_URL,
 } from '../../../constants';
 
 import getStoreInstance from '../../../Store';
@@ -26,6 +27,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ShadowButton from '../../sharedComponents/ShadowButton/ShadowButton';
 import {DropzoneArea} from 'material-ui-dropzone'
 import MuiAlert from '@material-ui/lab/Alert';
+import { Redirect } from 'react-router-dom';
 
 jss.setup(preset())
 
@@ -34,13 +36,15 @@ export default class createPost extends Component {
         super(props);
 
         this.state = {
+            imageData: null,
             loading: false,
             alertType:"",
             alertMessage: "",
             alertOpen: false,
             imageFile: null,
             postTitle: "",
-            postURL: "",
+            imageURL: "",
+            redirectTo: null,
             uploadDialogStyles: {},
             uploadDialogTitleStyles: {},
             textFieldComponent: withStyles({
@@ -65,7 +69,7 @@ export default class createPost extends Component {
                 user,
                 post: {
                     title: this.state.postTitle,
-                    imageURL: this.state.postURL,
+                    imageURL: this.state.imageURL,
                 }
             };
 
@@ -73,12 +77,13 @@ export default class createPost extends Component {
 
             if (response.status === 200) {
                 if (response.data.responseType === RESPONSE_TYPE_OK) {
-                    this.setState({alertOpen: true, alertMessage: "Something went wrong. Please try again later", alertType: "success"});
+                    this.setState({alertOpen: true, alertMessage: "Post uploaded!", alertType: "success", redirectTo: FRONT_PAGE_URL});
                 }
                 else {
                     this.setState({alertOpen: true, alertMessage: response.data.responseMessage, alertType: "error"});
                 }
             }
+            this.setState({loading: false});
         }
     }
 
@@ -112,6 +117,7 @@ export default class createPost extends Component {
     }
 
     postNewImage() {
+        // Assertions
         const user = getStoreInstance().get(USER_KEY);
         if (user == null || user.email == null) {
             this.setState({alertOpen: true, alertMessage: "You are not logged in!", alertType: "error"});
@@ -135,30 +141,63 @@ export default class createPost extends Component {
         const scope = this;
         reader.addEventListener("load", async function () {
             let b64String =
-                reader.result.slice(reader.result.indexOf("base64") + ("base64").length, reader.result.length);
+                reader.result.slice(reader.result.indexOf("base64,") + ("base64,").length, reader.result.length);
             const response = await uploadImageToImgur(b64String, title);
-            scope.setState({imageURL: response.data.link});
-            scope.createPost()
-            if (response === false) {
-                this.setState({alertOpen: true, alertMessage: "Something went wrong. Please try again later"});
+            if (!response) {
+                scope.setState({alertOpen: true, alertMessage: "Something went wrong. Please try again later", loading: false});
             }
             else {
-                
+                scope.setState({imageURL: response.data.link});
+                scope.createPost();
             }
-            this.setState({loading: false});
         }, false);
         reader.readAsDataURL(file);
-        this.setState({loading: false});
     }
 
     render() {
-        const shadowButtonInner = (
+        if (this.state.redirectTo != null) {
+            return <Redirect push to={this.state.redirectTo}></Redirect>
+        }
+
+        let shadowButtonInner = (
             <p>Upload</p>
         );
         if (this.state.loading) {
             shadowButtonInner = (
-                <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1581182739/loading1.gif"></img>
+                <>
+                    <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1581182739/loading1.gif"></img>
+                    <p style={{visibility: "hidden"}}>Upload</p>
+                </>
             )
+        }
+
+        // TODO: Rename
+        let fileUploadOrImage = '';
+        if (this.state.imageData != null) {
+            // fileUploadOrImage = <img
+            //     className="PreviewImage PreviewImage--show"
+            //     src={this.state.imageData}
+            // />
+        }
+        else {
+            fileUploadOrImage = (
+                <DropzoneArea
+                    showPreviewsInDropzone={false}
+                    acceptedFiles={["image/*"]}
+                    filesLimit={1}
+                    maxFileSize={2000000}
+                    dropzoneText={"Drop files or click here"}
+                    onChange={(files) => {
+                        this.setState({imageFile: files[0]})
+
+                        const reader = new FileReader();
+                        reader.addEventListener('load', () => {
+                            this.setState({imageData: reader.result});
+                        });
+                        reader.readAsDataURL(files[0]);
+                    }}
+                ></DropzoneArea>
+            );
         }
 
         return (
@@ -177,14 +216,13 @@ export default class createPost extends Component {
                         fullWidth
                     >
                     </this.state.textFieldComponent>
-                    <DropzoneArea
-                        showPreviewsInDropzone={false}
-                        acceptedFiles={["image/*"]}
-                        filesLimit={1}
-                        maxFileSize={2000000}
-                        dropzoneText={"Drop files or click here"}
-                        onChange={(files) => {this.setState({imageFile: files[0]})}}
-                    ></DropzoneArea>
+                    <div className="PreviewImageContainer">
+                        <img
+                            src={(this.state.imageData == null) ? "#" : this.state.imageData}
+                            className={"PreviewImage " + ((this.state.imageData == null) ? "PreviewImage--hidden" : "PreviewImage--show")}
+                        ></img>
+                    </div>
+                    {fileUploadOrImage}
                     <ShadowButton
                         text="Upload"
                         onClick={this.postNewImage.bind(this)}

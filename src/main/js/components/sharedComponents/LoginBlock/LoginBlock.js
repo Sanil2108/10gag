@@ -68,7 +68,7 @@ export class LoginBlock extends Component {
                     if (authenticationResult.successful) {
                         getStoreInstance().updateOrCreate(USER_KEY, {
                             email: authenticationResult.email,
-                            password: authenticationResult.password,
+                            token: authenticationResult.token,
                             userName: authenticationResult.userName,
                         });
                     }

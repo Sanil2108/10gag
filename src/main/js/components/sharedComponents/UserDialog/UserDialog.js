@@ -27,15 +27,16 @@ export class UserDialog extends Component {
         getStoreInstance().subscribe(USER_KEY, this.currentUserChanged.bind(this));
     }
 
-    async loginUser() {
-        const authenticationResult = await authenticateUserWithPassword(
-            this.state.email,
-            this.state.password,
-        );
-        if (authenticationResult) {
-            getStoreInstance().updateOrCreate(USER_KEY, authenticationResult);
-        }
-    }
+    // async loginUser() {
+    //     const authenticationResult = await authenticateUserWithPassword(
+    //         this.state.email,
+    //         this.state.password,
+    //     );
+    //     console.log(authenticationResult);
+    //     if (authenticationResult) {
+    //         getStoreInstance().updateOrCreate(USER_KEY, authenticationResult);
+    //     }
+    // }
 
     logoutUser() {
         getStoreInstance().updateOrCreate(USER_KEY, {email: null, userName:null, token: null});
