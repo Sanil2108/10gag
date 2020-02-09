@@ -90,6 +90,7 @@ export const THEMES = {
                 TITLE_TEXT_COLOR: "#ffffff",
                 BUTTON_BACKGROUND: "#9a0007",
                 BUTTON_TEXT_COLOR: "#ffffff",
+                UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "9a0007",
             }
         },
         BODY: {

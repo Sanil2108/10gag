@@ -1,8 +1,8 @@
 .UploadDialog {
     position: absolute;
     margin-top: 100px;
-    width: 40%;
-    margin-left: 30%;
+    width: 30%;
+    margin-left: 35%;
     box-shadow: 0px 10px 14px 6px rgba(50, 50, 50, 0.8);
     transition: all 0.3s;
 }
@@ -13,4 +13,40 @@
     text-decoration: none;
     font-size: 24;
     padding-left: 20px;
+}
+
+.UploadDialog .MuiInputBase-input {
+    color: #fff;
+}
+
+.UploadDialog .MuiFormLabel-root {
+    color: #999;
+}
+
+.UploadDialog .DropzoneArea-dropzoneParagraph-69 {
+    font-size: 20px;
+}
+
+.DropzoneArea-dropzoneTextStyle-67 {
+    margin: auto;
+    transform: translateY(-10px);
+}
+
+.PreviewList-smallPreviewImg-87 {
+    display: none;
+}
+
+.DropzoneArea-dropZone-64 {
+    background: transparent !important;
+    margin: 5%;
+    color: white;
+    width: 90% !important;
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+}
+
+.DropzoneArea-uploadIconSize-68 {
+    color: white !important;
+    margin-top: -20px;
 }

@@ -18,11 +18,14 @@ import getStoreInstance from '../../../Store';
 import TopBar from '../../sharedComponents/TopBar/TopBar';
 
 import './CreatePost.css';
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, Snackbar } from '@material-ui/core';
 
 import jss from 'jss'
 import preset from 'jss-preset-default'
 import { withStyles } from '@material-ui/core/styles';
+import ShadowButton from '../../sharedComponents/ShadowButton/ShadowButton';
+import {DropzoneArea} from 'material-ui-dropzone'
+import MuiAlert from '@material-ui/lab/Alert';
 
 jss.setup(preset())
 
@@ -31,14 +34,15 @@ export default class createPost extends Component {
         super(props);
 
         this.state = {
+            loading: false,
+            alertType:"",
+            alertMessage: "",
+            alertOpen: false,
+            imageFile: null,
             postTitle: "",
             postURL: "",
             uploadDialogStyles: {},
             uploadDialogTitleStyles: {},
-            uploadButtonComponent: withStyles({
-                root: {},
-                label: {},
-            })(Button),
             textFieldComponent: withStyles({
                 root: {
                     fontSize: 40,
@@ -56,11 +60,6 @@ export default class createPost extends Component {
 
     async createPost() {
         let user = getStoreInstance().get(USER_KEY);
-        if (user === null) {
-            // TODO: Throw proper error here. No user logged in
-            console.error("CreatePost - No user logged in.");
-            return;
-        }
         if (await authenticateUserWithToken(user.email, user.token)) {
             const createPostRequest = {
                 user,
@@ -74,10 +73,10 @@ export default class createPost extends Component {
 
             if (response.status === 200) {
                 if (response.data.responseType === RESPONSE_TYPE_OK) {
-                    console.log("Post created!");
+                    this.setState({alertOpen: true, alertMessage: "Something went wrong. Please try again later", alertType: "success"});
                 }
                 else {
-                    console.error(response.data.responseMessage);
+                    this.setState({alertOpen: true, alertMessage: response.data.responseMessage, alertType: "error"});
                 }
             }
         }
@@ -95,16 +94,9 @@ export default class createPost extends Component {
             color: uploadDialogStyles.TITLE_TEXT_COLOR,
         }});
 
-        this.setState({
-            uploadButtonComponent: withStyles({
-                root: {
-                    backgroundColor: uploadDialogStyles.BUTTON_BACKGROUND,
-                },
-                label: {
-                    color: uploadDialogStyles.BUTTON_TEXT_COLOR,
-                }
-            })(Button),
-        })
+        this.setState({uploadFileButtonStyles: {
+            background: uploadDialogStyles.UPLOAD_FILE_BUTTON_BACKGROUND_COLOR,
+        }});
     }
 
     componentDidMount() {
@@ -119,8 +111,24 @@ export default class createPost extends Component {
         this.setState({postTitle: event.target.value})
     }
 
-    newFileUpload() {
-        const file = document.getElementById('file-uploader').files[0];
+    postNewImage() {
+        const user = getStoreInstance().get(USER_KEY);
+        if (user == null || user.email == null) {
+            this.setState({alertOpen: true, alertMessage: "You are not logged in!", alertType: "error"});
+            return;
+        }
+        if (this.state.imageFile === null) {
+            this.setState({alertOpen: true, alertMessage: "You forgot to upload something!", alertType: "error"});
+            return;
+        }
+        if (this.state.postTitle === "" || this.state.postTitle === null) {
+            this.setState({alertOpen: true, alertMessage: "You forgot to write a title!", alertType: "error"});
+            return;
+        }
+
+        this.setState({loading: true});
+
+        const file = this.state.imageFile;
         const title = this.state.postTitle;
 
         const reader = new FileReader();
@@ -132,41 +140,67 @@ export default class createPost extends Component {
             scope.setState({imageURL: response.data.link});
             scope.createPost()
             if (response === false) {
-                alert('Something went wrong');
+                this.setState({alertOpen: true, alertMessage: "Something went wrong. Please try again later"});
             }
             else {
-
+                
             }
+            this.setState({loading: false});
         }, false);
         reader.readAsDataURL(file);
+        this.setState({loading: false});
     }
 
     render() {
+        const shadowButtonInner = (
+            <p>Upload</p>
+        );
+        if (this.state.loading) {
+            shadowButtonInner = (
+                <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1581182739/loading1.gif"></img>
+            )
+        }
+
         return (
             <div>
                 <TopBar></TopBar>
                 <div className="UploadDialog" style={this.state.uploadDialogStyles}>
-                    <h1>
+                    <h1 style={this.state.headingStyles}>
                         Upload image
                     </h1>
-                    <form>
-                        <this.state.textFieldComponent
-                            onChange={this.handleTitleChange.bind(this)}
-                            label="Title"
-                            variant="filled">
-                        </this.state.textFieldComponent>
 
-                        <input type="file" id="file-uploader" accept="image/*">
-                        </input>
-                    </form>
-
-                    <this.state.uploadButtonComponent
-                        onClick={this.newFileUpload.bind(this)}
-                        variant="contained"
+                    <this.state.textFieldComponent
+                        onChange={this.handleTitleChange.bind(this)}
+                        label="Title"
+                        variant="filled"
+                        size="small"
+                        fullWidth
                     >
-                        Upload
-                    </this.state.uploadButtonComponent>
+                    </this.state.textFieldComponent>
+                    <DropzoneArea
+                        showPreviewsInDropzone={false}
+                        acceptedFiles={["image/*"]}
+                        filesLimit={1}
+                        maxFileSize={2000000}
+                        dropzoneText={"Drop files or click here"}
+                        onChange={(files) => {this.setState({imageFile: files[0]})}}
+                    ></DropzoneArea>
+                    <ShadowButton
+                        text="Upload"
+                        onClick={this.postNewImage.bind(this)}
+                        backgroundColor={"#b92929"}
+                        hoverBoxShadow={"inset 0px 0px 10px 30px #942020"}
+                        defaultBoxShadow={"inset 0px 0px 0px 0px #942020"}
+                    >
+                        {shadowButtonInner}
+                    </ShadowButton>
                 </div>
+
+                <Snackbar open={this.state.alertOpen} autoHideDuration={6000} onClose={() => {this.setState({alertOpen: false})}}>
+                    <MuiAlert elevation={6} variant={"filled"} onClose={() => {this.setState({alertOpen: false})}} severity={this.state.alertType}>
+                        {this.state.alertMessage}
+                    </MuiAlert>
+                </Snackbar>
             </div>
         )
     }
