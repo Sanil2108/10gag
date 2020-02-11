@@ -77,15 +77,12 @@ export class PostSummary extends Component {
                         {this.state.post.title}<br />
                     </h1>
                 </Link>
+                <img src={this.state.post.imageURL} height="200"></img>
                 <VoteContainer
                     votes={this.state.post.votes}
-                    // upvoteColor={this.state.currentColors.UPVOTE_BUTTON_COLOUR}
-                    // downvoteColor={this.state.currentColors.DOWNVOTE_BUTTON_COLOUR}
-                    // voteTextColor={}
                     onDownvote={this.onDownvotePost.bind(this)}
                     onUpvote={this.onUpvotePost.bind(this)}
-                    ></VoteContainer>
-                <img src={this.state.post.imageURL} height="200"></img>
+                ></VoteContainer>
             </div>
         )
     }

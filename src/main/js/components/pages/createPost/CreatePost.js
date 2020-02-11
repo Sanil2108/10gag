@@ -224,7 +224,6 @@ export default class createPost extends Component {
                     </div>
                     {fileUploadOrImage}
                     <ShadowButton
-                        text="Upload"
                         onClick={this.postNewImage.bind(this)}
                         backgroundColor={"#b92929"}
                         hoverBoxShadow={"inset 0px 0px 10px 30px #942020"}

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './FrontTopPostsDialog.css';
 import getStoreInstance from '../../../Store';
 import { THEME_KEY, THEMES } from '../../../constants';
+import ShadowButton from '../../sharedComponents/ShadowButton/ShadowButton';
 
 export class FrontTopPostsDialog extends Component {
     constructor(props) {
@@ -47,10 +48,14 @@ export class FrontTopPostsDialog extends Component {
                 <div className="FrontTopPosts" style={this.state.topPostDialogContentStyleObject}>
                     <h1 style={this.state.topPostDialogStyleObject}>Top posts</h1>
                     <div style={{paddingRight: "20px", paddingLeft:"20px", paddingBottom: "20px"}}>
-                        <div className="FrontTopPost">
+                        <ShadowButton
+                            backgroundColor={"#b92929"}
+                            hoverBoxShadow={"inset 0px 0px 10px 30px #942020"}
+                            defaultBoxShadow={"inset 0px 0px 0px 0px #942020"}
+                        >
                             <span className="FrontTopPost__Points">120</span>
                             <span className="FrontTopPost__Title">Post title 1</span>
-                        </div>
+                        </ShadowButton>
 
                         <div className="FrontTopPost">
                             <span className="FrontTopPost__Points">230</span>

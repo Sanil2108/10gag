@@ -10,6 +10,7 @@ import {
     USER_KEY
 } from '../../../constants';
 import './Post.css';
+import PostSummary from '../front/PostSummary';
 
 export default class Post extends Component {
 
@@ -27,6 +28,7 @@ export default class Post extends Component {
     async updateWithCurrentPost() {
         const post = await getPost(this.state.postId);
         this.setState({
+            post,
             postTitle: post.title,
             postVotes: post.votes,
             postImageURL: post.imageURL,
@@ -93,48 +95,48 @@ export default class Post extends Component {
     }
 
     render() {
-        const commentDivs = [];
 
-        console.log(this.state)
+        let post = '';
+        let postComments = '';
+        if (this.state.post) {
+            const commentDivs = [];
 
-        if (this.state.postComments !== undefined) {
-            for (let i = 0; i < this.state.postComments.length; i += 1) {
-                console.log(this.state.postComments)
-                commentDivs.push(
-                    <div key={"comment"+i} style={{border: "1px solid black"}}>
-                        {this.state.postComments[i].points + '\t' + this.state.postComments[i].originalPoster.userName + '\t' + this.state.postComments[i].text}
-                    </div>
-                )
+            if (this.state.postComments) {
+                for (let i = 0; i < this.state.postComments.length; i += 1) {
+                    commentDivs.push(
+                        <div key={"comment"+i} style={{border: "1px solid black"}}>
+                            {this.state.postComments[i].points + '\t' + this.state.postComments[i].originalPoster.userName + '\t' + this.state.postComments[i].text}
+                        </div>
+                    )
+                }
             }
-        }
 
-        let voteDivText = '';
-        if (this.state.upvoted) {
-            voteDivText = 'upvoted';
-        }
-        else if (this.state.downvoted) {
-            voteDivText = 'downvoted';
+            let voteDivText = '';
+            if (this.state.upvoted) {
+                voteDivText = 'upvoted';
+            }
+            else if (this.state.downvoted) {
+                voteDivText = 'downvoted';
+            }
+            post = (
+                <div style={{
+                    position: "absolute",
+                    marginTop: "7vh",
+                    left: "20%",
+                    width: "60%"
+
+                }}>
+                    <PostSummary post={this.state.post}></PostSummary>
+                    {/* < */}
+                    {commentDivs}
+                </div>
+            )
         }
 
         return (
             <div>
                 <TopBar></TopBar>
-                I am in post {this.state.postId}
-                <h2>{(this.state.postTitle !== undefined) ? this.state.postTitle : "Loading"}</h2><br />
-                <div style={{ border: "1px solid black" }} onClick={this.upvotePost.bind(this)}>
-                    Upvote
-                </div>
-                <div style={{ border: "1px solid black" }} onClick={this.downvotePost.bind(this)}>
-                    Downvote
-                </div>
-                <div style={{ border: "1px solid green" }}>
-                    {voteDivText}
-                </div>
-                <img src={(this.state.postImageURL !== undefined) ? this.state.postImageURL : "Empty"} style={{height: "100px"}}></img><br />
-                votes: {(this.state.postVotes !== undefined) ? this.state.postVotes : 0}
-
-                { commentDivs }
-                
+                { post }
             </div>
         )
     }
