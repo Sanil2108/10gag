@@ -95,6 +95,12 @@ export const THEMES = {
                 UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "9a0007",
             }
         },
+        POST: {
+            COMMENT_CARD: {
+                BACKGROUND_COLOR: "#d32f2f",
+                TEXT_COLOR: "#fff",
+            },
+        },
         BODY: {
             BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1575470467/Z6kdWmA.jpg)',
             BACKGROUND_COLOR: '#ff0000',

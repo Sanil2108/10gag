@@ -1,0 +1,33 @@
+.CommentCard {
+    box-shadow: 0px 10px 14px 6px rgba(50, 50, 50, 0.8);
+    margin: 20px;
+    transition: all 0.3s;
+    cursor: pointer;
+    padding: 15px;
+    display: flex;
+}
+
+.CommentCard__text {
+    margin: auto 0px auto 10px;
+    display: block;
+}
+
+.CommentCard__username {
+    margin: 10px;
+    bottom: 0%;
+    font-size: 0.8em;
+}
+
+.CommentCard__VoteContainer {
+    display: inline-flex;
+}
+
+.CommentCard__information {
+    position: relative;
+}
+
+.CommentCard__VoteContainer i {}
+
+.CommentCard__VoteContainer span {
+    margin: 3px 4px;
+}

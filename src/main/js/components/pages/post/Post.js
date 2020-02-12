@@ -11,6 +11,7 @@ import {
 } from '../../../constants';
 import './Post.css';
 import PostSummary from '../front/PostSummary';
+import CommentCard from './CommentCard';
 
 export default class Post extends Component {
 
@@ -124,11 +125,36 @@ export default class Post extends Component {
                     marginTop: "7vh",
                     left: "20%",
                     width: "60%"
-
                 }}>
                     <PostSummary post={this.state.post}></PostSummary>
                     {/* < */}
-                    {commentDivs}
+                    {/* {commentDivs} */}
+
+                    <CommentCard
+                        userName="Sanil2"
+                        votes={10}
+                        upvoted={false}
+                        downvoted={false}
+                        text="Some comment here"
+                    ></CommentCard>
+                    
+                    <CommentCard
+                        userName="Sanil"
+                        votes={32}
+                        upvoted={true}
+                        downvoted={false}
+                        text="Ut id turpis ac augue tristique finibus at id urna. Nullam dignissim dui eu bibendum mattis. Morbi leo diam, commodo quis mattis at, rutrum porttitor ex. Cras porttitor, ligula nec mollis posuere, justo nisl elementum mauris, vitae congue orci lectus euismod massa. Donec justo neque, ullamcorper vel tempus eget, congue vitae magna. Vest"
+                    ></CommentCard>
+
+
+                    <CommentCard
+                        userName="Sanil"
+                        votes={32}
+                        upvoted={true}
+                        downvoted={false}
+                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur venenatis ultrices dictum. Nam tempus arcu metus, ut aliquet tellus rutrum vel. Aenean consectetur, leo sit amet ve"
+                    ></CommentCard>
+
                 </div>
             )
         }

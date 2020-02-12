@@ -71,19 +71,19 @@ export class PostSummary extends Component {
 
     render() {
         return (
-            <div key={"post"+this.state.post.id} className="Post" style={this.state.postSummaryStyleObject}>
-                <Link to={POST_PAGE_URL + "/" + this.state.post.id}>
+            <Link to={POST_PAGE_URL + "/" + this.state.post.id}>
+                <div key={"post"+this.state.post.id} className="Post" style={this.state.postSummaryStyleObject}>
                     <h1>
                         {this.state.post.title}<br />
                     </h1>
-                </Link>
-                <img src={this.state.post.imageURL} height="200"></img>
-                <VoteContainer
-                    votes={this.state.post.votes}
-                    onDownvote={this.onDownvotePost.bind(this)}
-                    onUpvote={this.onUpvotePost.bind(this)}
-                ></VoteContainer>
-            </div>
+                    <img src={this.state.post.imageURL} height="200"></img>
+                    <VoteContainer
+                        votes={this.state.post.votes}
+                        onDownvote={this.onDownvotePost.bind(this)}
+                        onUpvote={this.onUpvotePost.bind(this)}
+                    ></VoteContainer>
+                </div>
+            </Link>
         )
     }
 }
