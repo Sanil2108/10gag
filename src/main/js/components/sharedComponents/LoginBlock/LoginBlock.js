@@ -65,11 +65,14 @@ export class LoginBlock extends Component {
 
                 <Button onClick={async () => {
                     const authenticationResult = await authenticateUserWithPassword(this.state.emailEntered, this.state.passwordEntered);
+                    console.log(authenticationResult);
                     if (authenticationResult.successful) {
                         getStoreInstance().updateOrCreate(USER_KEY, {
                             email: authenticationResult.email,
                             token: authenticationResult.token,
                             userName: authenticationResult.userName,
+                            upvotedPostsIds: authenticationResult.upvotedPostsIds,
+                            downvotedPostsIds: authenticationResult.downvotedPostsIds,
                         });
                     }
                     else {

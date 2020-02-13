@@ -4,6 +4,7 @@ import in.co.sanilkhurana.tengag.responses.error_responses.*;
 import in.co.sanilkhurana.tengag.responses.user_responses.*;
 import in.co.sanilkhurana.tengag.models.Token;
 import in.co.sanilkhurana.tengag.models.User;
+import in.co.sanilkhurana.tengag.models.Post;
 import in.co.sanilkhurana.tengag.responses.Response;
 import in.co.sanilkhurana.tengag.services.UserAuthenticationService;
 import in.co.sanilkhurana.tengag.services.UserRetrievalService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/users")
@@ -36,7 +39,27 @@ public class UserController {
         }
         else {
             Token newToken = userAuthenticationService.updateOrCreateTokenForUser(user);
-            LoginUserResponse loginUserResponse = new LoginUserResponse(newToken, userRetrievalService.getUser(user.getEmail()));
+
+            List<Post> upvotedPosts = userRetrievalService.getUpvotedPosts(user);
+            List<Post> downvotedPosts = userRetrievalService.getDownvotedPosts(user);
+
+            long[] upvotedPostIds = new long[upvotedPosts.size()];
+            long[] downvotedPostIds = new long[downvotedPosts.size()];
+
+            for (int i=0; i < upvotedPosts.size(); i++) {
+                upvotedPostIds[i] = ((Post)upvotedPosts.get(i)).getId();
+            }
+
+            for (int i=0; i < downvotedPosts.size(); i++) {
+                downvotedPostIds[i] = ((Post)downvotedPosts.get(i)).getId();
+            }
+            
+            LoginUserResponse loginUserResponse = new LoginUserResponse(
+                newToken,
+                userRetrievalService.getUser(user.getEmail()),
+                upvotedPostIds,
+                downvotedPostIds
+            );
 
             return loginUserResponse;
         }
@@ -59,7 +82,22 @@ public class UserController {
         if (user == null) {
             return new UserDoesNotExistErrorResponse();
         }
-        return new GetUserResponse(user);
+
+        List<Post> upvotedPosts = user.getUpvotedPosts();
+        List<Post> downvotedPosts = user.getDownvotedPosts();
+
+        long[] upvotedPostIds = new long[upvotedPosts.size()];
+        long[] downvotedPostIds = new long[downvotedPosts.size()];
+
+        for (int i=0; i < upvotedPosts.size(); i++) {
+            upvotedPostIds[i] = ((Post)upvotedPosts.get(i)).getId();
+        }
+
+        for (int i=0; i < upvotedPosts.size(); i++) {
+            downvotedPostIds[i] = ((Post)downvotedPosts.get(i)).getId();
+        }
+
+        return new GetUserResponse(user, upvotedPostIds, downvotedPostIds);
     }
 
     // TODO:

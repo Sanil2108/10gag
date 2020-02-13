@@ -37,7 +37,13 @@ class App extends React.Component {
         super(props);
 
         // Default values
-        getStoreInstance().updateOrCreate(USER_KEY, {email: null, token: null, userName: null});
+        getStoreInstance().updateOrCreate(USER_KEY, {
+            email: null,
+            token: null,
+            userName: null,
+            upvotedPostsIds: [],
+            downvotedPostsIds: [],
+        });
         getStoreInstance().updateOrCreate(THEME_KEY, THEME_NAMES.FASCINATING_FIRE);
         getStoreInstance().updateOrCreate(GAPI_KEY, null);
 

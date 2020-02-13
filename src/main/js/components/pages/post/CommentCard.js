@@ -38,7 +38,7 @@ export class CommentCard extends Component {
                     color: this.state.commentCardColors.TEXT_COLOR,
                 }}
             >
-                <span className="CommentCard__VoteContainer">
+                {/* <span className="CommentCard__VoteContainer">
                     <i className="material-icons">
                         keyboard_arrow_up
                     </i>
@@ -46,7 +46,7 @@ export class CommentCard extends Component {
                     <i className="material-icons">
                         keyboard_arrow_down
                     </i>
-                </span>
+                </span> */}
                 <span className="CommentCard__information">
                     <span className="CommentCard__text">{this.props.text}</span>
                     <span className="CommentCard__username">{this.props.userName}</span>

@@ -74,8 +74,12 @@ export const THEMES = {
         FRONT: {
             POST_SUMMARY: {
                 BACKGROUND_COLOR: "#d32f2f",
-                VOTE_SELECTED_COLOR: "#fff",
-                VOTE_INSIDE_COLOR: "#9a0007"
+                UPVOTE_BUTTON_SELECTED_COLOR: "#ffffff",
+                UPVOTE_BUTTON_DESELECTED_COLOR: "#9a0007",
+                DONWVOTE_BUTTON_SELECTED_COLOR: "#ffffff",
+                DONWVOTE_BUTTON_DESELECTED_COLOR: "#9a0007",
+                VOTE_TEXT_COLOR: "#9a0007",
+                VOTE_BOX_SHADOW_COLOR: "#d32f2f",
             },
             TOP_POSTS: {
                 BACKGROUND_COLOR: "#d32f2f",

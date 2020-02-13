@@ -38,7 +38,14 @@ let authenticateUser = async (loginRequest, email) => {
     const response = await axios.post(LOGIN_USER_URL(), loginRequest);
     if (response.status === 200) {
         if (response.data.responseType === RESPONSE_TYPE_OK) {
-            return {successful: true, token: response.data.token.token, email, userName: response.data.user.userName};
+            return {
+                successful: true,
+                token: response.data.token.token,
+                email,
+                userName: response.data.user.userName,
+                upvotedPostsIds: response.data.upvotedPostsIds,
+                downvotedPostsIds: response.data.downvotedPostsIds,
+            };
         }
         else {
             return {successful: false, responseMessage: response.data.responseMessage};

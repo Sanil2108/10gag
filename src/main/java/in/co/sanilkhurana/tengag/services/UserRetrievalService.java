@@ -1,11 +1,13 @@
 package in.co.sanilkhurana.tengag.services;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import in.co.sanilkhurana.tengag.models.User;
+import in.co.sanilkhurana.tengag.models.Post;
 import in.co.sanilkhurana.tengag.repositories.UserRepository;
 
 @Service
@@ -13,6 +15,14 @@ public class UserRetrievalService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public List<Post> getUpvotedPosts(User user) {
+        return this.getUser(user.getEmail()).getUpvotedPosts();
+    }
+
+    public List<Post> getDownvotedPosts(User user) {
+        return this.getUser(user.getEmail()).getDownvotedPosts();
+    }
 
     public User getUser(String email) {
         return userRepository.findById(email).get();
