@@ -10,6 +10,7 @@ import {
     DOWNVOTE_POST_URL,
     UPLOAD_TO_IMGUR_URL,
     CREATE_USER_URL,
+    CREATE_COMMENT_URL,
 } from './constants';
 
 const CLIENT_ID = 'a7ea9abc8fd85ac';
@@ -169,6 +170,33 @@ export let sendDownvotePostRequest = async (postId, userEmail, token) => {
         },
     }
     const response = await axios.post(DOWNVOTE_POST_URL(postId), data);
+    if (response.status === 200) {
+        if (response.data.responseType === RESPONSE_TYPE_OK) {
+            return true;
+        }
+        else {
+            console.error(response.data.responseMessage);
+            return new Error(response.data.responseMessage);
+        }
+    }
+    return new Error("axios falied");
+}
+
+export let sendCreateCommentRequest = async (commentText, userEmail, token, postId) => {
+    const data = {
+        post: {
+            id: postId,
+        },
+        comment: {
+            text: commentText,
+        },
+        user: {
+            email: userEmail,
+            token,
+        },
+    };
+
+    const response = await axios.post(CREATE_COMMENT_URL(), data);
     if (response.status === 200) {
         if (response.data.responseType === RESPONSE_TYPE_OK) {
             return true;

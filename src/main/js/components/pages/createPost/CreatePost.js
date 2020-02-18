@@ -66,7 +66,10 @@ export default class createPost extends Component {
         let user = getStoreInstance().get(USER_KEY);
         if (await authenticateUserWithToken(user.email, user.token)) {
             const createPostRequest = {
-                user,
+                user: {
+                    email: user.email,
+                    token: user.token,
+                },
                 post: {
                     title: this.state.postTitle,
                     imageURL: this.state.imageURL,

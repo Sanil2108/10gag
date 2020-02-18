@@ -12,6 +12,7 @@ import {
 import './Post.css';
 import PostSummary from '../front/PostSummary';
 import CommentCard from './CommentCard';
+import CreateCommentCard from './CreateCommentCard';
 
 export default class Post extends Component {
 
@@ -105,9 +106,13 @@ export default class Post extends Component {
             if (this.state.postComments) {
                 for (let i = 0; i < this.state.postComments.length; i += 1) {
                     commentDivs.push(
-                        <div key={"comment"+i} style={{border: "1px solid black"}}>
-                            {this.state.postComments[i].points + '\t' + this.state.postComments[i].originalPoster.userName + '\t' + this.state.postComments[i].text}
-                        </div>
+                        <CommentCard key={"comment"+i}
+                            userName={this.state.postComments[i].originalPoster.userName}
+                            votes={this.state.postComments[i].points}
+                            upvoted={false}
+                            downvoted={false}
+                            text={this.state.postComments[i].text}
+                        ></CommentCard>
                     )
                 }
             }
@@ -123,38 +128,17 @@ export default class Post extends Component {
                 <div style={{
                     position: "absolute",
                     marginTop: "7vh",
-                    left: "20%",
-                    width: "60%"
+                    left: "32.5%",
+                    width: "35%"
                 }}>
                     <PostSummary post={this.state.post}></PostSummary>
-                    {/* < */}
-                    {/* {commentDivs} */}
 
-                    <CommentCard
-                        userName="Sanil2"
-                        votes={10}
-                        upvoted={false}
-                        downvoted={false}
-                        text="Some comment here"
-                    ></CommentCard>
-                    
-                    <CommentCard
+                    <CreateCommentCard
+                        postId={this.state.postId}
                         userName="Sanil"
-                        votes={32}
-                        upvoted={true}
-                        downvoted={false}
-                        text="Ut id turpis ac augue tristique finibus at id urna. Nullam dignissim dui eu bibendum mattis. Morbi leo diam, commodo quis mattis at, rutrum porttitor ex. Cras porttitor, ligula nec mollis posuere, justo nisl elementum mauris, vitae congue orci lectus euismod massa. Donec justo neque, ullamcorper vel tempus eget, congue vitae magna. Vest"
-                    ></CommentCard>
+                    ></CreateCommentCard>
 
-
-                    <CommentCard
-                        userName="Sanil"
-                        votes={32}
-                        upvoted={true}
-                        downvoted={false}
-                        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur venenatis ultrices dictum. Nam tempus arcu metus, ut aliquet tellus rutrum vel. Aenean consectetur, leo sit amet ve"
-                    ></CommentCard>
-
+                    {commentDivs}
                 </div>
             )
         }

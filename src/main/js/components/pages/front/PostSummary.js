@@ -41,7 +41,6 @@ export class PostSummary extends Component {
             })
             return;
         }
-        console.log(newUser);
         this.setState({
             upvoted: newUser.upvotedPostsIds.indexOf(this.state.post.id) !== -1,
             downvoted: newUser.downvotedPostsIds.indexOf(this.state.post.id) !== -1,

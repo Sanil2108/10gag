@@ -15,7 +15,7 @@ export class CommentCard extends Component {
         this.state = {
             commentCardColors: this.updateWithNewThemeColours(
                 getStoreInstance().get(THEME_KEY)
-            )
+            ),
         };
     }
 
