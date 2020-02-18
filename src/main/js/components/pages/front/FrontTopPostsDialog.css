@@ -12,11 +12,15 @@
 
 .FrontTopPost__Title {
     margin-left: 20px;
+    display: block;
+    flex-grow: 1;
 }
 
 .FrontTopPost__Points {
     width: 30px;
-    display: inline-block;
+    position: absolute;
+    margin-left: 15px;
+    float: left;
 }
 
 .FrontTopPosts h1 {

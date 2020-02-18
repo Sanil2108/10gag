@@ -11,6 +11,7 @@ export class FrontTopPostsDialog extends Component {
         this.state = {
             topPostDialogStyleObject: {},
             topPostDialogContentStyleObject: {},
+            topPostDialogButtonStyle: {},
         }
     }
 
@@ -22,15 +23,22 @@ export class FrontTopPostsDialog extends Component {
             this.setState({
                 topPostDialogStyleObject
             });
-        }
 
-        if (THEMES[newValue].FRONT.TOP_POSTS !== undefined) {
             let topPostDialogContentStyleObject = {
                 background: THEMES[newValue].FRONT.TOP_POSTS.DARK_BACKGROUND_COLOR,
             };
             this.setState({
                 topPostDialogContentStyleObject,
             });
+
+            let topPostDialogButtonStyle = {
+                backgroundColor: THEMES[newValue].FRONT.TOP_POSTS.DARK_BACKGROUND_COLOR,
+                hoverBoxShadow: 'inset 0px 0px 10px 30px ' + THEMES[newValue].FRONT.TOP_POSTS.BACKGROUND_COLOR,
+                defaultBoxShadow: 'inset 0px 0px 0px 0px ' + THEMES[newValue].FRONT.TOP_POSTS.BACKGROUND_COLOR,
+            }
+            this.setState({
+                topPostDialogButtonStyle
+            })
         }
     }
 
@@ -43,54 +51,33 @@ export class FrontTopPostsDialog extends Component {
     }
 
     render() {
+        const shadowButtons = [];
+        for (let i = 0; i < 10; i += 1) {
+            shadowButtons.push(
+                <ShadowButton
+                    backgroundColor={this.state.topPostDialogButtonStyle.backgroundColor}
+                    hoverBoxShadow={this.state.topPostDialogButtonStyle.hoverBoxShadow}
+                    defaultBoxShadow={this.state.topPostDialogButtonStyle.defaultBoxShadow}
+                >
+                    <div style={{
+                        height: '40px',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center'
+                    }}>
+                        <span className="FrontTopPost__Points">120</span>
+                        <span className="FrontTopPost__Title">Post title 1</span>
+                    </div>
+                </ShadowButton>
+            );
+        }
+
         return (
             <div style={{"position":"fixed", "width":"22vw"}}>
                 <div className="FrontTopPosts" style={this.state.topPostDialogContentStyleObject}>
                     <h1 style={this.state.topPostDialogStyleObject}>Top posts</h1>
-                    <div style={{paddingRight: "20px", paddingLeft:"20px", paddingBottom: "20px"}}>
-                        <ShadowButton
-                            backgroundColor={"#b92929"}
-                            hoverBoxShadow={"inset 0px 0px 10px 30px #942020"}
-                            defaultBoxShadow={"inset 0px 0px 0px 0px #942020"}
-                        >
-                            <span className="FrontTopPost__Points">120</span>
-                            <span className="FrontTopPost__Title">Post title 1</span>
-                        </ShadowButton>
-
-                        <div className="FrontTopPost">
-                            <span className="FrontTopPost__Points">230</span>
-                            <span className="FrontTopPost__Title">Post title 1</span>
-                        </div>
-
-                        <div className="FrontTopPost">
-                            <span className="FrontTopPost__Points">12</span>
-                            <span className="FrontTopPost__Title">Post title 1</span>
-                        </div>
-
-                        <div className="FrontTopPost">
-                            <span className="FrontTopPost__Points">34</span>
-                            <span className="FrontTopPost__Title">Post title 1</span>
-                        </div>
-
-                        <div className="FrontTopPost">
-                            <span className="FrontTopPost__Points">120</span>
-                            <span className="FrontTopPost__Title">Post title 1</span>
-                        </div>
-
-                        <div className="FrontTopPost">
-                            <span className="FrontTopPost__Points">230</span>
-                            <span className="FrontTopPost__Title">Post title 1</span>
-                        </div>
-
-                        <div className="FrontTopPost">
-                            <span className="FrontTopPost__Points">12</span>
-                            <span className="FrontTopPost__Title">Post title 1</span>
-                        </div>
-
-                        <div className="FrontTopPost">
-                            <span className="FrontTopPost__Points">34</span>
-                            <span className="FrontTopPost__Title">Post title 1</span>
-                        </div>
+                    <div style={{paddingBottom: "20px"}}>
+                        {shadowButtons}
                     </div>
                 </div>
             </div>
