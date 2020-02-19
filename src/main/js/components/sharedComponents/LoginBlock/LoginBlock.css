@@ -1,10 +1,10 @@
 .LoginBlock {
     height: 100%;
-    background-color: #000;
-    background-color: orangered;
+    background-color: #333;
     position: absolute;
     width: 100%;
     right: 0px;
+    border-radius: 0px 0px 8px 8px;
 }
 
 .google-sign-in {
@@ -16,9 +16,17 @@
     width: 20px;
 }
 
+.facebook-sign-in {
+    display: inline-block;
+    border: 1px solid white;
+    height: 20px;
+    width: 20px;
+    background: url('https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Facebook_Home_logo_old.svg/399px-Facebook_Home_logo_old.svg.png');
+    background-size: cover;
+}
+
 .GoogleSignInButtonsContainerDisabled {
     opacity: 0.3;
-
 }
 
 .GoogleSignInButtonsContainerEnabled {
@@ -30,6 +38,7 @@
     display: inline-block;
     border-radius: 1000px;
     padding: 10px;
+    margin-top: 10px;
     background-color: #FFF;
 }
 
@@ -41,3 +50,39 @@
 .SignInButtonsContainer {
     text-align: center;
 }
+
+.LoginBlock .MuiFilledInput-underline:after {
+    border-bottom: 2px solid white !important;
+}
+
+.LoginBlock .MuiAlert-root {
+    /* position: fixed !important;
+    top: 85vh !important;
+    width: 400px !important; */
+}
+
+.LoginBlock .MuiButton-root {
+    color: #fff !important;
+    border: 1px solid #fff !important;
+    margin: 14px auto !important;
+    display: block !important;
+}
+
+.LoginBlock .MuiButton-root.Mui-disabled {
+    opacity: 0.3;
+}
+
+.LoginBlock .MuiFilledInput-root {
+    height: 40px !important;
+    margin-top: 20px;
+}
+
+.LoginBlock .errorMessage {
+    color: #cc1111;
+    font-size: 0.4em;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    width: 100%;
+    margin-top: 2px;
+}
+

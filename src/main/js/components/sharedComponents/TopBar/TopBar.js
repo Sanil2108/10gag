@@ -27,8 +27,8 @@ export default class TopBar extends Component {
         super(props);
 
         this.state = {
-            email: "sanilkhurana7@gmail.com",
-            password: "root",
+            email: "",
+            password: "",
             currentUser: getStoreInstance().get(USER_KEY),
             currentTheme: getStoreInstance().get(THEME_KEY),
             redirectTo: null,

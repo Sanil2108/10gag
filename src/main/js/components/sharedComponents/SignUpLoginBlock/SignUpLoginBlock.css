@@ -3,7 +3,7 @@
 }
 
 .SignUpTab-enter {
-    opacity: 0;
+    opacity: 0.5;
     clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
 }
 
@@ -23,7 +23,7 @@
 }
 
 .SignUpTab-exit-active {
-    opacity: 0;
+    opacity: 0.5;
     clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
     transition: all 1s;
 }
@@ -31,7 +31,7 @@
 
 
 .LoginTab-enter {
-    opacity: 0;
+    opacity: 0.5;
     clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
 }
 
@@ -47,7 +47,7 @@
 }
 
 .LoginTab-exit-active {
-    opacity: 0;
+    opacity: 0.5;
     clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
     transition: all 1s;
 }
