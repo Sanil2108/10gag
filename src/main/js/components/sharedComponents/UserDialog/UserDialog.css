@@ -11,11 +11,30 @@
     flex-direction: column;
 }
 
+.UserDialog__information .ShadowButton span {
+    margin: auto;
+}
+
+.UserDialog__information .ShadowButton {
+    position: relative;
+    width: 100%;
+    bottom: 0px;
+    height: 26px;
+    border-radius: 0px 0px 8px 8px;
+    padding: 4px 0px;
+    margin: 0px;
+}
+
+.UserDialog__information div {
+    margin: auto;
+}
+
 .UserDialog__information {
     height: 100px;
     width: 400px;
-    background: purple;
-    font-size: 18px;
+    background: #333;
+    font-size: 14px;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .UserDialog--show {

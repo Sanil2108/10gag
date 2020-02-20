@@ -4,6 +4,7 @@ import './UserInformationBlock.css';
 import getStoreInstance from '../../../Store';
 import { USER_KEY } from '../../../constants';
 import { Button } from '@material-ui/core';
+import ShadowButton from '../ShadowButton/ShadowButton';
 
 export class UserInformationBlock extends Component {
     constructor(props) {
@@ -33,15 +34,25 @@ export class UserInformationBlock extends Component {
 
     render() {
         return (<div className={"UserDialog UserDialog__information " + this.props.userDialogClass}>
-            <span>
-                email: {(this.state.user !== null) ? this.state.user.email : "N/A"}
-                username: {(this.state.user !== null) ? this.state.user.userName : "N/A"}
-                token: {(this.state.user !== null) ? this.state.user.token : "N/A"}
-            </span>
+            <div>
+                You are logged in as {(this.state.user !== null) ? this.state.user.userName : "N/A"}<br>
+                </br> with email address {(this.state.user !== null) ? this.state.user.email : "N/A"}
+            </div>
 
-            <Button onClick={this.logOutUser.bind(this)}>
+            <ShadowButton
+                onClick={this.logOutUser.bind(this)}
+                backgroundColor={"#555"}
+                hoverBoxShadow={"inset 0px 0px 10px 30px #333"}
+                defaultBoxShadow={"inset 0px 0px 0px 0px #333"}
+            >
+                <span>
+                    Logout
+                </span>
+            </ShadowButton>
+
+            {/* <Button onClick={}>
                 Logout
-            </Button>
+            </Button> */}
         </div>
         )
     }
