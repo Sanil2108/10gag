@@ -55,6 +55,7 @@ export class FrontTopPostsDialog extends Component {
         for (let i = 0; i < 10; i += 1) {
             shadowButtons.push(
                 <ShadowButton
+                    key={"shadowButtons"+i}
                     backgroundColor={this.state.topPostDialogButtonStyle.backgroundColor}
                     hoverBoxShadow={this.state.topPostDialogButtonStyle.hoverBoxShadow}
                     defaultBoxShadow={this.state.topPostDialogButtonStyle.defaultBoxShadow}

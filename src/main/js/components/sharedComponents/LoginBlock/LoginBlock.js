@@ -59,34 +59,41 @@ export class LoginBlock extends Component {
         });
     }
 
+    updateGapi(newGapi) {
+        newGapi.load('auth2', () => {
+            let auth2 = newGapi.auth2.init({
+                client_id: '156732240229-5dr179koaj2l5uvd2oet8e04h9ir971j.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+            });
+
+            const element = document.querySelector('#google-login-button');
+            auth2.attachClickHandler(
+                element,
+                {},
+                (googleUser) => {
+                    console.log(googleUser);
+                },
+                (error) => {
+                    console.error(error);
+                },
+            );
+
+            this.setState({
+                gapiInitialized: true,
+            });
+        });
+    }
+
     componentDidMount() {
         const gapi = getStoreInstance().get(GAPI_KEY);
         if (gapi === null) {
             getStoreInstance().subscribe(GAPI_KEY, (key, oldValue, newValue) => {
-                newValue.load('auth2', () => {
-                    let auth2 = newValue.auth2.init({
-                        client_id: '156732240229-5dr179koaj2l5uvd2oet8e04h9ir971j.apps.googleusercontent.com',
-                        cookiepolicy: 'single_host_origin',
-                    });
-
-                    const element = document.querySelector('#google-login-button');
-                    auth2.attachClickHandler(
-                        element,
-                        {},
-                        (googleUser) => {
-                            console.log(googleUser);
-                        },
-                        (error) => {
-                            console.error(error);
-                        },
-                    );
-
-                    this.setState({
-                        gapiInitialized: true,
-                    });
-                });
-                
-            })
+                this.updateGapi(newValue);
+            });
+        }
+        else {
+            this.setState({gapiInitialized: true});
+            this.updateGapi(gapi);
         }
     }
 
