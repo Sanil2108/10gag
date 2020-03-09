@@ -71,7 +71,8 @@ export class LoginBlock extends Component {
                 element,
                 {},
                 (googleUser) => {
-                    console.log(googleUser);
+                    console.log(googleUser.getAuthResponse().id_token);
+
                 },
                 (error) => {
                     console.error(error);
@@ -181,10 +182,6 @@ export class LoginBlock extends Component {
                         <div className="google-sign-in" id="google-login-button">
 
                         </div>
-                    </div>
-
-                    <div className="facebook-sign-in">
-                        
                     </div>
                 </div>
 
