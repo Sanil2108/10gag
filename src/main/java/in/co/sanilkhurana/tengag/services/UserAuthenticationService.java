@@ -24,7 +24,9 @@ public class UserAuthenticationService {
         if (correctUser.getPassword().equals(user.getPassword())) {
             return true;
         }
-        if (correctUser.getToken() != null && correctUser.getToken().getToken().equals(user.getToken().getToken())) {
+        if (correctUser.getToken() != null && correctUser.getToken().getToken() != null &&
+            user.getToken() != null && user.getToken().getToken() != null
+            && correctUser.getToken().getToken().equals(user.getToken().getToken())) {
             return true;
         }
         return false;
