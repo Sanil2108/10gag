@@ -17,6 +17,8 @@ import java.util.List;
 @Service
 public class PostRetrievalService {
 
+    public static final int PAGE_LIMIT = 10;
+
     @Autowired
     private PostRepository postRepository;
 
@@ -60,7 +62,16 @@ public class PostRetrievalService {
     }
 
     public List<Post> getNewPosts() {
-        return IteratorUtils.toList(postRepository.findAll(new Sort(Sort.Direction.DESC, "date")).iterator());
+        return getNewPosts(1);
+    }
+
+    public List<Post> getNewPosts(int page) {
+        List<Post> postList = IteratorUtils.toList(postRepository.findAll(new Sort(Sort.Direction.DESC, "date")).iterator());
+        return postList.subList((page - 1) * PAGE_LIMIT, Math.min(page * PAGE_LIMIT, postList.size()));
+    }
+
+    public int getNumberOfPages() {
+        return (int)Math.ceil(IteratorUtils.toList(postRepository.findAll().iterator()).size() / (float)PAGE_LIMIT);
     }
 
     public void upvotePost(User user, Post post) {

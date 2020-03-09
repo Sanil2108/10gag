@@ -11,10 +11,10 @@ import getStoreInstance from '../../../Store';
 import * as constants from '../../../constants';
 
 import './Front.css';
-import VoteContainer from './VoteContainer';
 import PostSummary from './PostSummary';
 import FrontTopPostsDialog from './FrontTopPostsDialog';
 import FrontPostType from './FrontPostType';
+import PageButtonController from './PageButtonController';
 
 export default class Front extends Component {
 
@@ -25,6 +25,7 @@ export default class Front extends Component {
             posts: [],
             loadingPosts: true,
             frontStyleObject: {},
+            page: (props.match.params.page === undefined) ? 1 : props.match.params.page,
         };
     }
 
@@ -37,7 +38,7 @@ export default class Front extends Component {
     async loadPosts() {
         this.setState({loadingPosts: true});
         
-        const posts = await getPosts();
+        const posts = await getPosts(this.state.page);
         this.setState({loadingPosts: false});
         if (posts) {
             this.setState({posts})
@@ -84,6 +85,8 @@ export default class Front extends Component {
                         <FrontTopPostsDialog></FrontTopPostsDialog>
                     </div>
                 </div>
+                <PageButtonController currentPage={this.state.page}>
+                </PageButtonController>
             </div>
         )
     }

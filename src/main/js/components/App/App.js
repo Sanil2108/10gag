@@ -90,8 +90,9 @@ class App extends React.Component {
                             <Route path={CREATE_POST_PAGE_URL}>
                                 <CreatePost></CreatePost>
                             </Route>
-                            <Route path={FRONT_PAGE_URL}>
-                                <Front></Front>
+                            <Route path={FRONT_PAGE_URL + ":page"} component={Front}>
+                            </Route>
+                            <Route path={FRONT_PAGE_URL} component={Front}>
                             </Route>
                         </Switch>
                     </Router>

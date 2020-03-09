@@ -11,6 +11,7 @@ import {
     UPLOAD_TO_IMGUR_URL,
     CREATE_USER_URL,
     CREATE_COMMENT_URL,
+    GET_NUMBER_OF_PAGES,
     GET_TOP_POSTS_URL,
 } from './constants';
 
@@ -89,8 +90,8 @@ export let getUser = async (userName) => {
     return false;
 }
 
-export let getPosts = async () => {
-    const response = await axios.get(NEW_POSTS_URL(), {});
+export let getPosts = async (page) => {
+    const response = await axios.get(NEW_POSTS_URL(page), {});
     if (response.status === 200) {
         if (response.data.responseType === RESPONSE_TYPE_OK) {
             return response.data.posts;
@@ -147,6 +148,19 @@ export let getTopPosts = async () => {
     if (response.status === 200) {
         if (response.data.responseType == RESPONSE_TYPE_OK) {
             return response.data.posts;
+        }
+        else {
+            console.error(response.data.responseMessage);
+            return null;
+        }
+    }
+}
+
+export let getNumberOfPages = async () => {
+    const response = await axios.get(GET_NUMBER_OF_PAGES());
+    if (response.status === 200) {
+        if (response.data.responseType == RESPONSE_TYPE_OK) {
+            return parseInt(response.data.pageLength);
         }
         else {
             console.error(response.data.responseMessage);

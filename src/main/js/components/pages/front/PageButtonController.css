@@ -1,0 +1,25 @@
+.PageButton {
+    display: inline-block;
+    padding: 8px 12px 12px;
+    margin: 6px;
+    font-size: 1.4rem;
+    height: 1.4rem;
+    width: 1.4rem;
+    border-radius: 100px;
+    box-shadow: #aaaaaa73 0px 5px 10px 0px;
+    transition: all 0.2s;
+}
+
+.PageButton:hover {
+    box-shadow: #aaaaaa73 0px 5px 10px 5px;
+    transform: translateY(-2px);
+}
+
+.PageButton--selected {
+    background-color: #fff;
+}
+
+.PageButtonsContainer {
+    display: inline-block;
+    padding: 0px 0px 30px;
+}

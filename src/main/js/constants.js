@@ -8,7 +8,8 @@ const BASE_URL = (PRODUCTION_ENV) ? PRODUCTION_URL : DEVELOPMENT_URL;
 export const LOGIN_USER_URL = () => BASE_URL + 'users/login';
 export const CREATE_USER_URL = () => BASE_URL + 'users/register'
 export const CREATE_POST_URL = () => BASE_URL + 'posts/create';
-export const NEW_POSTS_URL = () => BASE_URL + 'posts/get/new';
+export const NEW_POSTS_URL = (page) => BASE_URL + 'posts/get/new/' + page;
+export const GET_NUMBER_OF_PAGES = () => BASE_URL + 'posts/get/pagesLength';
 export const HOT_POSTS_URL = () => BASE_URL + 'posts/get/hot';
 export const TOP_POSTS_URL = () => BASE_URL + 'posts/get/top';
 export const GET_POST_URL = (postId) => BASE_URL + 'posts/get/' + postId
@@ -89,6 +90,10 @@ export const THEMES = {
                 POST_TITLE_COLOR: "#ffffff",
                 POST_VOTES_COLOR: "#ffffff",
                 DARK_BACKGROUND_COLOR: "#9a0007",
+            },
+            PAGE_SELECTION: {
+                UNSELECTED_COLOR: "#d32f2f",
+                SELECTED_COLOR: "#9a0007",
             },
             OPACITY: 1,
         },

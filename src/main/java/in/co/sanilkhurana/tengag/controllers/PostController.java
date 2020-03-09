@@ -116,4 +116,15 @@ public class PostController {
         return new GetPostsResponse(posts);
     }
 
+    @GetMapping("/get/new/{page}")
+    public Response getNewPosts(@PathVariable int page) {
+        List<Post> posts = postRetrievalService.getNewPosts(page);
+        return new GetPostsResponse(posts);
+    }
+
+    @GetMapping("/get/pagesLength")
+    public Response getNumberOfPages() {
+        return new GetNumberOfPagesResponse(postRetrievalService.getNumberOfPages());
+    }
+
 }
