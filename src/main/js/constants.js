@@ -15,6 +15,7 @@ export const GET_POST_URL = (postId) => BASE_URL + 'posts/get/' + postId
 export const GET_USER_URL = (userName) => BASE_URL + 'users/get/' + userName;
 export const UPVOTE_POST_URL = (postId) => BASE_URL + 'posts/upvote/' + postId;
 export const DOWNVOTE_POST_URL = (postId) => BASE_URL + 'posts/downvote/' + postId;
+export const GET_TOP_POSTS_URL = () => BASE_URL + 'posts/get/top'
 export const CREATE_COMMENT_URL = () => BASE_URL + 'comments/createComment';
 
 export const UPLOAD_TO_IMGUR_URL = 'https://api.imgur.com/3/image';

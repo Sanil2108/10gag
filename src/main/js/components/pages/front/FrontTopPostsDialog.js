@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import './FrontTopPostsDialog.css';
 import getStoreInstance from '../../../Store';
-import { THEME_KEY, THEMES } from '../../../constants';
+import { THEME_KEY, THEMES, POST_PAGE_URL } from '../../../constants';
 import ShadowButton from '../../sharedComponents/ShadowButton/ShadowButton';
+import { getTopPosts } from '../../../utils';
+import { Redirect } from 'react-router-dom';
 
 export class FrontTopPostsDialog extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ export class FrontTopPostsDialog extends Component {
             topPostDialogStyleObject: {},
             topPostDialogContentStyleObject: {},
             topPostDialogButtonStyle: {},
+            posts: [],
         }
     }
 
@@ -48,17 +51,32 @@ export class FrontTopPostsDialog extends Component {
         });
 
         this.themeChanged(getStoreInstance().get(THEME_KEY));
+        this.loadTopPosts();
+    }
+
+    async loadTopPosts() {
+        const posts = await getTopPosts();
+        this.setState({posts});
+    }
+
+    openPost(postId) {
+        this.setState({redirectTo: `${POST_PAGE_URL}/${this.state.posts[postId].id}`})
     }
 
     render() {
+        if (this.state.redirectTo != null) {
+            return <Redirect push to={this.state.redirectTo}></Redirect>
+        }
+
         const shadowButtons = [];
-        for (let i = 0; i < 10; i += 1) {
+        for (let i = 0; i < this.state.posts.length; i += 1) {
             shadowButtons.push(
                 <ShadowButton
                     key={"shadowButtons"+i}
                     backgroundColor={this.state.topPostDialogButtonStyle.backgroundColor}
                     hoverBoxShadow={this.state.topPostDialogButtonStyle.hoverBoxShadow}
                     defaultBoxShadow={this.state.topPostDialogButtonStyle.defaultBoxShadow}
+                    onClick={this.openPost.bind(this, i)}
                 >
                     <div style={{
                         height: '40px',
@@ -66,8 +84,8 @@ export class FrontTopPostsDialog extends Component {
                         flexDirection: 'row',
                         alignItems: 'center'
                     }}>
-                        <span className="FrontTopPost__Points">120</span>
-                        <span className="FrontTopPost__Title">Post title 1</span>
+                        <span className="FrontTopPost__Points">{this.state.posts[i].votes}</span>
+                        <span className="FrontTopPost__Title">{this.state.posts[i].title}</span>
                     </div>
                 </ShadowButton>
             );

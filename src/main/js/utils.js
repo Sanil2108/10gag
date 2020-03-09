@@ -11,6 +11,7 @@ import {
     UPLOAD_TO_IMGUR_URL,
     CREATE_USER_URL,
     CREATE_COMMENT_URL,
+    GET_TOP_POSTS_URL,
 } from './constants';
 
 const CLIENT_ID = 'a7ea9abc8fd85ac';
@@ -138,6 +139,19 @@ export let uploadImageToImgur = async (base64, title) => {
     else {
         console.error(response.statusText);
         return false;
+    }
+}
+
+export let getTopPosts = async () => {
+    const response = await axios.get(GET_TOP_POSTS_URL());
+    if (response.status === 200) {
+        if (response.data.responseType == RESPONSE_TYPE_OK) {
+            return response.data.posts;
+        }
+        else {
+            console.error(response.data.responseMessage);
+            return null;
+        }
     }
 }
 

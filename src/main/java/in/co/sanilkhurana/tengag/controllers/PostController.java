@@ -102,7 +102,7 @@ public class PostController {
 
     @GetMapping("/get/top")
     public Response getTopPosts() {
-        return new GetPostsResponse(new ArrayList<Post>());
+        return new GetPostsResponse(postRetrievalService.getTopPosts());
     }
 
     @GetMapping("/get/hot")

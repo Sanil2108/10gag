@@ -55,6 +55,10 @@ public class PostRetrievalService {
         return postRepository.findAll();
     }
 
+    public List<Post> getTopPosts() {
+        return IteratorUtils.toList(postRepository.findAll(new Sort(Sort.Direction.DESC, "votes")).iterator()).subList(0, 10);
+    }
+
     public List<Post> getNewPosts() {
         return IteratorUtils.toList(postRepository.findAll(new Sort(Sort.Direction.DESC, "date")).iterator());
     }
