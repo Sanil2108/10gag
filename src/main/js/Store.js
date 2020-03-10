@@ -36,10 +36,14 @@ class Store {
 
             this.keyValuePairs[key].value = value;
         }
+        localStorage.setItem(key, value);
     }
 
-    get(key) {
+    get(key, fromLocalStorage = true) {
         if (this.keyValuePairs[key] === undefined) {
+            if (fromLocalStorage && localStorage.getItem(key)) {
+                return localStorage.getItem(key);
+            }
             console.error("Store - get - Key does not exist")
             return null;
         }

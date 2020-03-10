@@ -43,9 +43,8 @@ export class PageButtonController extends Component {
         const buttons = [];
         for (let i = 0; i < this.state.pageCount; i += 1) {
             buttons.push(
-                <a href={`${FRONT_PAGE_URL}${i+1}`}>
+                <a key={`pageButton${i}`} href={`${FRONT_PAGE_URL}${i+1}`}>
                     <div
-                        key={`pageButton${i}`}
                         className={"PageButton " + ((this.props.currentPage == (i + 1)) ? 'PageButton--selected' : 'PageButton--unselected')}
                         style={{
                             "backgroundColor": ((this.props.currentPage == (i + 1)) ? this.state.pageSelectedColor : this.state.pageUnselectedColor)
@@ -58,7 +57,7 @@ export class PageButtonController extends Component {
         }
 
         return (
-            <div style={{"text-align": "center"}}>
+            <div style={{"textAlign": "center"}}>
                 <div className="PageButtonsContainer">
                     {buttons}
                 </div>

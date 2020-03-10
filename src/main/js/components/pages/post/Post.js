@@ -36,8 +36,6 @@ export default class Post extends Component {
             postImageURL: post.imageURL,
             postComments: post.comments,
         });
-
-        console.log(this.state.post);
     }
 
     componentDidMount() {
