@@ -22,27 +22,38 @@ class Store {
         return true;
     }
 
-    updateOrCreate(key, value, defaultValue = null) {
-        if (this.keyValuePairs[key] === undefined) {
-            this.keyValuePairs[key] = {
-                value,
-                callbacks: [],
-            }
+    sync(key) {
+        if (!localStorage.getItem(key)) {
+            return;
         }
-        else {
-            for (let callback of this.keyValuePairs[key].callbacks) {
-                callback(key, this.keyValuePairs[key].value, value);
-            }
+        this.updateOrCreate(key, JSON.parse(localStorage.getItem(key)));
+    }
 
-            this.keyValuePairs[key].value = value;
+    updateOrCreate(key, value, defaultValue = null) {
+        try {
+            if (this.keyValuePairs[key] === undefined) {
+                this.keyValuePairs[key] = {
+                    value,
+                    callbacks: [],
+                }
+            }
+            else {
+                for (let callback of this.keyValuePairs[key].callbacks) {
+                    callback(key, this.keyValuePairs[key].value, value);
+                }
+
+                this.keyValuePairs[key].value = value;
+            }
         }
-        localStorage.setItem(key, value);
+        finally {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
     }
 
     get(key, fromLocalStorage = true) {
         if (this.keyValuePairs[key] === undefined) {
             if (fromLocalStorage && localStorage.getItem(key)) {
-                return localStorage.getItem(key);
+                return JSON.parse(localStorage.getItem(key));
             }
             console.error("Store - get - Key does not exist")
             return null;

@@ -36,16 +36,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        // Default values
-        getStoreInstance().updateOrCreate(USER_KEY, {
-            email: null,
-            token: null,
-            userName: null,
-            upvotedPostsIds: [],
-            downvotedPostsIds: [],
-        });
-        getStoreInstance().updateOrCreate(THEME_KEY, THEME_NAMES.FASCINATING_FIRE);
-        getStoreInstance().updateOrCreate(GAPI_KEY, null);
+        this.initStore();
 
         getStoreInstance().subscribe(THEME_KEY, this.themeChanged.bind(this));
 
@@ -55,6 +46,28 @@ class App extends React.Component {
         this.baseTheme = createMuiTheme();
 
         this.themeChanged(THEME_KEY, null, getStoreInstance().get(THEME_KEY));
+    }
+
+    initStore() {
+        if (getStoreInstance().get(USER_KEY) == null) {
+            getStoreInstance().updateOrCreate(USER_KEY, {
+                email: null,
+                token: null,
+                userName: null,
+                upvotedPostsIds: [],
+                downvotedPostsIds: [],
+            });
+        }
+        else {
+            getStoreInstance().sync(USER_KEY);
+        }
+        if (getStoreInstance().get(THEME_KEY) == null) {
+            getStoreInstance().updateOrCreate(THEME_KEY, THEME_NAMES.FASCINATING_FIRE);
+        }
+        else {
+            getStoreInstance().sync(THEME_KEY);
+        }
+        getStoreInstance().updateOrCreate(GAPI_KEY, null);
     }
 
     componentDidMount() {
