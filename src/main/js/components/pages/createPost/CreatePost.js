@@ -47,6 +47,7 @@ export default class createPost extends Component {
             redirectTo: null,
             uploadDialogStyles: {},
             uploadDialogTitleStyles: {},
+            uploadFileButtonStyles: {},
             textFieldComponent: withStyles({
                 root: {
                     fontSize: 40,
@@ -103,7 +104,9 @@ export default class createPost extends Component {
         }});
 
         this.setState({uploadFileButtonStyles: {
-            background: uploadDialogStyles.UPLOAD_FILE_BUTTON_BACKGROUND_COLOR,
+            backgroundColor: uploadDialogStyles.UPLOAD_FILE_BUTTON_DARK_BACKGROUND_COLOR,
+            hoverBoxShadow: 'inset 0px 0px 10px 30px ' + uploadDialogStyles.UPLOAD_FILE_BUTTON_BACKGROUND_COLOR,
+            defaultBoxShadow: 'inset 0px 0px 0px 0px ' + uploadDialogStyles.UPLOAD_FILE_BUTTON_BACKGROUND_COLOR,
         }});
     }
 
@@ -228,9 +231,9 @@ export default class createPost extends Component {
                     {fileUploadOrImage}
                     <ShadowButton
                         onClick={this.postNewImage.bind(this)}
-                        backgroundColor={"#b92929"}
-                        hoverBoxShadow={"inset 0px 0px 10px 30px #942020"}
-                        defaultBoxShadow={"inset 0px 0px 0px 0px #942020"}
+                        backgroundColor={this.state.uploadFileButtonStyles.backgroundColor}
+                        hoverBoxShadow={this.state.uploadFileButtonStyles.hoverBoxShadow}
+                        defaultBoxShadow={this.state.uploadFileButtonStyles.defaultBoxShadow}
                     >
                         {shadowButtonInner}
                     </ShadowButton>

@@ -45,7 +45,7 @@ export const THEME_NAMES = {
     FELICITOUS_FOREST: 'Felicitous Forest',
     MULISH_MOUNTAINS: 'Mulish Mountains',
     SPRY_SAVANNAH: 'Spry Savannah',
-    SCINTILLATING_SKYSCRAPERS: 'Scintillating Skyscrapers',
+    // SCINTILLATING_SKYSCRAPERS: 'Scintillating Skyscrapers',
 }
 
 export const THEMES = {
@@ -58,9 +58,43 @@ export const THEMES = {
         },
         FRONT: {
             POST_SUMMARY: {
-                BACKGROUND_COLOR: "#0288d1",
+                BACKGROUND_COLOR: "#0288d1", // Light
+                UPVOTE_BUTTON_SELECTED_COLOR: "#ffffff",
+                UPVOTE_BUTTON_DESELECTED_COLOR: "#02679e", // Dark
+                DONWVOTE_BUTTON_SELECTED_COLOR: "#ffffff",
+                DONWVOTE_BUTTON_DESELECTED_COLOR: "#02679e", // Dark
+                VOTE_TEXT_COLOR: "#02679e", // Dark
+                VOTE_BOX_SHADOW_COLOR: "#0288d1", // Light
+            },
+            TOP_POSTS: {
+                BACKGROUND_COLOR: "#0288d1", // Light
+                POST_TITLE_COLOR: "#ffffff",
+                POST_VOTES_COLOR: "#ffffff",
+                DARK_BACKGROUND_COLOR: "#02679e", // Dark
+            },
+            PAGE_SELECTION: {
+                UNSELECTED_COLOR: "#0288d1", // Light
+                SELECTED_COLOR: "#02679e", // Dark
             },
             OPACITY: 1,
+        },
+        CREATE_POST: {
+            CREATE_POST_DIALOG: {
+                BACKGROUND_COLOR: "#0288d1", // Light
+                TITLE_BACKGROUND_COLOR: "#02679e", // Dark
+                TITLE_TEXT_COLOR: "#ffffff",
+                BUTTON_BACKGROUND: "#02679e", // Dark
+                BUTTON_TEXT_COLOR: "#ffffff",
+                UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "#02679e", // Dark
+                UPLOAD_FILE_BUTTON_DARK_BACKGROUND_COLOR: "#0288d1" // Light,
+            }
+        },
+        POST: {
+            COMMENT_CARD: {
+                BACKGROUND_COLOR: "#0288d1", // Light
+                TEXT_COLOR: "#fff",
+                TEXT_AREA_BACKGROUND_COLOR: "#02679e", // Dark
+            },
         },
         BODY: {
             BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1579714883/landscape-photograph-of-body-of-water-1001682.jpg)',
@@ -104,7 +138,8 @@ export const THEMES = {
                 TITLE_TEXT_COLOR: "#ffffff",
                 BUTTON_BACKGROUND: "#9a0007",
                 BUTTON_TEXT_COLOR: "#ffffff",
-                UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "9a0007",
+                UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "#9a0007",
+                UPLOAD_FILE_BUTTON_DARK_BACKGROUND_COLOR: "#d32f2f",
             }
         },
         POST: {
@@ -143,6 +178,10 @@ export const THEMES = {
                 POST_VOTES_COLOR: "#ffffff",
                 DARK_BACKGROUND_COLOR: "#00701a", // Dark
             },
+            PAGE_SELECTION: {
+                UNSELECTED_COLOR: "#3b8e3f", // Light
+                SELECTED_COLOR: "#00701a", // Dark
+            },
             OPACITY: 1,
         },
         CREATE_POST: {
@@ -152,7 +191,8 @@ export const THEMES = {
                 TITLE_TEXT_COLOR: "#ffffff",
                 BUTTON_BACKGROUND: "#00701a", // Dark
                 BUTTON_TEXT_COLOR: "#ffffff",
-                UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "00701a", // Dark
+                UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "#00701a", // Dark
+                UPLOAD_FILE_BUTTON_DARK_BACKGROUND_COLOR: "#3b8e3f" // Light,
             }
         },
         POST: {
@@ -191,6 +231,10 @@ export const THEMES = {
                 POST_VOTES_COLOR: "#ffffff",
                 DARK_BACKGROUND_COLOR: "#8c0032", // Dark
             },
+            PAGE_SELECTION: {
+                UNSELECTED_COLOR: "#c2185b", // Light
+                SELECTED_COLOR: "#8c0032", // Dark
+            },
             OPACITY: 1,
         },
         CREATE_POST: {
@@ -200,7 +244,8 @@ export const THEMES = {
                 TITLE_TEXT_COLOR: "#ffffff",
                 BUTTON_BACKGROUND: "#8c0032", // Dark
                 BUTTON_TEXT_COLOR: "#ffffff",
-                UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "8c0032", // Dark
+                UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "#8c0032", // Dark
+                UPLOAD_FILE_BUTTON_DARK_BACKGROUND_COLOR: "#c2185b" // Light,
             }
         },
         POST: {
@@ -239,6 +284,10 @@ export const THEMES = {
                 POST_VOTES_COLOR: "#ffffff",
                 DARK_BACKGROUND_COLOR: "#ac0800", // Dark
             },
+            PAGE_SELECTION: {
+                UNSELECTED_COLOR: "#e64a19", // Light
+                SELECTED_COLOR: "#ac0800", // Dark
+            },
             OPACITY: 1,
         },
         CREATE_POST: {
@@ -248,7 +297,8 @@ export const THEMES = {
                 TITLE_TEXT_COLOR: "#ffffff",
                 BUTTON_BACKGROUND: "#ac0800", // Dark
                 BUTTON_TEXT_COLOR: "#ffffff",
-                UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "ac0800", // Dark
+                UPLOAD_FILE_BUTTON_BACKGROUND_COLOR: "#ac0800", // Dark
+                UPLOAD_FILE_BUTTON_DARK_BACKGROUND_COLOR: "#e64a19" // Light,
             }
         },
         POST: {
@@ -264,22 +314,22 @@ export const THEMES = {
         }
     },
 
-    [THEME_NAMES.SCINTILLATING_SKYSCRAPERS]:{
-        TOPBAR: {
-            SHADOW_COLOR: "rgba(255,0,0,.2)",
-            DROPDOWN: {
-                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580057625/187680.jpg)',
-            },
-        },
-        FRONT: {
-            POST_SUMMARY: {
-                BACKGROUND_COLOR: "#d32f2f",
-            },
-            OPACITY: 1,
-        },
-        BODY: {
-            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580057625/187680.jpg)',
-            BACKGROUND_COLOR: '#ff0000',
-        }
-    },
+    // [THEME_NAMES.SCINTILLATING_SKYSCRAPERS]:{
+    //     TOPBAR: {
+    //         SHADOW_COLOR: "rgba(255,0,0,.2)",
+    //         DROPDOWN: {
+    //             BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580057625/187680.jpg)',
+    //         },
+    //     },
+    //     FRONT: {
+    //         POST_SUMMARY: {
+    //             BACKGROUND_COLOR: "#d32f2f",
+    //         },
+    //         OPACITY: 1,
+    //     },
+    //     BODY: {
+    //         BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580057625/187680.jpg)',
+    //         BACKGROUND_COLOR: '#ff0000',
+    //     }
+    // },
 }
