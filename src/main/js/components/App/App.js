@@ -103,6 +103,10 @@ class App extends React.Component {
                             <Route path={CREATE_POST_PAGE_URL}>
                                 <CreatePost></CreatePost>
                             </Route>
+                            <Route path={FRONT_PAGE_URL + "10gag/:page"} component={Front}>
+                            </Route>
+                            <Route path={FRONT_PAGE_URL + "10gag/"} component={Front}>
+                            </Route>
                             <Route path={FRONT_PAGE_URL + ":page"} component={Front}>
                             </Route>
                             <Route path={FRONT_PAGE_URL} component={Front}>
