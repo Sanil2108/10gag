@@ -2,7 +2,7 @@
 
 # dependencies
 /src/main/js/node_modules
-/src/main/resources/static/built/bundle.js
+/src/main/static/templates/built/bundle.js
 node_modules/
 /.pnp
 .pnp.js
