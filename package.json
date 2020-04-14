@@ -11,6 +11,7 @@
     "@mui-treasury/components": "0.3.0",
     "@mui-treasury/styles": "0.3.1",
     "@mui-treasury/styling": "0.2.0",
+    "aws-sdk": "^2.656.0",
     "axios": "^0.19.0",
     "jquerykeyframes": "^1.0.8",
     "jss": "^10.0.4",

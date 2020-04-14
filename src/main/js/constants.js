@@ -1,5 +1,5 @@
 // API related information
-const PRODUCTION_ENV = true;
+const PRODUCTION_ENV = false;
 const PRODUCTION_URL = 'http://3.20.255.26:5000/api/';
 const DEVELOPMENT_URL = 'http://localhost:5000/api/';
 const BASE_URL = (PRODUCTION_ENV) ? PRODUCTION_URL : DEVELOPMENT_URL;
