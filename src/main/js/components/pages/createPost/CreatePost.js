@@ -4,6 +4,7 @@ import * as axios from 'axios';
 import {
     authenticateUserWithToken,
     uploadImageToImgur,
+    uploadImageToS3,
 } from '../../../utils';
 
 import {
@@ -148,12 +149,13 @@ export default class createPost extends Component {
         reader.addEventListener("load", async function () {
             let b64String =
                 reader.result.slice(reader.result.indexOf("base64,") + ("base64,").length, reader.result.length);
-            const response = await uploadImageToImgur(b64String, title);
+
+            const response = await uploadImageToS3(b64String, title);
             if (!response) {
                 scope.setState({alertOpen: true, alertMessage: "Something went wrong. Please try again later", loading: false});
             }
             else {
-                scope.setState({imageURL: response.data.link});
+                scope.setState({imageURL: response});
                 scope.createPost();
             }
         }, false);

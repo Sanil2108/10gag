@@ -4,6 +4,13 @@ const PRODUCTION_URL = 'http://3.20.255.26:5000/api/';
 const DEVELOPMENT_URL = 'http://localhost:5000/api/';
 const BASE_URL = (PRODUCTION_ENV) ? PRODUCTION_URL : DEVELOPMENT_URL;
 
+// TODO: Security risk here. Ensure this is handled properly
+// AWS Credentials
+export const AWS_REGION = 'ap-south-1';
+export const IDENTITY_POOL_ID = 'ap-south-1:cc891bd7-b5ff-458d-ac16-5da7fe4abc25';
+export const S3_BUCKET_NAME = 'sanilk-main-bucket/10gag';
+export const S3_API_VERSION = '2006-03-01';
+
 // External URLs
 export const LOGIN_USER_URL = () => BASE_URL + 'users/login';
 export const CREATE_USER_URL = () => BASE_URL + 'users/register'
@@ -38,6 +45,7 @@ export const FRONT_PAGE_URL = '/';
 export const USER_KEY = 'user';
 export const THEME_KEY = 'theme';
 export const GAPI_KEY = 'gapi';
+export const S3_KEY = 's3';
 
 export const THEME_NAMES = {
     OPTIMISTIC_OCEAN: 'Optimistic Ocean',

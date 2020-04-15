@@ -1,4 +1,5 @@
 import * as axios from 'axios';
+import * as AWS from 'aws-sdk';
 
 import {
     LOGIN_USER_URL,
@@ -13,8 +14,12 @@ import {
     CREATE_COMMENT_URL,
     GET_NUMBER_OF_PAGES,
     GET_TOP_POSTS_URL,
+    S3_KEY,
+    S3_BUCKET_NAME,
 } from './constants';
+import getStoreInstance from './Store';
 
+// TODO: Security risk
 const CLIENT_ID = 'a7ea9abc8fd85ac';
 
 export let authenticateUserWithToken = async (email, token) => {
@@ -117,6 +122,55 @@ export let getPost = async (postId)  => {
     }
 }
 
+export let uploadImageToS3 = async (base64, title) => {
+    const S3 = getStoreInstance().get(S3_KEY);
+
+    const file = dataURLtoFile(base64, 'someFile.png');
+    const upload = new AWS.S3.ManagedUpload({
+        params: {
+            Bucket: S3_BUCKET_NAME,
+            // Key: 'someFile.png',
+            Key: title.replace(/ /g, '') + getRandomString(40) + '.png',
+            Body: file,
+            ACL: "public-read"
+        }
+    });
+
+    const result = await upload.promise();
+
+    return result.Location;
+}
+
+function getRandomString(length) {
+    const allowedValues = [...Array('Z'.charCodeAt(0) - 'A'.charCodeAt(0) + 1).keys()].map(i => i + 'A'.charCodeAt(0))
+    allowedValues.push(...[...Array('z'.charCodeAt(0) - 'a'.charCodeAt(0) + 1).keys()].map(i => i + 'a'.charCodeAt(0)))
+    allowedValues.push(...[...Array('9'.charCodeAt(0) - '0'.charCodeAt(0) + 1).keys()].map(i => i + '0'.charCodeAt(0)))
+
+    let string = '';
+
+    for (let i = 0; i < length; i += 1) {
+        const randomInt = parseInt(Math.random() * allowedValues.length)
+        string += String.fromCharCode(allowedValues[randomInt]);
+    }
+
+    return string;
+}
+
+function dataURLtoFile(dataUrl, filename) {
+    var arr = dataUrl.split(','),
+        // mime = arr[0].match(/:(.*?);/)[1],
+        mime = 'image/png',
+        bstr = atob(dataUrl), 
+        n = bstr.length, 
+        u8arr = new Uint8Array(n);
+        
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    
+    return new File([u8arr], filename, {type:mime});
+}
+
 export let uploadImageToImgur = async (base64, title) => {
     const data = {
         type: "base64",
@@ -135,7 +189,7 @@ export let uploadImageToImgur = async (base64, title) => {
 
     const response = await axios.post(UPLOAD_TO_IMGUR_URL, data, config);
     if (response.status === 200) {
-        return response.data;
+        return response.data.data.link;
     }
     else {
         console.error(response.statusText);

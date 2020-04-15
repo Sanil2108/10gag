@@ -20,6 +20,11 @@ import {
     THEME_NAMES,
     THEMES,
     GAPI_KEY,
+    AWS_REGION,
+    IDENTITY_POOL_ID,
+    S3_BUCKET_NAME,
+    S3_API_VERSION,
+    S3_KEY,
 } from '../../constants';
 
 import './App.css';
@@ -30,6 +35,8 @@ import {
     Route,
   } from "react-router-dom";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core";
+
+import * as AWS from 'aws-sdk';
 
 class App extends React.Component {
 
@@ -74,6 +81,26 @@ class App extends React.Component {
         document.body.onload = () => {
             getStoreInstance().updateOrCreate(GAPI_KEY, window.gapi);
         }
+
+        this.initializeAWS();
+    }
+
+    initializeAWS() {
+        // TODO: Temp
+        window.AWS = AWS;
+
+        AWS.config.update({
+            region: AWS_REGION,
+            credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: IDENTITY_POOL_ID
+            })
+        });
+
+        const s3 = new AWS.S3({
+            apiVersion: S3_API_VERSION,
+            params: { Bucket: S3_BUCKET_NAME }
+        });
+        getStoreInstance().updateOrCreate(S3_KEY, s3, null, false);
     }
 
     themeChanged(key, oldValue, newValue) {

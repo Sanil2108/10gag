@@ -29,7 +29,7 @@ class Store {
         this.updateOrCreate(key, JSON.parse(localStorage.getItem(key)));
     }
 
-    updateOrCreate(key, value, defaultValue = null) {
+    updateOrCreate(key, value, defaultValue = null, storeInLocalStorage = true) {
         try {
             if (this.keyValuePairs[key] === undefined) {
                 this.keyValuePairs[key] = {
@@ -46,7 +46,9 @@ class Store {
             }
         }
         finally {
-            localStorage.setItem(key, JSON.stringify(value));
+            if (storeInLocalStorage) {
+                localStorage.setItem(key, JSON.stringify(value));
+            }
         }
     }
 
