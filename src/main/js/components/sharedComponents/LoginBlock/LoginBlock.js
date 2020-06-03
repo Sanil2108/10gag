@@ -62,7 +62,7 @@ export class LoginBlock extends Component {
     updateGapi(newGapi) {
         newGapi.load('auth2', () => {
             let auth2 = newGapi.auth2.init({
-                client_id: '156732240229-5dr179koaj2l5uvd2oet8e04h9ir971j.apps.googleusercontent.com',
+                client_id: '***',
                 cookiepolicy: 'single_host_origin',
             });
 
@@ -93,8 +93,8 @@ export class LoginBlock extends Component {
             });
         }
         else {
-            this.setState({gapiInitialized: true});
-            this.updateGapi(gapi);
+            // this.setState({gapiInitialized: true});
+            // this.updateGapi(gapi);
         }
     }
 

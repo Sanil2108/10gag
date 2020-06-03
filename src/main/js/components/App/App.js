@@ -47,9 +47,6 @@ class App extends React.Component {
 
         getStoreInstance().subscribe(THEME_KEY, this.themeChanged.bind(this));
 
-        // TODO: Temp
-        window.storeInstance = getStoreInstance();
-
         this.baseTheme = createMuiTheme();
 
         this.themeChanged(THEME_KEY, null, getStoreInstance().get(THEME_KEY));

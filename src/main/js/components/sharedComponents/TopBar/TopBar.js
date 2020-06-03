@@ -50,7 +50,6 @@ export default class TopBar extends Component {
 
     // TODO: oldUser would come first
     currentUserChanged(key, oldUser, newUser) {
-        console.log(key, oldUser, newUser);
         this.setState({
             currentUser: newUser,
         });

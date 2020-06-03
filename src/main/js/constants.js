@@ -5,9 +5,9 @@ const DEVELOPMENT_URL = 'http://localhost:5000/api/';
 const BASE_URL = (PRODUCTION_ENV) ? PRODUCTION_URL : DEVELOPMENT_URL;
 
 // AWS Credentials
-export const AWS_REGION = System.getenv('TENGAG_S3_REGION');
-export const IDENTITY_POOL_ID = System.getenv('TENGAG_S3_IDENTITY_POOL_ID');
-export const S3_BUCKET_NAME = System.getenv('TENGAG_S3_BUCKET_NAME');
+export const AWS_REGION = process.env.TENGAG_S3_REGION
+export const IDENTITY_POOL_ID = process.env.TENGAG_S3_IDENTITY_POOL_ID
+export const S3_BUCKET_NAME = process.env.TENGAG_S3_BUCKET_NAME
 export const S3_API_VERSION = '2006-03-01';
 
 // External URLs
