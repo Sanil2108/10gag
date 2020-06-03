@@ -4,11 +4,10 @@ const PRODUCTION_URL = 'http://3.7.175.185/10gag/api/';
 const DEVELOPMENT_URL = 'http://localhost:5000/api/';
 const BASE_URL = (PRODUCTION_ENV) ? PRODUCTION_URL : DEVELOPMENT_URL;
 
-// TODO: Security risk here. Ensure this is handled properly
 // AWS Credentials
-export const AWS_REGION = 'ap-south-1';
-export const IDENTITY_POOL_ID = 'ap-south-1:cc891bd7-b5ff-458d-ac16-5da7fe4abc25';
-export const S3_BUCKET_NAME = 'sanilk-main-bucket/10gag';
+export const AWS_REGION = System.getenv('TENGAG_S3_REGION');
+export const IDENTITY_POOL_ID = System.getenv('TENGAG_S3_IDENTITY_POOL_ID');
+export const S3_BUCKET_NAME = System.getenv('TENGAG_S3_BUCKET_NAME');
 export const S3_API_VERSION = '2006-03-01';
 
 // External URLs
