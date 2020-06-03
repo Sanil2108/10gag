@@ -11,21 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.co.sanilkhurana.tengag.models.Comment;
-import in.co.sanilkhurana.tengag.models.Post;
-import in.co.sanilkhurana.tengag.models.User;
+import in.co.sanilkhurana.tengag.models.*;
 import in.co.sanilkhurana.tengag.responses.Response;
-import in.co.sanilkhurana.tengag.responses.comment_responses.CreateCommentResponse;
-import in.co.sanilkhurana.tengag.responses.comment_responses.CreateReplyResponse;
-import in.co.sanilkhurana.tengag.responses.comment_responses.DownvoteCommentResponse;
-import in.co.sanilkhurana.tengag.responses.comment_responses.GetChildrenCommentsResponse;
-import in.co.sanilkhurana.tengag.responses.comment_responses.UpvoteCommentResponse;
-import in.co.sanilkhurana.tengag.responses.error_responses.CommentDoesNotExistErrorResponse;
-import in.co.sanilkhurana.tengag.responses.error_responses.UserAuthenticationFailedErrorResponse;
-import in.co.sanilkhurana.tengag.responses.error_responses.UserDoesNotExistErrorResponse;
-import in.co.sanilkhurana.tengag.services.CommentRetrievalService;
-import in.co.sanilkhurana.tengag.services.UserAuthenticationService;
-import in.co.sanilkhurana.tengag.services.UserRetrievalService;
+import in.co.sanilkhurana.tengag.responses.comment_responses.*;
+import in.co.sanilkhurana.tengag.responses.error_responses.*;
+import in.co.sanilkhurana.tengag.services.*;
 
 @RestController
 @RequestMapping("/api/comments")

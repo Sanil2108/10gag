@@ -8,9 +8,7 @@ import in.co.sanilkhurana.tengag.responses.post_responses.*;
 import in.co.sanilkhurana.tengag.models.Post;
 import in.co.sanilkhurana.tengag.models.User;
 import in.co.sanilkhurana.tengag.responses.Response;
-import in.co.sanilkhurana.tengag.services.PostRetrievalService;
-import in.co.sanilkhurana.tengag.services.UserAuthenticationService;
-import in.co.sanilkhurana.tengag.services.UserRetrievalService;
+import in.co.sanilkhurana.tengag.services.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;

@@ -2,9 +2,7 @@ package in.co.sanilkhurana.tengag.controllers;
 
 import in.co.sanilkhurana.tengag.responses.error_responses.*;
 import in.co.sanilkhurana.tengag.responses.user_responses.*;
-import in.co.sanilkhurana.tengag.models.Token;
-import in.co.sanilkhurana.tengag.models.User;
-import in.co.sanilkhurana.tengag.models.Post;
+import in.co.sanilkhurana.tengag.models.*;
 import in.co.sanilkhurana.tengag.responses.Response;
 import in.co.sanilkhurana.tengag.services.UserAuthenticationService;
 import in.co.sanilkhurana.tengag.services.UserRetrievalService;
