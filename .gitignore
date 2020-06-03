@@ -1,8 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/src/main/js/node_modules
-/src/main/static/templates/built/bundle.js
+src/main/js/node_modules
+src/main/static/templates/built
+src/main/resources/static/built
 node_modules/
 /.pnp
 .pnp.js
