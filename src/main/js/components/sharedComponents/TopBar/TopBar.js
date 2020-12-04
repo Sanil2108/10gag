@@ -122,7 +122,7 @@ export default class TopBar extends Component {
                 </span>
                 <span className="LogoContainer">
                     <Link to={FRONT_PAGE_URL}>
-                        9GAG++
+                        10Gag
                     </Link>
                 </span>
                 <span className="RightPaneContainer">
