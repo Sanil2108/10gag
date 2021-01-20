@@ -87,7 +87,7 @@ export class CommentCard extends Component {
         if (this.state.loading) {
             shadowButtonInner = (
                 <>
-                    <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1581182739/loading1.gif"></img>
+                    <img src="https://res.cloudinary.com/dezfx8pnt/image/upload/v1611111032/10gag/loading1_gsgfu5.gif"></img>
                     <p style={{visibility: "hidden"}}>Upload</p>
                 </>
             )

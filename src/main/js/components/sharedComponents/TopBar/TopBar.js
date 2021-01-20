@@ -129,19 +129,19 @@ export default class TopBar extends Component {
 
                     <span className="RotateButton RightPaneButton">
                         <Link to={CREATE_POST_PAGE_URL} className="RightPaneButton__Link">
-                            <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580033150/plus.svg"></img>
+                            <img src="https://res.cloudinary.com/dezfx8pnt/image/upload/v1611111277/10gag/add-white-18dp_bsprss.svg"></img>
                         </Link>
                     </span>
                     <span className="RotateButton RightPaneButton">
                         <Link to={SETTINGS_PAGE_URL} className="RightPaneButton__Link">
-                            <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580033152/gear_1.svg"></img>
+                            <img src="https://res.cloudinary.com/dezfx8pnt/image/upload/v1611111279/10gag/settings-white-18dp_szldko.svg"></img>
                         </Link>
                     </span>
 
                     <span>
                         <span className="RightPaneButton">
                             <Link to="#" className="RightPaneButton__Link" onClick={this.toggleUserDialog.bind(this)}>
-                                <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580042222/user_1.svg"></img>
+                                <img src="https://res.cloudinary.com/dezfx8pnt/image/upload/v1611111281/10gag/person-white-18dp_wgurbf.svg"></img>
                             </Link>
                         </span>
                         {userDialog}

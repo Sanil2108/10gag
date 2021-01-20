@@ -98,7 +98,7 @@ export default class ThemeDropDown extends Component {
                     <span className="ThemeNameContainer">
                         {this.state.currentThemeName}
                     </span>
-                    <img src="https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580044318/download.svg"></img>
+                    <img src="https://res.cloudinary.com/dezfx8pnt/image/upload/v1611111104/10gag/arrow_drop_down-24px_x5ajky.svg"></img>
                 </span>
                 {dropDownDiv}
             </span>

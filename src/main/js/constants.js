@@ -60,7 +60,7 @@ export const THEMES = {
         TOPBAR: {
             SHADOW_COLOR: "#abcded",
             DROPDOWN: {
-                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1579714883/landscape-photograph-of-body-of-water-1001682.jpg)',
+                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dezfx8pnt/image/upload/v1611110136/10gag/landscape-photograph-of-body-of-water-1001682_vtwhvc.jpg)',
             }
         },
         FRONT: {
@@ -104,7 +104,7 @@ export const THEMES = {
             },
         },
         BODY: {
-            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1579714883/landscape-photograph-of-body-of-water-1001682.jpg)',
+            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dezfx8pnt/image/upload/v1611110136/10gag/landscape-photograph-of-body-of-water-1001682_vtwhvc.jpg)',
             BACKGROUND_COLOR: '#ff0000',
         }
     },
@@ -113,7 +113,7 @@ export const THEMES = {
         TOPBAR: {
             SHADOW_COLOR: "rgba(255,0,0,.2)",
             DROPDOWN: {
-                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1575470467/Z6kdWmA.jpg)',
+                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dezfx8pnt/image/upload/v1611110135/10gag/Z6kdWmA_ealgwf.jpg)',
             },
         },
         FRONT: {
@@ -157,7 +157,7 @@ export const THEMES = {
             },
         },
         BODY: {
-            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1575470467/Z6kdWmA.jpg)',
+            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dezfx8pnt/image/upload/v1611110135/10gag/Z6kdWmA_ealgwf.jpg)',
             BACKGROUND_COLOR: '#ff0000',
         }
     },
@@ -166,7 +166,7 @@ export const THEMES = {
         TOPBAR: {
             SHADOW_COLOR: "rgba(255,255,255,.2)",
             DROPDOWN: {
-                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580057659/a9a83efe190ed9660b27be8047b94edd.jpg)',
+                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dezfx8pnt/image/upload/v1611110135/10gag/a9a83efe190ed9660b27be8047b94edd_fyuo8n.jpg)',
             },
         },
         FRONT: {
@@ -210,7 +210,7 @@ export const THEMES = {
             },
         },
         BODY: {
-            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580057659/a9a83efe190ed9660b27be8047b94edd.jpg)',
+            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dezfx8pnt/image/upload/v1611110135/10gag/a9a83efe190ed9660b27be8047b94edd_fyuo8n.jpg)',
             BACKGROUND_COLOR: '#ff0000',
         }
     },
@@ -219,7 +219,7 @@ export const THEMES = {
         TOPBAR: {
             SHADOW_COLOR: "rgba(255,255,255,.2)",
             DROPDOWN: {
-                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580057978/22121.jpg)',
+                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dezfx8pnt/image/upload/v1611110136/10gag/22121_g5jgsb.jpg)',
             },
         },
         FRONT: {
@@ -263,7 +263,7 @@ export const THEMES = {
             },
         },
         BODY: {
-            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580057978/22121.jpg)',
+            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dezfx8pnt/image/upload/v1611110136/10gag/22121_g5jgsb.jpg)',
             BACKGROUND_COLOR: '#ff0000',
         }
     },
@@ -272,7 +272,7 @@ export const THEMES = {
         TOPBAR: {
             SHADOW_COLOR: "rgba(255,255,255,.2)",
             DROPDOWN: {
-                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580057956/342588.jpg)',
+                BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dezfx8pnt/image/upload/v1611110135/10gag/342588_e8br1x.jpg)',
             },
         },
         FRONT: {
@@ -316,7 +316,7 @@ export const THEMES = {
             },
         },
         BODY: {
-            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dkb1nvu7q/image/upload/v1580057956/342588.jpg)',
+            BACKGROUND_IMAGE: 'url(https://res.cloudinary.com/dezfx8pnt/image/upload/v1611110135/10gag/342588_e8br1x.jpg)',
             BACKGROUND_COLOR: '#ff0000',
         }
     },
